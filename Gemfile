@@ -46,3 +46,8 @@ group :development do
   # gem "spring"
 end
 
+group :production, :actions do
+  gem 'pg'
+  gem 'activerecord-postgresql-adapter'
+end
+
