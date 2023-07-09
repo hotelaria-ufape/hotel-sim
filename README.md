@@ -26,11 +26,11 @@ Para os funcionários do Hotel-sim, o sistema oferece recursos de autenticação
 * [RubyMine](https://nodejs.org/dist/v16.14.0/node-v16.14.0-x64.msi)
   * 2021.3.2
 * [Node.js](https://nodejs.org/dist/v16.14.0/node-v16.14.0-x64.msi)
-  * 16.14.0 
+  * 16.14.0
 * [SQLite3](https://www.sqlite.org/2023/sqlite-tools-win32-x86-3420000.zip)
 * [Yarn](https://github.com/yarnpkg/yarn/releases/download/v1.22.15/yarn-)
-  * 1.22.15 
-* Codacy
+  * 1.22.15
+* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e436e025c5e44c4bb4243ad1498760b6)](https://app.codacy.com/gh/hotelaria-ufape/hotel-sim/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 * Railway
 #
             ⚠️STATUS DO PROJETO
