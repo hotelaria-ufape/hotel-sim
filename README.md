@@ -1,5 +1,7 @@
 # Sistema de Gerenciamento <span style="color:purple">Hotel-sim</span>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/aba16962206e413187584fcefed68d8e)](https://app.codacy.com/gh/hotelaria-ufape/hotel-sim?utm_source=github.com&utm_medium=referral&utm_content=hotelaria-ufape/hotel-sim&utm_campaign=Badge_Grade)
+
            	🤵 INTEGRANTES
 #
 [Guilherme Rutemberg](https://github.com/GuiSysLima)  |  [Gustavo Henrique](https://github.com/GustavoHenriqueVieira)  |  [Mauro Vinícius](https://github.com/mvinicius175)  |  [Max David](https://github.com/maxdavidsouza) | [Pedro Augusto](https://github.com/pemedeiros) | [Pedro Almeida](https://github.com/PJota021)
