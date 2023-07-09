@@ -2,7 +2,7 @@
 
            	🤵 INTEGRANTES
 #
-[Guilherme Rutemberg](https://github.com/GuiSysLima)  |  Gustavo Henrique  |  [Mauro Vinícius](https://github.com/mvinicius175)  |  [Max David](https://github.com/maxdavidsouza) | Pedro Augusto | [Pedro Almeida](https://github.com/PJota021)
+[Guilherme Rutemberg](https://github.com/GuiSysLima)  |  [Gustavo Henrique](https://github.com/GustavoHenriqueVieira)  |  [Mauro Vinícius](https://github.com/mvinicius175)  |  [Max David](https://github.com/maxdavidsouza) | [Pedro Augusto](https://github.com/pemedeiros) | [Pedro Almeida](https://github.com/PJota021)
 #
 	        📕 SOBRE O PROJETO
 #
