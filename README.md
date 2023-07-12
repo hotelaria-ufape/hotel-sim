@@ -9,7 +9,7 @@ O projeto será desenvolvido em Ruby e Rails, com escopo SaaS, para a disciplina
 
 O hotel-sim trata-se de uma ferramenta de gerenciamento de hospedagem para um hotel, possuindo como cliente, um administrador do estabelecimento, que poderá, através desse sistema, alugar cômodos para clientes por meio digital, ver o desempenho de seus funcionários, avaliar as condições de cada cômodo, como bem comunicar-se com seus hóspedes.
 
-*   [Site no Railway]()
+*   [Site no Render](https://hotel-sim.onrender.com/)
 
 ## 📌 Objetivos
 Seu principal objetivo é fornecer uma plataforma intuitiva e eficiente para que um dono de uma hospedaria divulgue acomodações para locação, receba clientes através de agendamentos, gerencie seus funcionários e avalie seu desempenho através de suas possíveis reservas.
@@ -27,7 +27,7 @@ Para os funcionários, o sistema oferece recursos de autenticação, permitindo 
 *   Versão 2021.3.2
  ### [SQLite3](https://www.sqlite.org/index.html)
  ### [Codacy](https://www.codacy.com/product)
- ### [Railway](https://railway.app/)
+ ### [Render](https://render.com/)
  ### [Node.js](https://www.heroku.com/)
 *   Versão 16.4.0
 
