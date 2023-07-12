@@ -1,4 +1,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e436e025c5e44c4bb4243ad1498760b6)](https://app.codacy.com/gh/hotelaria-ufape/hotel-sim/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Render Deploy](https://badgen.net/badge/render%20deploy/check%20here/green?icon=libraries)](https://hotel-sim.onrender.com/)
+[![Ruby Version](https://badgen.net/badge/ruby%20version/v3.1.1/red?icon=ruby)](https://www.ruby-lang.org/pt/)
+[![Rails Version](https://badgen.net/badge/rails%20version/v7.0.2.2/red?icon=ruby)](https://rubyonrails.org/)
 # Sistema de Gerenciamento de <span style="color:purple">Hotel</span>
 
 ## 🤵 Integrantes
