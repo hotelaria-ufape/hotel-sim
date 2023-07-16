@@ -41,7 +41,8 @@ class ReservasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reserva
-      @reserva = Reserva.find(params[:id])
+      current_user = Cliente.find(session[:cliente_id])
+      @reserva = current_user.reservas.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
