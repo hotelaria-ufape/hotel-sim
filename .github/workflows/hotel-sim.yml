@@ -26,9 +26,9 @@ jobs:
         with:
           ruby-version: 3.1.1
 
-      - name: Install PostgreSQL client
+      - name: Install PostgreSQL client and dependecies
         run: |
-          sudo apt-get -yqq install libpq-dev
+          sudo apt-get -yqq install libpq-dev cucumber
       - name: Cache Ruby Gems
         uses: actions/cache@v2
         with:
@@ -36,6 +36,7 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+
       - name: Bundle Install
         run: |
           bundle config path vendor/bundle
@@ -53,10 +54,11 @@ jobs:
         run: |
           bundle exec rails db:prepare
       - name: rake test
-          env:
-            RAILS_ENV: actions
-          run: |
-            bundle exec rake
+        env:
+          RAILS_ENV: actions
+        run: |
+          bundle exec rake
+
       - name: cucumber tests
-          run: |
-            bundle exec cucumber
+        run: |
+          bundle exec cucumber
