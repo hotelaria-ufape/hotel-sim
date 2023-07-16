@@ -6,33 +6,43 @@ class ReservasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get reservas_url, as: :json
+    get reservas_url
+    assert_response :success
+  end
+
+  test "should get new" do
+    get new_reserva_url
     assert_response :success
   end
 
   test "should create reserva" do
     assert_difference("Reserva.count") do
-      post reservas_url, params: { reserva: { cliente_id: @reserva.cliente_id, custo: @reserva.custo, data_de_entrada: @reserva.data_de_entrada, data_de_saida: @reserva.data_de_saida, quarto_id: @reserva.quarto_id } }, as: :json
+      post reservas_url, params: { reserva: { cliente_id: @reserva.cliente_id, custo: @reserva.custo, data_de_entrada: @reserva.data_de_entrada, data_de_saida: @reserva.data_de_saida, quarto_id: @reserva.quarto_id } }
     end
 
-    assert_response :created
+    assert_redirected_to reserva_url(Reserva.last)
   end
 
   test "should show reserva" do
-    get reserva_url(@reserva), as: :json
+    get reserva_url(@reserva)
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get edit_reserva_url(@reserva)
     assert_response :success
   end
 
   test "should update reserva" do
-    patch reserva_url(@reserva), params: { reserva: { cliente_id: @reserva.cliente_id, custo: @reserva.custo, data_de_entrada: @reserva.data_de_entrada, data_de_saida: @reserva.data_de_saida, quarto_id: @reserva.quarto_id } }, as: :json
-    assert_response :success
+    patch reserva_url(@reserva), params: { reserva: { cliente_id: @reserva.cliente_id, custo: @reserva.custo, data_de_entrada: @reserva.data_de_entrada, data_de_saida: @reserva.data_de_saida, quarto_id: @reserva.quarto_id } }
+    assert_redirected_to reserva_url(@reserva)
   end
 
   test "should destroy reserva" do
     assert_difference("Reserva.count", -1) do
-      delete reserva_url(@reserva), as: :json
+      delete reserva_url(@reserva)
     end
 
-    assert_response :no_content
+    assert_redirected_to reservas_url
   end
 end

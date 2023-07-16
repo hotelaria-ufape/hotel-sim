@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_16_135111) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_16_161246) do
   create_table "clientes", force: :cascade do |t|
     t.string "cpf"
     t.string "nome"

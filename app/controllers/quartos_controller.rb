@@ -1,41 +1,60 @@
 class QuartosController < ApplicationController
-  before_action :set_quarto, only: %i[ show update destroy ]
+  before_action :set_quarto, only: %i[ show edit update destroy ]
 
-  # GET /quartos
+  # GET /quartos or /quartos.json
   def index
     @quartos = Quarto.all
-
-    render json: @quartos
   end
 
-  # GET /quartos/1
+  # GET /quartos/1 or /quartos/1.json
   def show
-    render json: @quarto
   end
 
-  # POST /quartos
+  # GET /quartos/new
+  def new
+    @quarto = Quarto.new
+  end
+
+  # GET /quartos/1/edit
+  def edit
+  end
+
+  # POST /quartos or /quartos.json
   def create
     @quarto = Quarto.new(quarto_params)
 
-    if @quarto.save
-      render json: @quarto, status: :created, location: @quarto
-    else
-      render json: @quarto.errors, status: :unprocessable_entity
+    respond_to do |format|
+      if @quarto.save
+        format.html { redirect_to quarto_url(@quarto), notice: "Quarto was successfully created." }
+        format.json { render :show, status: :created, location: @quarto }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @quarto.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  # PATCH/PUT /quartos/1
+  # PATCH/PUT /quartos/1 or /quartos/1.json
   def update
-    if @quarto.update(quarto_params)
-      render json: @quarto
-    else
-      render json: @quarto.errors, status: :unprocessable_entity
+    respond_to do |format|
+      if @quarto.update(quarto_params)
+        format.html { redirect_to quarto_url(@quarto), notice: "Quarto was successfully updated." }
+        format.json { render :show, status: :ok, location: @quarto }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @quarto.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  # DELETE /quartos/1
+  # DELETE /quartos/1 or /quartos/1.json
   def destroy
     @quarto.destroy
+
+    respond_to do |format|
+      format.html { redirect_to quartos_url, notice: "Quarto was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private
