@@ -1,2 +1,0 @@
-class Quarto < ApplicationRecord
-end
