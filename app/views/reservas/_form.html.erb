@@ -13,30 +13,64 @@
 
   <div>
     <%= form.label :cliente_id, style: "display: block" %>
-    <%= form.text_field :cliente_id %>
+    <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true }) %>
   </div>
 
   <div>
     <%= form.label :quarto_id, style: "display: block" %>
-    <%= form.text_field :quarto_id %>
+    <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select' }) %>
   </div>
 
   <div>
     <%= form.label :data_de_entrada, style: "display: block" %>
-    <%= form.date_field :data_de_entrada %>
+    <%= form.datetime_field :data_de_entrada, id: 'data-de-entrada' %>
   </div>
 
   <div>
     <%= form.label :data_de_saida, style: "display: block" %>
-    <%= form.date_field :data_de_saida %>
+    <%= form.datetime_field :data_de_saida, id: 'data-de-saida' %>
   </div>
 
   <div>
     <%= form.label :custo, style: "display: block" %>
-    <%= form.text_field :custo %>
+    <%= form.text_field :custo, readonly: true, id: 'custo-field' %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var quartoSelect = document.querySelector('.quarto-select');
+        var custoField = document.querySelector('#custo-field');
+        var dataEntradaField = document.querySelector('#data-de-entrada');
+        var dataSaidaField = document.querySelector('#data-de-saida');
+
+        function calcularCustoDaReserva(){
+            var quartoId = quartoSelect.value;
+            var dataEntrada = new Date(dataEntradaField.value);
+            var dataSaida = new Date(dataSaidaField.value);
+            var diferencaEmMinutos = Math.floor((dataSaida - dataEntrada) / 60000);
+
+            if (quartoId !== '' && dataEntrada.value !== '' && dataSaida.value !== '') {
+                fetch('/reservas/get_custo?quarto_id=' + quartoId)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        var custoTotal = (data.custo / 1440) * diferencaEmMinutos;
+                        custoField.value = custoTotal.toFixed(2);
+                    });
+            } else {
+                custoField.value = '0.00';
+            };
+        }
+
+        quartoSelect.addEventListener('change', calcularCustoDaReserva);
+        dataEntradaField.addEventListener('change', calcularCustoDaReserva);
+        dataSaidaField.addEventListener('change', calcularCustoDaReserva);
+        calcularCustoDaReserva();
+    });
+</script>

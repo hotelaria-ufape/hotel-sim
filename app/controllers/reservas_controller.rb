@@ -15,6 +15,13 @@ class ReservasController < ApplicationController
     @reserva = Reserva.new
   end
 
+  def get_custo
+    quarto = Quarto.find(params[:quarto_id])
+    custo = quarto.preco_diaria # Ou qualquer lógica que você tenha para calcular o custo
+
+    render json: { custo: custo }
+  end
+
   # GET /reservas/1/edit
   def edit
   end
