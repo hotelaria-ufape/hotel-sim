@@ -2,10 +2,15 @@
 
 <h1>Reservas</h1>
 
+<br>
+
 <tr>
   <% @reservas.each do |reserva| %>
     <p> [ <%= reserva.data_de_entrada %> - <%= reserva.data_de_saida %> ] - <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %></p>
   <% end %>
 </tr>
 
-<%= link_to "New reserva", new_reserva_path %>
+<%= link_to "Agendar reserva", new_reserva_path %>
+
+<br>
+<%= link_to "Home", root_path %>
