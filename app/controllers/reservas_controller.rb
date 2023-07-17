@@ -30,16 +30,6 @@ class ReservasController < ApplicationController
   def create
     @reserva = Reserva.new(reserva_params)
 
-    # Calcular o custo com base no quarto e dias de hospedagem
-    quarto = Quarto.find(reserva_params[:quarto_id])
-    data_entrada = Date.parse(reserva_params[:data_de_entrada])
-    data_saida = Date.parse(reserva_params[:data_de_saida])
-    dias_hospedagem = (data_saida - data_entrada).to_i
-    custo = quarto.preco_diaria * dias_hospedagem
-
-    # Definir o custo no objeto reserva
-    @reserva.custo = custo
-
     respond_to do |format|
       if @reserva.save
         format.html { redirect_to reserva_url(@reserva), notice: "Reserva was successfully created." }
@@ -50,8 +40,6 @@ class ReservasController < ApplicationController
       end
     end
   end
-
-
 
   # PATCH/PUT /reservas/1 or /reservas/1.json
   def update
