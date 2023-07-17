@@ -1,12 +1,12 @@
 <div id="<%= dom_id reserva %>">
   <p>
     <strong>Cliente:</strong>
-    <%= reserva.cliente_id %>
+    <%= Cliente.find(reserva.cliente_id).nome %>
   </p>
 
   <p>
     <strong>Quarto:</strong>
-    <%= reserva.quarto_id %>
+    <%= Quarto.find(reserva.quarto_id).numero%>
   </p>
 
   <p>

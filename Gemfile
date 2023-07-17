@@ -44,5 +44,7 @@ group :production, :actions do
   gem 'activerecord-postgresql-adapter'
 end
 
+gem 'cpf_cnpj', '~> 0.2.1'
+
 gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.1.1'
 gem 'jquery-rails'

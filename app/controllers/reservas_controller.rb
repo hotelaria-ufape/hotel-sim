@@ -21,10 +21,16 @@ class ReservasController < ApplicationController
 
   # POST /reservas or /reservas.json
   def create
+    @cliente = Cliente.find(reserva_params[:cliente_id])
+    @quarto = Quarto.find(reserva_params[:quarto_id])
     @reserva = Reserva.new(reserva_params)
-
+    @cliente.reservas << @reserva
+    @quarto.reservas << @reserva
     respond_to do |format|
       if @reserva.save
+        # Atualiza a disponibilidade do quarto
+        @quarto.update(disponibilidade: false)
+
         format.html { redirect_to reserva_url(@reserva), notice: "Reserva was successfully created." }
         format.json { render :show, status: :created, location: @reserva }
       else
@@ -56,6 +62,7 @@ class ReservasController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

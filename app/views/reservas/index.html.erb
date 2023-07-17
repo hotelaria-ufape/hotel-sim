@@ -2,13 +2,10 @@
 
 <h1>Reservas</h1>
 
-<div id="reservas">
+<tr>
   <% @reservas.each do |reserva| %>
-    <%= render reserva %>
-    <p>
-      <%= link_to "Show this reserva", reserva %>
-    </p>
+    <p> [ <%= reserva.data_de_entrada %> - <%= reserva.data_de_saida %> ] - <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %></p>
   <% end %>
-</div>
+</tr>
 
 <%= link_to "New reserva", new_reserva_path %>

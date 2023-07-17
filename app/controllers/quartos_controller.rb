@@ -8,6 +8,7 @@ class QuartosController < ApplicationController
 
   # GET /quartos/1 or /quartos/1.json
   def show
+    @quarto = Quarto.find(params[:id])
   end
 
   # GET /quartos/new
