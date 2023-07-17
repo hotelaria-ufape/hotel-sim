@@ -75,3 +75,5 @@ group :production, :actions do
   gem 'pg'
   gem 'activerecord-postgresql-adapter'
 end
+
+gem 'cpf_cnpj', '~> 0.2.1'
