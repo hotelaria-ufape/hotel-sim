@@ -3,8 +3,12 @@
 <%= render @quarto %>
 
 <div>
-  <%= link_to "Edit this quarto", edit_quarto_path(@quarto) %> |
-  <%= link_to "Back to quartos", quartos_path %>
+  <%= link_to "Editar quarto", edit_quarto_path(@quarto) %> |
+  <%= link_to "Quartos", quartos_path %>
 
-  <%= button_to "Destroy this quarto", @quarto, method: :delete %>
+  <%= button_to "Remover quarto", @quarto, method: :delete %>
 </div>
+
+<br>
+
+<%= link_to "Home", root_path %>

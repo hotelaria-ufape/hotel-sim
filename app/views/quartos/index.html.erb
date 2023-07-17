@@ -2,13 +2,18 @@
 
 <h1>Quartos</h1>
 
+<br>
 <div id="quartos">
-  <% @quartos.each do |quarto| %>
-    <%= render quarto %>
-    <p>
-      <%= link_to "Show this quarto", quarto %>
-    </p>
-  <% end %>
+  <tr>
+    <% @quartos.each do |quarto| %>
+      <p> [ Quarto: <%= quarto.numero %>  -  Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível"%> ] <%= link_to "Exibir quarto", quarto, id:"d-#{quarto.numero}" %></p>
+    <% end %>
+  </tr>
 </div>
+<br><br>
 
-<%= link_to "New quarto", new_quarto_path %>
+<%= link_to "Cadastrar Quarto", new_quarto_path %>
+
+<br>
+
+<%= link_to "Home", root_path %>
