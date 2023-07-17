@@ -9,6 +9,13 @@ class Reserva < ApplicationRecord
   validate :data_entrada
   validate :data_saida
 
+  before_destroy :marcar_quarto_como_disponivel
+
+  private
+
+  def marcar_quarto_como_disponivel
+    quarto.update(disponibilidade: true)
+  end
 
   def data_entrada
     if data_de_entrada.present? && data_de_entrada < Date.today
