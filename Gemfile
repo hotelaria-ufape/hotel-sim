@@ -43,3 +43,6 @@ group :production, :actions do
   gem 'pg'
   gem 'activerecord-postgresql-adapter'
 end
+
+gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.1.1'
+gem 'jquery-rails'

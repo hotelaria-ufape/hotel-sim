@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+    width: 95%;
+    max-width: 800px;
+    margin: auto;
+
+    background-image: url(https://static.vecteezy.com/system/resources/previews/009/258/615/original/abstract-elegant-transparent-wave-background-free-vector.jpg);
+
+    line-height: 1.5;
+    color: black;
+}
+
+main{
+    background: transparent;
+    padding: 5px 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+
+.app-name, .headline{
+    text-align: center;
+}
