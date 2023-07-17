@@ -27,7 +27,6 @@ class ReservasController < ApplicationController
   end
 
   # POST /reservas or /reservas.json
-  # POST /reservas or /reservas.json
   def create
     @reserva = Reserva.new(reserva_params)
 
@@ -51,6 +50,7 @@ class ReservasController < ApplicationController
       end
     end
   end
+
 
 
   # PATCH/PUT /reservas/1 or /reservas/1.json

@@ -11,17 +11,16 @@
 
   <p>
     <strong>Data de entrada:</strong>
-    <%= reserva.data_de_entrada %>
+    <%= reserva.data_de_entrada.to_time.strftime("%d/%m/%Y %H:%M") %>
   </p>
 
   <p>
-    <strong>Data de saida:</strong>
-    <%= reserva.data_de_saida %>
+    <strong>Data de saída:</strong>
+    <%= reserva.data_de_saida.to_time.strftime("%d/%m/%Y %H:%M") %>
   </p>
 
   <p>
     <strong>Custo:</strong>
     <%= reserva.custo %>
   </p>
-
 </div>

@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_16_161246) do
   create_table "reservas", force: :cascade do |t|
     t.integer "cliente_id", null: false
     t.integer "quarto_id", null: false
-    t.date "data_de_entrada"
-    t.date "data_de_saida"
+    t.datetime "data_de_entrada"
+    t.datetime "data_de_saida"
     t.decimal "custo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
