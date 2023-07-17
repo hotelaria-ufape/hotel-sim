@@ -41,6 +41,17 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+      - name: Run Migrations
+        env:
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_USER: postgres
+          PG_PASSWORD: password
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:migrate
+          bundle exec rails db:test:prepare
+
       - name: Run Tests
         env:
           PG_DATABASE: postgres
@@ -58,6 +69,7 @@ jobs:
           RAILS_ENV: actions
         run: |
           bundle exec rake
+          rails 
 
       - name: cucumber tests
         run: |
