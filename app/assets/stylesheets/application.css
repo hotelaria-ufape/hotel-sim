@@ -36,8 +36,8 @@ html, body, main{
 }
 
 .labels input, .labels textarea, .labels select{
-    background-color: rgba(30, 218, 155, 0.438);
-    border: 2px solid rgba(30, 218, 155, 0.205);
+    background-color: rgba(30 218 155 43.8%);
+    border: 2px solid rgba(30 218 155 20.5%);
     border-radius: 5px;
     width: 100%;
 }
@@ -58,7 +58,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 input[type="checkbox"]:checked {
-    background-color: rgb(1, 116, 30);
+    background-color: rgb(1 116 30);
 }
 
 .submit{
@@ -74,11 +74,11 @@ input[type="checkbox"]:checked {
     font-weight: bold;
     border: none;
     border-radius: 15px;
-    background-color: rgb(54, 223, 166);
+    background-color: rgb(54 223 166);
 }
 
 .submit input:hover, .submit input[type="submit"]:hover{
-    background-color: rgb(30, 218, 155);
+    background-color: rgb(30 218 155);
     cursor: pointer;
 }
 
@@ -93,7 +93,7 @@ input[type="checkbox"]:checked {
 .link-to-div a{
     text-decoration: none;
     padding: 4px;
-    background-color: rgb(0, 115, 126);
+    background-color: rgb(0 115 126);
     color: white;
     width: 30%;
     padding-top: 10px;
@@ -104,12 +104,12 @@ input[type="checkbox"]:checked {
 }
 
 .link-to-div a:hover{
-    background-color: rgb(1, 61, 66);
+    background-color: rgb(1 61 66);
 }
 
 .labels select:hover, .labels input[type="text"]:hover, .labels textarea:hover{
     font-weight: bold;
-    background-color: rgba(30, 218, 155, 0.575);
+    background-color: rgba(30 218 155 57.5%);
 }
 /* End of New and Edit pages */
 
@@ -136,7 +136,7 @@ input[type="checkbox"]:checked {
 
 .home-btn{
     border: none;
-    background-color: rgb(14, 138, 41);
+    background-color: rgb(14 138 41);
     border-radius: 10px;
     padding: 15px;
     margin: 5px; width: 200px;
@@ -147,7 +147,7 @@ input[type="checkbox"]:checked {
 }
 
 .home-btn:hover{
-    background-color: rgb(24, 160, 53);
+    background-color: rgb(24 160 53);
     cursor: pointer;
 }
 
@@ -165,7 +165,7 @@ input[type="checkbox"]:checked {
     list-style: none;
     background-color: beige;
     width: 50%;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0 0 0 20%);
     z-index: 1;
 }
 
@@ -187,7 +187,7 @@ input[type="checkbox"]:checked {
 }
 
 .show-grid {
-    background-color: rgb(1, 73, 95);
+    background-color: rgb(1 73 95);
     color: white;
     margin: 1px;
     padding: 10px;
@@ -196,7 +196,7 @@ input[type="checkbox"]:checked {
 }
 
 .show-grid a{
-    color: rgb(105, 191, 231);
+    color: rgb(105 191 231);
     text-decoration: none;
 }
 
@@ -212,7 +212,7 @@ input[type="checkbox"]:checked {
     margin: 5px;
     padding: 10px;
     text-decoration: none;
-    background-color: rgb(0, 104, 122);
+    background-color: rgb(0 104 122);
     color: white;
     border-radius: 10px;
     text-align: center;
@@ -220,7 +220,7 @@ input[type="checkbox"]:checked {
 }
 
 .links a:hover{
-    background-color: rgb(0, 174, 218);
+    background-color: rgb(0 174 218);
     cursor: pointer;
 }
 
@@ -254,7 +254,7 @@ input[type="checkbox"]:checked {
 }
 
 .link-show a, .link-show button, #links a, #links button{
-    background-color: rgb(0, 85, 212);
+    background-color: rgb(0 85 212);
     color: whitesmoke;
     margin-top: 10px;
     padding: 10px;
@@ -263,7 +263,7 @@ input[type="checkbox"]:checked {
 }
 
 .link-show a:hover, .link-show button:hover{
-    background-color: rgb(0, 115, 255);
+    background-color: rgb(0 115 255);
     cursor: pointer;
 }
 
@@ -276,11 +276,11 @@ input[type="checkbox"]:checked {
     text-decoration: 0;
     text-align: center;
     width: calc(600px + 10px);
-    background-color: rgb(2, 163, 42);
+    background-color: rgb(2 163 42);
 }
 
 #links a:hover{
-    background-color: rgb(0, 212, 53);
+    background-color: rgb(0 212 53);
 }
 
 /* End of Show pages */
