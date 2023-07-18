@@ -3,17 +3,17 @@ require 'cpf_cnpj'
 class Cliente < ApplicationRecord
   has_many :reservas, dependent: :destroy
 
-  validates :nome, presence: true, length: {in: 5..40}
-  validates :telefone, presence: true, uniqueness: true, format: { with: /\A\d{2}\d{5}-\d{4}\z/, message: "formato de telefone de ser ddd xxxxx-xxxx" }, length: {in: 12..13}
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP}
-  validates :cpf, presence: true, uniqueness: true
+  validates :nome, presence: { message: "não pode estar em branco." }, length: {in: 5..256, message: "deve ter entre 5 e 255 caracteres."}
+  validates :telefone, presence: { message: "não pode estar em branco." }, length: { is: 11, message: "deve ter 11 dígitos. (DDD+Número. Ex: 87912345678)" }
+  validates :email, presence: { message: "não pode estar em branco." }, uniqueness: { message: "informado não é valido." }, format: { with: URI::MailTo::EMAIL_REGEXP, message: "informado não é valido."}
+  validates :cpf, presence: { message: "não pode estar em branco." }, uniqueness: { message: "informado não é valido." }
   validate :cpf_valido
 
   before_validation :formatar_cpf
 
   def cpf_valido
     if cpf.present? && !CPF.valid?(cpf)
-      errors.add(:cpf, "formato ou número errado")
+      errors.add(:cpf, "informado não é valido.")
     end
   end
 

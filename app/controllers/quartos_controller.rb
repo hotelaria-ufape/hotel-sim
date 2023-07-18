@@ -49,6 +49,12 @@ class QuartosController < ApplicationController
 
   # DELETE /quartos/1 or /quartos/1.json
   def destroy
+    reservas = @quarto.reservas
+
+    # Excluir as reservas associadas ao quarto
+    reservas.each do |reserva|
+      reserva.destroy
+    end
     @quarto.destroy
 
     respond_to do |format|
