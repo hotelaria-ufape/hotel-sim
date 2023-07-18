@@ -155,3 +155,25 @@ input[type="checkbox"]:checked {
 }
 
 /* End of Home Page */
+
+/* Error messages */
+
+.errors h2{
+    cursor: pointer;
+}
+
+.errors ul{
+    display: none;
+    position: absolute;
+    list-style: none;
+    background-color: #f9f9f9;
+    width: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.errors h2:hover + ul{
+    display: block;
+}
+
+/* End of error messages */
