@@ -1,42 +1,46 @@
 <%= form_with(model: quarto) do |form| %>
-  <% if quarto.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(quarto.errors.count, "error") %> prohibited this quarto from being saved:</h2>
+  <div class='errors'>
+    <% if quarto.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(quarto.errors.count, "error") %> prohibited this quarto from being saved:</h2>
 
-      <ul>
-        <% quarto.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% quarto.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='form-div'>
+    <div class='labels'>
+      <%= form.label :numero, style: "display: block" %>
+      <%= form.number_field :numero %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :numero, style: "display: block" %>
-    <%= form.number_field :numero %>
-  </div>
+    <div class='labels'>
+      <%= form.label :tipo, style: "display: block" %>
+      <%= form.text_field :tipo %>
+    </div>
 
-  <div>
-    <%= form.label :tipo, style: "display: block" %>
-    <%= form.text_field :tipo %>
-  </div>
+    <div class='labels'>
+      <%= form.label :disponibilidade, style: "display: block" %>
+      <%= form.check_box :disponibilidade %>
+    </div>
 
-  <div>
-    <%= form.label :disponibilidade, style: "display: block" %>
-    <%= form.check_box :disponibilidade %>
-  </div>
+    <div class='labels'>
+      <%= form.label :preco_diaria, style: "display: block" %>
+      <%= form.text_field :preco_diaria %>
+    </div>
 
-  <div>
-    <%= form.label :preco_diaria, style: "display: block" %>
-    <%= form.text_field :preco_diaria %>
-  </div>
+    <div class='labels'>
+      <%= form.label :descricao, style: "display: block" %>
+      <%= form.text_area :descricao %>
+    </div>
 
-  <div>
-    <%= form.label :descricao, style: "display: block" %>
-    <%= form.text_area :descricao %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <div class='submit'>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

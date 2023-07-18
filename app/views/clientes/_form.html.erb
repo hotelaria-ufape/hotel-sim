@@ -1,37 +1,42 @@
 <%= form_with(model: cliente) do |form| %>
-  <% if cliente.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+  <div class='errors'>
+    <% if cliente.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
 
-      <ul>
-        <% cliente.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% cliente.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='form-div'>
+    <div class='labels'>
+      <%= form.label :cpf, style: "display: block" %>
+      <%= form.text_field :cpf %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :cpf, style: "display: block" %>
-    <%= form.text_field :cpf %>
+    <div class='labels'>
+      <%= form.label :nome, style: "display: block" %>
+      <%= form.text_field :nome %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :telefone, style: "display: block" %>
+      <%= form.text_field :telefone %>
+    </div>
+
+    <div class='submit'>
+      <%= form.submit %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :telefone, style: "display: block" %>
-    <%= form.text_field :telefone %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

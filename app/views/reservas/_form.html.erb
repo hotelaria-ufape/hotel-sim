@@ -1,44 +1,49 @@
 <%= form_with(model: reserva) do |form| %>
-  <% if reserva.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
+  <div class='errors'>
+    <% if reserva.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
 
-      <ul>
-        <% reserva.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% reserva.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='form-div'>
+    <div class='labels'>
+      <%= form.label :cliente_id, style: "display: block" %>
+      <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true }) %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :cliente_id, style: "display: block" %>
-    <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true }) %>
+    <div class='labels'>
+      <%= form.label :quarto_id, style: "display: block" %>
+      <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select' }) %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :data_de_entrada, style: "display: block" %>
+      <%= form.datetime_field :data_de_entrada, id: 'data-de-entrada' %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :data_de_saida, style: "display: block" %>
+      <%= form.datetime_field :data_de_saida, id: 'data-de-saida' %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :custo, style: "display: block" %>
+      <%= form.text_field :custo, readonly: true, id: 'custo-field' %>
+    </div>
+
+    <div class='submit'>
+      <%= form.submit %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :quarto_id, style: "display: block" %>
-    <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select' }) %>
-  </div>
-
-  <div>
-    <%= form.label :data_de_entrada, style: "display: block" %>
-    <%= form.datetime_field :data_de_entrada, id: 'data-de-entrada' %>
-  </div>
-
-  <div>
-    <%= form.label :data_de_saida, style: "display: block" %>
-    <%= form.datetime_field :data_de_saida, id: 'data-de-saida' %>
-  </div>
-
-  <div>
-    <%= form.label :custo, style: "display: block" %>
-    <%= form.text_field :custo, readonly: true, id: 'custo-field' %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>
 
 <script>

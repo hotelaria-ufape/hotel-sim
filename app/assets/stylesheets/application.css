@@ -1,15 +1,115 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Noto+Serif&family=Poppins:wght@300;500;600;700&display=swap');
+
+*{
+    font-family: 'Noto Serif', serif;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    flex-direction: column;
+}
+
+/* New and Edit pages */
+.labels{
+    display: flex;
+    flex-direction: column ;
+
+    width: 50vw;
+}
+
+.labels label{
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+.labels input, .labels textarea, .labels select{
+    background-color: rgba(30, 218, 155, 0.438);
+    border: 2px solid rgba(30, 218, 155, 0.205);
+    border-radius: 5px;
+    width: 100%;
+}
+
+.labels textarea{
+    resize: none;
+    height: 100px;
+}
+
+input[type="checkbox"] {
+    all: unset;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: red;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked {
+    background-color: rgb(1, 116, 30);
+}
+
+
+
+.submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.submit input, .submit input[type="submit"]{
+    padding: 10px;
+    margin-top: 5px;
+    width: 60%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(54, 223, 166);
+}
+
+.submit input:hover, .submit input[type="submit"]:hover{
+    background-color: rgb(30, 218, 155);
+    cursor: pointer;
+}
+
+.link-to-div{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+.link-to-div a{
+    text-decoration: none;
+    padding: 4px;
+    background-color: rgb(0, 115, 126);
+    color: white;
+    width: 30%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 0;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.link-to-div a:hover{
+    background-color: rgb(1, 61, 66);
+}
+
+#up-h1{
+    margin-top: 20px;
+    font-size: 1.8rem;
+}
+
+.labels select:hover, .labels input[type="text"]:hover, .labels textarea:hover{
+    font-weight: bold;
+    background-color: rgba(30, 218, 155, 0.575);
+}
+/* End of New and Edit pages */
