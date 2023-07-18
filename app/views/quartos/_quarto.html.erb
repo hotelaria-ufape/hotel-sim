@@ -1,25 +1,25 @@
-<div id="<%= dom_id quarto %>">
-  <p>
+<div id="<%= dom_id quarto %>" class='showing'>
+  <p class='show-item'>
     <strong>Numero:</strong>
     <%= quarto.numero %>
   </p>
 
-  <p>
+  <p class='show-item'>
     <strong>Tipo:</strong>
     <%= quarto.tipo %>
   </p>
 
-  <p>
+  <p class='show-item'>
     <strong>Disponibilidade:</strong>
     <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %>
   </p>
 
-  <p>
+  <p class='show-item'>
     <strong>Preco diaria:</strong>
     <%= quarto.preco_diaria %>
   </p>
 
-  <p>
+  <p class='show-item'>
     <strong>Descricao:</strong>
     <%= quarto.descricao %>
   </p>

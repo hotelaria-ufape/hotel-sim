@@ -1,13 +1,11 @@
-<h1>Editing quarto</h1>
+<h1 id='up-h1'>Editing quarto</h1>
 
 <%= render "form", quarto: @quarto %>
 
 <br>
 
-<div>
-  <%= link_to "Exibir quarto", @quarto %> |
+<div class='link-to-div'>
+  <%= link_to "Exibir quarto", @quarto %>
   <%= link_to "Quartos", quartos_path %>
 </div>
 
-<br>
-<%= link_to "Home", root_path %>
