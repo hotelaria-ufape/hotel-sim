@@ -49,6 +49,13 @@ class ClientesController < ApplicationController
 
   # DELETE /clientes/1 or /clientes/1.json
   def destroy
+    # Obtendo as reservas do cliente antes de excluí-lo
+    reservas = @cliente.reservas
+    reservas.each do |reserva|
+      # Marcar o quarto como disponível antes de destruir a reserva
+      reserva.quarto.update(disponibilidade: true)
+      reserva.destroy
+    end
     @cliente.destroy
 
     respond_to do |format|
