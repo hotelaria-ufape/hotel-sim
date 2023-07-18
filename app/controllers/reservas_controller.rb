@@ -32,6 +32,7 @@ class ReservasController < ApplicationController
 
     respond_to do |format|
       if @reserva.save
+        @reserva.quarto.update(disponibilidade: false)
         format.html { redirect_to reserva_url(@reserva), notice: "Reserva was successfully created." }
         format.json { render :show, status: :created, location: @reserva }
       else
@@ -56,8 +57,9 @@ class ReservasController < ApplicationController
 
   # DELETE /reservas/1 or /reservas/1.json
   def destroy
+    quarto = @reserva.quarto
     @reserva.destroy
-
+    quarto.update(disponibilidade: true) if @reserva.destroyed?
     respond_to do |format|
       format.html { redirect_to reservas_url, notice: "Reserva was successfully destroyed." }
       format.json { head :no_content }

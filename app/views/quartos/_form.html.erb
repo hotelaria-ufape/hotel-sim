@@ -18,12 +18,12 @@
 
   <div>
     <%= form.label :tipo, style: "display: block" %>
-    <%= form.text_field :tipo %>
+    <%= form.select :tipo, options_for_select(["Quarto Padrão", "Quarto Familiar", "Quarto de Luxo", "Suíte Padrão", "Suíte Presidencial"]) %>
   </div>
 
   <div>
     <%= form.label :disponibilidade, style: "display: block" %>
-    <%= form.check_box :disponibilidade %>
+    <%= form.select :disponibilidade, options_for_select([["Disponível", true], ["Indisponível", false]]) %>
   </div>
 
   <div>
