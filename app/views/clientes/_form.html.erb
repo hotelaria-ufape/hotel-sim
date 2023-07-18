@@ -2,7 +2,7 @@
   <div class='errors'>
     <% if cliente.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved:</h2>
+        <h2><%= pluralize(cliente.errors.count, "error") %> prohibited this cliente from being saved (hover to see)</h2>
 
         <ul>
           <% cliente.errors.each do |error| %>
