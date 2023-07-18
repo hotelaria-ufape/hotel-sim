@@ -226,3 +226,62 @@ input[type="checkbox"]:checked {
 }
 
 /* End of Index pages */
+
+/* Show pages */
+
+.showing{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
+}
+
+.show-item, .show-item strong{
+    font-size: 1.2rem;
+}
+
+.link-show{
+    display: flex;
+    gap: 5px;
+    margin-top: 10%;
+}
+
+.link-show a{
+    text-decoration: none;
+    text-align: center;
+}
+
+.link-show button{
+    border: 0;
+}
+
+.link-show a, .link-show button, #links a, #links button{
+    background-color: rgb(0, 85, 212);
+    color: whitesmoke;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.link-show a:hover, .link-show button:hover{
+    background-color: rgb(0, 115, 255);
+    cursor: pointer;
+}
+
+#links{
+    display: flex;
+    gap: 5px;
+}
+
+#links a{
+    text-decoration: 0;
+    text-align: center;
+    width: calc(600px + 10px);
+    background-color: rgb(2, 163, 42);
+}
+
+#links a:hover{
+    background-color: rgb(0, 212, 53);
+}
+
+/* End of Show pages */

@@ -2,13 +2,12 @@
 
 <%= render @quarto %>
 
-<div>
-  <%= link_to "Editar quarto", edit_quarto_path(@quarto) %> |
-  <%= link_to "Quartos", quartos_path %>
-
+<div class='link-show'>
+  <%= link_to "Editar quarto", edit_quarto_path(@quarto) %>
+  <%= link_to "Voltar para quartos", quartos_path %>
   <%= button_to "Remover quarto", @quarto, method: :delete %>
 </div>
 
-<br>
-
-<%= link_to "Home", root_path %>
+<div id='links'>
+  <%= link_to "Home", root_path %>
+</div>

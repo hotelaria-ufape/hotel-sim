@@ -1,20 +1,21 @@
-<div id="<%= dom_id cliente %>">
-  <p>
-    <strong>Cpf:</strong>
-    <%= cliente.cpf %>
-  </p>
+<div id="<%= dom_id cliente %>" class='showing'>
 
-  <p>
+  <p class='show-item'>
     <strong>Nome:</strong>
     <%= cliente.nome %>
   </p>
 
-  <p>
+  <p class='show-item'>
+    <strong>Cpf:</strong>
+    <%= cliente.cpf %>
+  </p>
+
+  <p class='show-item'>
     <strong>Email:</strong>
     <%= cliente.email %>
   </p>
 
-  <p>
+  <p class='show-item'>
     <strong>Telefone:</strong>
     <%= cliente.telefone %>
   </p>
