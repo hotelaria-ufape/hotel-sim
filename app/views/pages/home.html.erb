@@ -15,9 +15,15 @@
       <p id='descricao'>O hotel-sim trata-se de uma ferramenta de gerenciamento de hospedagem para um hotel.</p>
     </main>
     <div id='home-buttons'>
-      <button class="home-btn"><%=link_to "Clientes", clientes_path, style: "color: black;" %></button>
-      <button class="home-btn"><%=link_to "Quartos", quartos_path, style: "color: black;" %></button>
-      <button class="home-btn"><%=link_to "Reservas", reservas_path, style: "color: black;" %></button>
+      <%= link_to clientes_path, style: "color: black;" do %>
+        <button class="home-btn">Clientes</button>
+      <% end %>
+      <%=link_to quartos_path, style: "color: black;" do %>
+        <button class="home-btn">Quartos</button>
+      <% end %>
+      <%=link_to reservas_path, style: "color: black;" do %>
+        <button class="home-btn">Reservas</button>
+      <% end %>
     </div>
   </body>
 </html>
