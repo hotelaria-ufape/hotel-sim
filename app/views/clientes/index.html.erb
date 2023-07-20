@@ -2,6 +2,14 @@
 
 <h1 id='up-h1'>Clientes</h1>
 
+<div id='search-client'>
+  <%= form_with(url: clientes_path, method: 'get', local: true) do %>
+  <h3>Procurar cliente</h3>
+    <%= text_field_tag(:search) %>
+    <%= submit_tag("Procurar") %>
+  <% end %>
+</div>
+
 <div class='list'>
   <tr class='tr-show'>
     <% @clientes.each do |cliente| %>
