@@ -2,11 +2,12 @@
 
 <%= render @cliente %>
 
-<div>
-  <%= link_to "Editar cliente", edit_cliente_path(@cliente) %> |
-  <%= link_to "Clientes", clientes_path %>
+<div class='link-show'>
+  <%= link_to "Editar cliente", edit_cliente_path(@cliente) %>
+  <%= link_to "Voltar para clientes", clientes_path %>
   <%= button_to "Remover cliente", @cliente, method: :delete %>
 </div>
 
-</br>
-<%= link_to "Home", root_path %>
+<div id='links'>
+  <%= link_to "Home", root_path %>
+</div>

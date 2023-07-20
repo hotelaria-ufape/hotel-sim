@@ -1,12 +1,24 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Clientes</h1>
+<h1 id='up-h1'>Clientes</h1>
 
-<tr>
-  <% @clientes.each do |cliente| %>
-    <p> [ <%= cliente.nome %> ] - <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %></p>
+<div id='search-client'>
+  <%= form_with(url: clientes_path, method: 'get', local: true) do %>
+  <h3>Procurar cliente</h3>
+    <%= text_field_tag(:search) %>
+    <%= submit_tag("Procurar") %>
   <% end %>
-</tr>
-<br>
-<%= link_to "Cadastrar cliente", new_cliente_path %> <br>
-<%= link_to "Home", root_path %>
+</div>
+
+<div class='list'>
+  <tr class='tr-show'>
+    <% @clientes.each do |cliente| %>
+      <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %></p>
+    <% end %>
+  </tr>
+</div>
+
+<div class='links'>
+  <%= link_to "Cadastrar cliente", new_cliente_path %>
+  <%= link_to "Home", root_path %>
+</div>

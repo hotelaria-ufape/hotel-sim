@@ -1,20 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Reservas</h1>
+<h1 id='up-h1'>Reservas</h1>
 
-<br>
+<div class='list'>
+  <tr class='tr-show'>
+    <% @reservas.each do |reserva| %>
+      <p class='show-grid'>
+        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y %H:%M") %> - <%= reserva.data_de_saida.strftime("%d/%m/%Y %H:%M") %> ] <br>
+        <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %>
+      </p>
+    <% end %>
+  </tr>
+</div>
 
-<tr>
-  <% @reservas.each do |reserva| %>
-    <p>
-      [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y %H:%M") %> - <%= reserva.data_de_saida.strftime("%d/%m/%Y %H:%M") %> ] -
-      <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %>
-    </p>
-  <% end %>
-</tr>
-
-
-<%= link_to "Agendar reserva", new_reserva_path %>
-
-<br>
-<%= link_to "Home", root_path %>
+<div class='links'>
+  <%= link_to "Agendar reserva", new_reserva_path %>
+  <%= link_to "Home", root_path %>
+</div>

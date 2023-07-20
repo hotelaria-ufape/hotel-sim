@@ -1,9 +1,10 @@
-<h1>New reserva</h1>
+<h1 id='up-h1'>New reserva</h1>
 
 <%= render "form", reserva: @reserva %>
 
 <br>
 
-<div>
+<div class='link-to-div'>
   <%= link_to "Back to reservas", reservas_path %>
+  <%= link_to "Home", root_path %>
 </div>

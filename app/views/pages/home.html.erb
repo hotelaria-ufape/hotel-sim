@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <title>Consulta-sim</title>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="application.css">
-</head>
+  <head>
+    <title>Consulta-sim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="application.css">
+  </head>
 
-<body>
-<main>
-  <div class="logo">
-  </div>
-  <h1 class="app-name">Hotel-sim</h1>
+  <body id='body-home'>
+    <main>
+      <div class="logo">
+      </div>
+      <h1 id="app-name">Hotel-sim</h1>
 
-  <p>O hotel-sim trata-se de uma ferramenta de gerenciamento de hospedagem para um hotel.</p>
-</main>
-
-<button class="button"><%=link_to "Clientes", clientes_path, style: "color: black;" %></button> </br> </br>
-<button class="button"><%=link_to "Quartos", quartos_path, style: "color: black;" %></button> </br> </br>
-<button class="button"><%=link_to "Reservas", reservas_path, style: "color: black;" %></button> </br> </br>
-
-</body>
+      <p id='descricao'>O hotel-sim trata-se de uma ferramenta de gerenciamento de hospedagem para um hotel.</p>
+    </main>
+    <div id='home-buttons'>
+      <%= link_to clientes_path, style: "color: black;" do %>
+        <button class="home-btn">Clientes</button>
+      <% end %>
+      <%=link_to quartos_path, style: "color: black;" do %>
+        <button class="home-btn">Quartos</button>
+      <% end %>
+      <%=link_to reservas_path, style: "color: black;" do %>
+        <button class="home-btn">Reservas</button>
+      <% end %>
+    </div>
+  </body>
 </html>
