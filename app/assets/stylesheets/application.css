@@ -310,7 +310,7 @@ input[type="checkbox"]:checked {
 }
 
 #search-price{
-    margin-top: 25px;
+    margin-top: 10px;
     position: absolute;
     right: 10%;
 }

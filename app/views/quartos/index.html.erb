@@ -19,7 +19,7 @@
 <div id="quartos" class='list'>
   <tr class='tr-show'>
     <% @quartos.each do |quarto| %>
-      <p class='show-grid'> [ Quarto: <%= quarto.numero %>  -  Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível"%> ] <br> <%= link_to "Exibir quarto", quarto, id:"d-#{quarto.numero}" %></p>
+      <p class='show-grid'> [ Quarto: <%= quarto.numero %>  -  Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível"%> ] <br>  Preço: R$<%= quarto.preco_diaria %>0 <br> <%= link_to "Exibir quarto", quarto, id:"d-#{quarto.numero}" %></p>
     <% end %>
   </tr>
 </div>
