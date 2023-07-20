@@ -36,8 +36,7 @@ html, body, main{
 }
 
 .labels input, .labels textarea, .labels select{
-    background-color: rgba(30 218 155 43.8%);
-    border: 2px solid rgba(30 218 155 20.5%);
+    background-color: rgba(30, 218, 155, 0.438);
     border-radius: 5px;
     width: 100%;
 }
