@@ -9,6 +9,7 @@ class Reserva < ApplicationRecord
   validates :custo, presence: { message: "não pode estar em branco." }, numericality: { greater_than: 0, message: "deve ser acima de zero." }
   validate :data_entrada
   validate :data_saida
+  validate :horas_de_diferenca_maior_que_6
 
   private
 
@@ -19,8 +20,15 @@ class Reserva < ApplicationRecord
   end
 
   def data_saida
-    if data_de_saida.present? && data_de_saida <= Date.today && data_de_saida <= data_de_entrada && ((data_de_saida - data_de_entrada) / 1.hour).to_i <= 6
+    if data_de_saida.present? && data_de_saida <= Date.today
       errors.add(:data_de_saida, "inválida. (veja se a data de saída é posterior à data de entrada e possui uma diferença acima de 6 horas de estadia)")
     end
+  end
+
+  def horas_de_diferenca_maior_que_6
+    return if data_de_saida.blank? || data_de_entrada.blank?
+
+    diferenca_horas = (data_de_saida - data_de_entrada) / 1.hour
+    errors.add(:data_de_saida, "deve ser marcada pelo menos para 6 horas após a data de entrada.") if diferenca_horas < 6
   end
 end
