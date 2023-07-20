@@ -283,3 +283,53 @@ input[type="checkbox"]:checked {
 }
 
 /* End of Show pages */
+
+/* Index buttons */
+
+
+.index-btn{
+    margin-top: 20px;
+}
+
+.index-btn a{
+    text-decoration: none;
+    background-color: rgb(3, 110, 3);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.index-btn a:hover{
+    background-color: rgb(0 174 0);
+    cursor: pointer;
+}
+
+/* End of Index buttons */
+
+/* Search client */
+
+#search-client{
+    justify-items: center;
+    margin-top: 20px;
+    position: fixed;
+    right: 10%;
+    top: 6%;
+}
+
+#search-client input[type='text']{
+    background-color: rgba(4, 175, 75, 0.575);
+    padding: 5px;
+}
+
+#search-client input[type='submit']{
+    background-color: rgb(1, 161, 161);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#search-client input[type='submit']:hover{
+    background-color: rgb(0 212 212);
+    cursor: pointer;
+}
+
+/* End of Search client */

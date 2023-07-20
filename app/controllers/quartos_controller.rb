@@ -3,7 +3,7 @@ class QuartosController < ApplicationController
 
   # GET /quartos or /quartos.json
   def index
-    @quartos = Quarto.all
+    @quartos = Quarto.where(disponibilidade: params[:disponibilidade])
   end
 
   # GET /quartos/1 or /quartos/1.json
