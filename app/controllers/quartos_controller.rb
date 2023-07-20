@@ -3,7 +3,12 @@ class QuartosController < ApplicationController
 
   # GET /quartos or /quartos.json
   def index
-    @quartos = Quarto.where(disponibilidade: params[:disponibilidade])
+    if params[:disponibilidade].present?
+      @quartos = Quarto.where(disponibilidade: params[:disponibilidade])
+    else
+      @quartos = Quarto.all
+    end
+    @quartos = @quartos.where('preco_diaria <= ?', params[:max_price]) if params[:max_price].present?
   end
 
   # GET /quartos/1 or /quartos/1.json
