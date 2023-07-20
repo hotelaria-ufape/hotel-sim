@@ -2,6 +2,11 @@
 
 <h1 id='up-h1'>Quartos</h1>
 
+<div class='index-btn'>
+  <%= link_to 'Exibir quartos disponíveis', quartos_path(disponibilidade: true) %>
+  <%= link_to 'Exibir quartos indisponíveis', quartos_path(disponibilidade: false) %>
+</div>
+
 
 <div id="quartos" class='list'>
   <tr class='tr-show'>
