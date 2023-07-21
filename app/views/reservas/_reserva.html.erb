@@ -10,6 +10,11 @@
   </p>
 
   <p class='show-item'>
+    <strong>Preço do Quarto (R$):</strong>
+    <%= Quarto.find(reserva.quarto_id).preco_diaria%>
+  </p>
+
+  <p class='show-item'>
     <strong>Data de Entrada:</strong>
     <%= reserva.data_de_entrada.to_time.strftime("%d/%m/%Y às %H:%M") %>
   </p>
@@ -20,7 +25,7 @@
   </p>
 
   <p class='show-item'>
-    <strong>Custo:</strong>
+    <strong>Custo (R$):</strong>
     <%= reserva.custo %>
   </p>
 </div>
