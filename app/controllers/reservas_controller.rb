@@ -4,6 +4,12 @@ class ReservasController < ApplicationController
   # GET /reservas or /reservas.json
   def index
     @reservas = Reserva.all
+
+    if params[:start_date].present? && params[:end_date].present?
+      start_date = DateTime.parse(params[:start_date])
+      end_date = DateTime.parse(params[:end_date])
+      @reservas = @reservas.where("(data_de_entrada BETWEEN ? AND ?) OR (data_de_saida BETWEEN ? AND ?)", start_date, end_date, start_date, end_date)
+    end
   end
 
   # GET /reservas/1 or /reservas/1.json
