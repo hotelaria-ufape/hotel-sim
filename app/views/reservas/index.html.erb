@@ -2,6 +2,21 @@
 
 <h1 id='up-h1'>Reservas</h1>
 
+<div>
+  <%= form_tag reservas_path, method: :get do %>
+
+    Filtragem por
+    <label for="start_date">data de início:</label>
+    <%= datetime_local_field_tag "start_date", params[:start_date] %>
+    e
+    <label for="end_date">data de término:</label>
+    <%= datetime_local_field_tag "end_date", params[:end_date] %>
+
+    <%= submit_tag "Filtrar" %>
+  <% end %>
+  <%= link_to "Redefinir Filtragem", reservas_path %>
+</div>
+
 <div class='list'>
   <tr class='tr-show'>
     <% @reservas.each do |reserva| %>
