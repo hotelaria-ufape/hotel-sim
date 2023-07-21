@@ -10,6 +10,7 @@ class Reserva < ApplicationRecord
   validate :data_entrada
   validate :data_saida
   validate :horas_de_diferenca_maior_que_6
+  validate :verificar_conflito_de_datas, on: :create
 
   private
 
@@ -30,5 +31,17 @@ class Reserva < ApplicationRecord
 
     diferenca_horas = (data_de_saida - data_de_entrada) / 1.hour
     errors.add(:data_de_saida, "deve ser marcada pelo menos para 6 horas após a data de entrada.") if diferenca_horas < 6
+  end
+
+  def verificar_conflito_de_datas
+    if quarto_id.present? && data_de_entrada.present? && data_de_saida.present?
+      conflito_reserva = Reserva.where(quarto_id: quarto_id)
+                                .where("(data_de_entrada BETWEEN ? AND ?) OR (data_de_saida BETWEEN ? AND ?)", data_de_entrada, data_de_saida, data_de_entrada, data_de_saida)
+                                .first
+      if conflito_reserva
+        periodo_conflito = "#{conflito_reserva.data_de_entrada.strftime('%d/%m/%Y às %H:%M')} até #{conflito_reserva.data_de_saida.strftime('%d/%m/%Y às %H:%M')}"
+        errors.add(:base, "Este quarto já está reservado para o período de #{periodo_conflito}.")
+      end
+    end
   end
 end
