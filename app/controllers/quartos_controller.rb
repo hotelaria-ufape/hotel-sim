@@ -8,7 +8,7 @@ class QuartosController < ApplicationController
     else
       @quartos = Quarto.all
     end
-    @quartos = @quartos.where('preco_diaria <= ?', params[:max_price]) if params[:max_price].present?
+    @quartos = @quartos.where('preco_diaria BETWEEN ? AND ?', params[:min_price], params[:max_price]) if params[:max_price].present? and params[:min_price].present?
   end
 
   # GET /quartos/1 or /quartos/1.json
@@ -30,7 +30,7 @@ class QuartosController < ApplicationController
 
     respond_to do |format|
       if @quarto.save
-        format.html { redirect_to quarto_url(@quarto), notice: "Quarto was successfully created." }
+        format.html { redirect_to quarto_url(@quarto), notice: "Quarto criado com sucesso." }
         format.json { render :show, status: :created, location: @quarto }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class QuartosController < ApplicationController
   def update
     respond_to do |format|
       if @quarto.update(quarto_params)
-        format.html { redirect_to quarto_url(@quarto), notice: "Quarto was successfully updated." }
+        format.html { redirect_to quarto_url(@quarto), notice: "Quarto atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @quarto }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +63,7 @@ class QuartosController < ApplicationController
     @quarto.destroy
 
     respond_to do |format|
-      format.html { redirect_to quartos_url, notice: "Quarto was successfully destroyed." }
+      format.html { redirect_to quartos_url, notice: "Quarto destruído com sucesso." }
       format.json { head :no_content }
     end
   end

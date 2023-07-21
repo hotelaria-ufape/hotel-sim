@@ -1,26 +1,31 @@
 <div id="<%= dom_id reserva %>" class='showing'>
   <p class='show-item'>
-    <strong>Cliente:</strong>
+    <strong>Nome do Cliente:</strong>
     <%= Cliente.find(reserva.cliente_id).nome %>
   </p>
 
   <p class='show-item'>
-    <strong>Quarto:</strong>
+    <strong>Número do Quarto:</strong>
     <%= Quarto.find(reserva.quarto_id).numero%>
   </p>
 
   <p class='show-item'>
-    <strong>Data de entrada:</strong>
-    <%= reserva.data_de_entrada.to_time.strftime("%d/%m/%Y %H:%M") %>
+    <strong>Preço do Quarto (R$):</strong>
+    <%= Quarto.find(reserva.quarto_id).preco_diaria%>
   </p>
 
   <p class='show-item'>
-    <strong>Data de saída:</strong>
-    <%= reserva.data_de_saida.to_time.strftime("%d/%m/%Y %H:%M") %>
+    <strong>Data de Entrada:</strong>
+    <%= reserva.data_de_entrada.to_time.strftime("%d/%m/%Y às %H:%M") %>
   </p>
 
   <p class='show-item'>
-    <strong>Custo:</strong>
+    <strong>Data de Saída:</strong>
+    <%= reserva.data_de_saida.to_time.strftime("%d/%m/%Y às %H:%M") %>
+  </p>
+
+  <p class='show-item'>
+    <strong>Custo (R$):</strong>
     <%= reserva.custo %>
   </p>
 </div>

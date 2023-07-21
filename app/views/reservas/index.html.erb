@@ -6,7 +6,7 @@
   <tr class='tr-show'>
     <% @reservas.each do |reserva| %>
       <p class='show-grid'>
-        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y %H:%M") %> - <%= reserva.data_de_saida.strftime("%d/%m/%Y %H:%M") %> ] <br>
+        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %> - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
         <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %>
       </p>
     <% end %>
