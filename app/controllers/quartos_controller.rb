@@ -8,7 +8,7 @@ class QuartosController < ApplicationController
     else
       @quartos = Quarto.all
     end
-    @quartos = @quartos.where('preco_diaria <= ?', params[:max_price]) if params[:max_price].present?
+    @quartos = @quartos.where('preco_diaria BETWEEN ? AND ?', params[:min_price], params[:max_price]) if params[:max_price].present? and params[:min_price].present?
   end
 
   # GET /quartos/1 or /quartos/1.json
