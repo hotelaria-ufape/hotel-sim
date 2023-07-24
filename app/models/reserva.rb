@@ -15,13 +15,13 @@ class Reserva < ApplicationRecord
   private
 
   def data_entrada
-    if data_de_entrada.present? && (data_de_entrada <= Date.today)
+    if data_de_entrada.present? && (data_de_entrada <= ((Date.current+1) - 1.minute))
       errors.add(:data_de_entrada, "inválida. (veja se a data de entrada é posterior à data de hoje)")
     end
   end
 
   def data_saida
-    if data_de_saida.present? && data_de_saida <= Date.today
+    if data_de_saida.present? && (data_de_saida <= ((Date.current+1) - 1.minute))
       errors.add(:data_de_saida, "inválida. (veja se a data de saída é posterior à data de entrada e possui uma diferença acima de 6 horas de estadia)")
     end
   end

@@ -47,35 +47,28 @@
 <% end %>
 
 <script>
-    document.addEventListener('click', function() {
+    document.addEventListener('change', function () {
         var quartoSelect = document.querySelector('.quarto-select');
         var custoField = document.querySelector('#custo-field');
         var dataEntradaField = document.querySelector('#data-de-entrada');
         var dataSaidaField = document.querySelector('#data-de-saida');
+        var quartoId = quartoSelect.value;
+        var dataEntrada = new Date(dataEntradaField.value);
+        var dataSaida = new Date(dataSaidaField.value);
+        var diferencaEmMinutos = Math.floor((dataSaida - dataEntrada) / 60000);
 
-        function calcularCustoDaReserva(){
-            var quartoId = quartoSelect.value;
-            var dataEntrada = new Date(dataEntradaField.value);
-            var dataSaida = new Date(dataSaidaField.value);
-            var diferencaEmMinutos = Math.floor((dataSaida - dataEntrada) / 60000);
-
-            if (quartoId !== '' && dataEntrada.value !== '' && dataSaida.value !== '') {
-                fetch('/reservas/get_custo?quarto_id=' + quartoId)
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(data) {
-                        var custoTotal = (data.custo / 1440) * diferencaEmMinutos;
-                        custoField.value = custoTotal.toFixed(2);
-                    });
-            } else {
-                custoField.value = '0.00';
-            };
+        if (quartoSelect.value != '' && quartoId !== '' && dataEntrada.value !== '' && dataSaida.value !== '') {
+            fetch('/reservas/get_custo?quarto_id=' + quartoId)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var custoTotal = (data.custo / 1440) * diferencaEmMinutos;
+                    custoField.value = custoTotal.toFixed(2);
+                });
+        } else {
+            custoField.value = '0.00';
         }
-
-        quartoSelect.addEventListener('change', calcularCustoDaReserva);
-        dataEntradaField.addEventListener('change', calcularCustoDaReserva);
-        dataSaidaField.addEventListener('change', calcularCustoDaReserva);
-        calcularCustoDaReserva();
+        ;
     });
 </script>
