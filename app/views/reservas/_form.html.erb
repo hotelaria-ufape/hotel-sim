@@ -2,7 +2,7 @@
   <div class='errors'>
     <% if reserva.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(reserva.errors.count, "error") %> prohibited this reserva from being saved (hover to see)</h2>
+        <h2><%= pluralize(reserva.errors.count, "erro") %> impedem esta reserva de ser criada (passe o mouse por cima para ver mais detalhes)</h2>
 
         <ul>
           <% reserva.errors.each do |error| %>
@@ -15,27 +15,27 @@
 
   <div class='form-div'>
     <div class='labels'>
-      <%= form.label :cliente_id, style: "display: block" %>
+      <%= form.label :cliente_id, 'Cliente', style: "display: block" %>
       <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true }) %>
     </div>
 
     <div class='labels'>
-      <%= form.label :quarto_id, style: "display: block" %>
+      <%= form.label :quarto_id, 'Quarto', style: "display: block" %>
       <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select' }) %>
     </div>
 
     <div class='labels'>
-      <%= form.label :data_de_entrada, style: "display: block" %>
+      <%= form.label :data_de_entrada, 'Data de Entrada', style: "display: block", for: 'data-de-entrada' %>
       <%= form.datetime_field :data_de_entrada, id: 'data-de-entrada' %>
     </div>
 
     <div class='labels'>
-      <%= form.label :data_de_saida, style: "display: block" %>
+      <%= form.label :data_de_saida, 'Data de Saída', style: "display: block", for: 'data-de-saida' %>
       <%= form.datetime_field :data_de_saida, id: 'data-de-saida' %>
     </div>
 
     <div class='labels'>
-      <%= form.label :custo, style: "display: block" %>
+      <%= form.label :custo, 'Custo', style: "display: block", for: 'custo-field' %>
       <%= form.text_field :custo, readonly: true, id: 'custo-field' %>
     </div>
 
@@ -47,7 +47,7 @@
 <% end %>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function() {
         var quartoSelect = document.querySelector('.quarto-select');
         var custoField = document.querySelector('#custo-field');
         var dataEntradaField = document.querySelector('#data-de-entrada');
