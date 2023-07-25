@@ -2,14 +2,14 @@
 
 one:
   numero: 1
-  tipo: MyString
-  disponibilidade: false
-  preco_diaria: 9.99
-  descricao: MyText
+  tipo: Quarto Padrão
+  disponibilidade: true
+  preco_diaria: 250.00
+  descricao: Primeiro quarto
 
 two:
-  numero: 1
-  tipo: MyString
-  disponibilidade: false
-  preco_diaria: 9.99
-  descricao: MyText
+  numero: 2
+  tipo: Quarto Familiar
+  disponibilidade: true
+  preco_diaria: 300.00
+  descricao: Segundo quarto

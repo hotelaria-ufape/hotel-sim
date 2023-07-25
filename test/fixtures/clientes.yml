@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  cpf: MyString
-  nome: MyString
-  email: MyString
-  telefone: MyString
+  cpf: 314.084.590-19
+  nome: Primeiro Cliente
+  email: primeirocliente@gmail.com
+  telefone: 87912345678
 
 two:
-  cpf: MyString
-  nome: MyString
-  email: MyString
-  telefone: MyString
+  cpf: 693.664.170-94
+  nome: Segundo Cliente
+  email: segundocliente@yahoo.com
+  telefone: 87922224444
