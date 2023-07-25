@@ -7,9 +7,9 @@ class QuartoTest < ActiveSupport::TestCase
   end
 
   test 'Criando quarto com dados validos' do
-    quarto = Quarto.new numero:'1', tipo:'Quarto Padrão', disponibilidade: true,
+    quarto = Quarto.new numero:'3', tipo:'Quarto Padrão', disponibilidade: true,
                         preco_diaria:150.00, descricao:'Quarto de entrada do nosso hotel.'
-    assert quarto.save
+    assert quarto.save, "Não foi possível salvar o quarto: #{quarto.errors.full_messages.join(', ')}"
   end
 
   test 'Criando quarto com numero invalido' do
