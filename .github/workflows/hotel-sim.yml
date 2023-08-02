@@ -1,8 +1,8 @@
-name: ACTIONS
+name: TESTES
 on: [push, pull_request]
 
 jobs:
-  test:
+  testes-rails-cucumber:
     runs-on: ubuntu-latest
 
     services:
@@ -18,15 +18,15 @@ jobs:
           POSTGRES_PASSWORD: password
 
     steps:
-      - name: Checkout Repository
+      - name: Checando o codigo
         uses: actions/checkout@v2
 
-      - name: Setup Ruby
+      - name: Configurando o Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.1
 
-      - name: Install PostgreSQL client
+      - name: Instalando um Cliente PostgreSQL
         run: |
           sudo apt-get -yqq install libpq-dev
       - name: Cache Ruby Gems
@@ -36,19 +36,25 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - name: Bundle Install
+      - name: Instalando as Gems
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: Run Tests
+      - name: Inicializando o Banco de Dados de Testes
         env:
           PG_DATABASE: postgres
           PG_HOST: localhost
           PG_USER: postgres
           PG_PASSWORD: password
-          RAILS_ENV: actions
+          RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           WITH_COVERAGE: true
           DISABLE_SPRING: 1
         run: |
           bundle exec rails db:prepare
+      - name: Realizando testes unitarios
+        run: | 
+          bundle exec rails test:models
+      - name: Realizando testes de cenario
+        run: | 
+          bundle exec cucumber
