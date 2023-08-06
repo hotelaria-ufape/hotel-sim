@@ -1,32 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 id='up-h1'>Quartos</h1>
-
 <div class='index-btn'>
   <%= link_to 'Exibir quartos disponíveis', quartos_path(disponibilidade: true) %>
   <%= link_to 'Exibir quartos indisponíveis', quartos_path(disponibilidade: false) %>
   <%= link_to 'Exibir todos os quartos', quartos_path %>
 </div>
 
-  <div id='search-price'>
-    <%= form_with(url: quartos_path, method: 'get', local: true) do %>
-      <%= hidden_field_tag(:disponibilidade, params[:disponibilidade]) %>
-      <%= number_field_tag(:min_price, params[:min_price], placeholder: 'Preço Mínimo') %>
-      <%= number_field_tag(:max_price, params[:max_price], placeholder: 'Preço Máximo') %>
-      <%= submit_tag("Procurar por preço") %>
-    <% end %>
-  </div>
+<div id='search-price'>
+  <%= form_with(url: quartos_path, method: 'get', local: true) do %>
+    <%= hidden_field_tag(:disponibilidade, params[:disponibilidade]) %>
+    <%= number_field_tag(:min_price, params[:min_price], placeholder: 'Preço Mínimo') %>
+    <%= number_field_tag(:max_price, params[:max_price], placeholder: 'Preço Máximo') %>
+    <%= submit_tag("Procurar por preço") %>
+  <% end %>
+</div>
 
 <div id="quartos" class='list'>
   <tr class='tr-show'>
     <% @quartos.each do |quarto| %>
-      <p class='show-grid'> [ Quarto: <%= quarto.numero %>  -  Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível"%> ] <br>  Preço: R$<%= quarto.preco_diaria %>0 <br> <%= link_to "Exibir quarto", quarto, id:"d-#{quarto.numero}" %></p>
+      <p class='show-grid'> [ Quarto: <%= quarto.numero %>  -
+        Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br> Preço: R$<%= quarto.preco_diaria %>
+        0 <br> <%= link_to "Exibir quarto", quarto, id: "d-#{quarto.numero}" %></p>
     <% end %>
   </tr>
-</div>
-<br><br>
-
-<div class='links'>
-  <%= link_to "Cadastrar quarto", new_quarto_path %>
-  <%= link_to "Home", root_path %>
 </div>

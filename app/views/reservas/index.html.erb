@@ -1,7 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 id='up-h1'>Reservas</h1>
-
 <div>
   <%= form_tag reservas_path, method: :get do %>
 
@@ -26,9 +24,4 @@
       </p>
     <% end %>
   </tr>
-</div>
-
-<div class='links'>
-  <%= link_to "Agendar reserva", new_reserva_path %>
-  <%= link_to "Home", root_path %>
 </div>
