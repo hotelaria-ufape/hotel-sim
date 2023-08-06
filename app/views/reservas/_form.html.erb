@@ -36,14 +36,14 @@
 
     <div class='labels'>
       <%= form.label :custo, 'Custo (R$)', style: "display: block", for: 'custo-field' %>
-      <%= form.text_field :custo, readonly: true, id: 'custo-field' %>
+      <%= form.text_field :custo, id: 'custo-field' %>
     </div>
 
     <div class='submit'>
       <% if reserva.persisted? %>
         <%= form.submit "Atualizar Reserva" %>
       <% else %>
-        <%= form.submit "Criar Entidade" %>
+        <%= form.submit "Agendar Reserva" %>
       <% end %>
     </div>
   </div>

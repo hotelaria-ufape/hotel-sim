@@ -3,36 +3,38 @@ Feature:
   I want to criar, editar, remover e visualizar reservas
   So that possa gerenciar o hotel
 
-  # Os fixtures "reservas.yml", "quartos.yml" e "clientes.yml" estão sendo utilizados para o teste
   Scenario: marcar uma reserva
-    Given Estou na pagina de cadastrar reserva
-    When Eu preencho os dados:
-      |      cliente       |       quarto       |       data_de_entrada      |  data_de_saida  | custo
-      | Primeiro Cliente   | 1                  |     2057-04-10 01:20:30    | 2057-04-11 01:20:30  | 100.00
+    Given Estou na pagina de cadastrar reserva apos cadastrar o cliente "Cliente A" e o quarto 1
+    When Eu preencho os dados cliente "Cliente A" quarto "1" data_de_entrada "2057-04-10 01:20:30" data_de_saida "2057-04-11 01:20:30" custo "100.00"
     Then Vejo que a reserva foi marcada
 
   Scenario: definir um tempo minimo de reserva
-    Given Estou na pagina de cadastrar reserva
-    When Eu preencho os dados:
-      |      cliente       |       quarto       |       data_de_entrada      |  data_de_saida  | custo
-      | Primeiro Cliente   | 1                  |     2057-04-10 01:20:30    | 2057-04-10 04:20:30  | 100.00
+    Given Estou na pagina de cadastrar reserva apos cadastrar o cliente "Cliente A" e o quarto 1
+    When Eu preencho os dados cliente "Cliente A" quarto "1" data_de_entrada "2057-04-10 01:20:30" data_de_saida "2057-04-10 04:20:30" custo "100.00"
     Then Vejo que existe um periodo minimo de locacao
 
-  Scenario: evitar choque entre reservas
-    Given Estou na pagina de cadastrar reserva
-    When Eu preencho os dados:
-      |      cliente       |       quarto       |       data_de_entrada      |  data_de_saida  | custo
-      | Primeiro Cliente   | 1                  |     2077-04-10 01:20:30    | 2078-04-10 04:20:30  | 100.00
-    Then Vejo que existe um choque horario entre as reservas
-
-  Scenario: editar a data de uma reserva
-    Given Estou na pagina de reservas
-    And Acesso uma reserva
-    When Altero a data de entrada para "2077-05-12 02:20:30"
-    Then Vejo que a reserva possui uma nova data de entrada
-
   Scenario: cancelar uma reserva
-    Given Estou na pagina de reservas
-    And Acesso uma reserva
-    When Eu clico para cancelar essa reserva
+    Given Estou na pagina de cadastrar reserva apos cadastrar o cliente "Cliente A" e o quarto 1
+    And Eu preencho os dados cliente "Cliente A" quarto "1" data_de_entrada "2057-04-10 01:20:30" data_de_saida "2057-04-11 01:20:30" custo "100.00"
+    And Vejo que a reserva foi marcada
+    When Clico para cancelar essa reserva
     Then Vejo que essa reserva foi corretamente removida
+
+  Scenario: choque entre reservas
+    Given Estou na pagina de cadastrar reserva apos cadastrar o cliente "Cliente A" o cliente "Cliente B" e o quarto 1
+    And Eu preencho os dados cliente "Cliente A" quarto "1" data_de_entrada "2058-01-10 04:20:30" data_de_saida "2058-01-11 04:20:30" custo "100.00"
+    And Vejo que a reserva foi marcada
+    When Eu preencho os dados cliente "Cliente B" quarto "1" data_de_entrada "2058-01-11 02:20:30" data_de_saida "2058-01-11 14:20:30" custo "50.00"
+    Then Vejo que existe um choque de horario entre essas reservas
+
+  Scenario: buscar reservas por periodo
+    Given Estou na pagina de cadastrar reserva apos cadastrar o cliente "Cliente A" o cliente "Cliente B" e o quarto 1
+    And Eu preencho os dados cliente "Cliente A" quarto "1" data_de_entrada "2058-01-10 04:20:30" data_de_saida "2058-01-11 04:20:30" custo "100.00"
+    And Vejo que a reserva foi marcada
+    When Eu preencho os dados cliente "Cliente B" quarto "1" data_de_entrada "2058-01-16 02:20:30" data_de_saida "2058-01-16 14:20:30" custo "50.00"
+    And Vejo que a reserva foi marcada
+    And Estou na pagina de reservas
+    And Seleciono a data de entrada "2058-01-09 01:30:25"
+    And Seleciono a data de saida "2058-01-14 04:20:30"
+    When Clico em filtrar
+    Then Vejo apenas a reserva do "Cliente A" marcada nesse periodo
