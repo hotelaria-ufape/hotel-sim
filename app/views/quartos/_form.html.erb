@@ -21,7 +21,7 @@
 
     <div class='labels'>
       <%= form.label :tipo, style: "display: block" %>
-      <%= form.select :tipo, options_for_select(["Quarto Padrão", "Quarto Familiar", "Quarto de Luxo", "Suíte Padrão", "Suíte Presidencial"]) %>
+      <%= form.select :tipo, options_for_select(["Quarto Padrão", "Quarto Familiar", "Quarto de Luxo", "Suíte Master", "Suíte Presidencial"]) %>
     </div>
 
     <div class='labels'>
@@ -37,6 +37,11 @@
     <div class='labels'>
       <%= form.label :descricao, style: "display: block" %>
       <%= form.text_area :descricao %>
+    </div>
+
+    <div class='labels'>
+      <%= form.label :quantidade_de_hospedes, style: "display: block" %>
+      <%= form.number_field :quantidade_de_hospedes %>
     </div>
 
     <div class='submit'>
