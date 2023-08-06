@@ -40,7 +40,11 @@
     </div>
 
     <div class='submit'>
-      <%= form.submit %>
+      <% if quarto.persisted? %>
+        <%= form.submit "Atualizar Quarto" %>
+      <% else %>
+        <%= form.submit "Cadastrar Quarto" %>
+      <% end %>
     </div>
   </div>
 <% end %>

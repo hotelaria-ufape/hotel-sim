@@ -35,7 +35,11 @@
     </div>
 
     <div class='submit'>
-      <%= form.submit %>
+      <% if cliente.persisted? %>
+        <%= form.submit "Atualizar Cliente" %>
+      <% else %>
+        <%= form.submit "Cadastrar Cliente" %>
+      <% end %>
     </div>
   </div>
 
