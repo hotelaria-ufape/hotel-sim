@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&family=Noto+Serif&family=Poppins:wght@300;500;600;700&display=swap');
 
 /* ESTILO GERAL - INÍCIO */
+/* Propriedades Iniciais de todos os Elementos da Página */
 * {
     font-family: 'Noto Serif', serif;
     font-size: 16px;
@@ -8,15 +9,18 @@
     margin: 0;
 }
 
+/* Base da Página */
 html {
     height: 100%;
 }
 
+/* Corpo da Página */
 body {
     position: relative;
     min-height: 100%;
 }
 
+/* Cabeçalho da Página */
 header {
     background-color: #f39b13;
     width: 100%;
@@ -26,6 +30,7 @@ header {
     font-size: 24px;
 }
 
+/* Navegador do Cabeçalho */
 header nav ul {
     background-color: #c27c0f;
     list-style: none;
@@ -33,6 +38,7 @@ header nav ul {
     padding: 0;
 }
 
+/* Elemento da Lista de um Navegador do Cabeçalho */
 header nav ul li {
     display: inline-block;
     margin-right: 20px;
@@ -40,10 +46,12 @@ header nav ul li {
     transition: text-shadow 0.3s ease;
 }
 
+/* Conteúdo da Página */
 .content {
     margin: 10px;
 }
 
+/* Rodapé da Página */
 footer {
     background-color: black;
     color: white;
@@ -55,7 +63,7 @@ footer {
 
 /* ESTILO GERAL - FIM */
 
-/* RODA DE IMAGENS - INÍCIO */
+/* PÁGINA INICIAL - RODA DE IMAGENS - INÍCIO */
 /* Contâiner de Cada Célula */
 .gallery-cell {
     width: 300px;
@@ -91,6 +99,82 @@ footer {
     color: inherit;
     font-size: inherit;
 }
-/* RODA DE IMAGENS - FIM */
+/* PÁGINA INICIAL - RODA DE IMAGENS - FIM */
+
+/* ESTILO PARA MENSAGENS DE ERROS - INÍCIO */
+
+/* Mensagem de Erro Geral */
+.errors h2{
+    cursor: pointer;
+}
+
+/* Lista de Mensagens de Erro */
+.errors ul{
+    display: none;
+    position: absolute;
+    list-style: none;
+    background-color: beige;
+    width: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,20%);
+    z-index: 1;
+}
+
+/* Interação de hover com o Mouse */
+.errors h2:hover + ul{
+    display: block;
+}
+
+/* ESTILO PARA MENSAGENS DE ERROS - FIM */
 
 /* ESTILO DO CONTEÚDO - INÍCIO */
+/* Index pages */
+
+
+.list{
+    width: 100%;
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+
+.show-grid {
+    background-color: rgb(1 73 95);
+    color: white;
+    margin: 1px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.show-grid a{
+    color: rgb(105 191 231);
+    text-decoration: none;
+}
+
+.links{
+    margin-top: 5%;
+    display: flex;
+    gap: 3px;
+    position: fixed;
+    bottom: 10%;
+}
+
+.links a{
+    margin: 5px;
+    padding: 10px;
+    text-decoration: none;
+    background-color: rgb(0 104 122);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.links a:hover{
+    background-color: rgb(0 174 218);
+    cursor: pointer;
+}
+
+/* End of Index pages */
+/* ESTILO DO CONTEÚDO - FIM */
