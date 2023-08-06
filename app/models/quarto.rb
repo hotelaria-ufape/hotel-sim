@@ -27,7 +27,7 @@ class Quarto < ApplicationRecord
 
   def validar_quantidade_de_hospedes(min, max)
     if tipo.present? && quantidade_de_hospedes.present?
-      if !(quantidade_de_hospedes.between?(min,max))
+      unless (quantidade_de_hospedes.between?(min,max))
         errors.add(:quantidade_de_hospedes," para um(a) #{tipo} deve estar entre #{min} e #{max} hóspede(s).")
       end
     end
