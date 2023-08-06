@@ -76,6 +76,6 @@ class QuartosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quarto_params
-      params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao)
+      params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
     end
 end

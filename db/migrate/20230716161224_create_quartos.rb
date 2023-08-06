@@ -6,6 +6,7 @@ class CreateQuartos < ActiveRecord::Migration[7.0]
       t.boolean :disponibilidade
       t.decimal :preco_diaria
       t.text :descricao
+      t.decimal :quantidade_de_hospedes
 
       t.timestamps
     end

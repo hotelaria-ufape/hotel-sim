@@ -1,29 +1,101 @@
-<!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <title>Consulta-sim</title>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="application.css">
-  </head>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
+</head>
 
-  <body id='body-home'>
-    <main>
-      <div class="logo">
-      </div>
-      <h1 id="app-name">Hotel-sim</h1>
-
-      <p id='descricao'>O hotel-sim trata-se de uma ferramenta de gerenciamento de hospedagem para um hotel.</p>
-    </main>
-    <div id='home-buttons'>
-      <%= link_to clientes_path, style: "color: black;" do %>
-        <button class="home-btn">Clientes</button>
-      <% end %>
-      <%=link_to quartos_path, style: "color: black;" do %>
-        <button class="home-btn">Quartos</button>
-      <% end %>
-      <%=link_to reservas_path, style: "color: black;" do %>
-        <button class="home-btn">Reservas</button>
-      <% end %>
+<h1>Veja o Catálogo de Quartos Disponíveis para Estadia abaixo:</h1>
+<!-- Roda de Opções (Quartos) -->
+<div class="gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
+  <div class="gallery-cell">
+    <%= image_tag("quarto-1.jpg", size: '300x200') %>
+    <div id="div-quarto-1" class="gallery-cell-div">
+      <button onmouseover=mudarCor("div-quarto-1","black","white") onmouseout=resetarCor("div-quarto-1","#fcbe03","black")>
+        Quartos para Solteiros e Casais
+      </button>
     </div>
-  </body>
-</html>
+  </div>
+  <div class="gallery-cell">
+    <%= image_tag("quarto-2.jpg", size: '300x200') %>
+    <div id="div-quarto-2" class="gallery-cell-div">
+      <button onmouseover=mudarCor("div-quarto-2","black","white") onmouseout=resetarCor("div-quarto-2","#fcbe03","black")>
+        Quartos para a Família
+      </button>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <%= image_tag("quarto-3.jpg", size: '300x200') %>
+    <div id="div-quarto-3" class="gallery-cell-div">
+      <button onmouseover=mudarCor("div-quarto-3","black","white") onmouseout=resetarCor("div-quarto-3","#fcbe03","black")>
+        Quartos de Luxo
+      </button>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <%= image_tag("quarto-4.jpg", size: '300x200') %>
+    <div id="div-quarto-4" class="gallery-cell-div">
+      <button onmouseover=mudarCor("div-quarto-4","black","white") onmouseout=resetarCor("div-quarto-4","#fcbe03","black")>
+        Suítes Master
+      </button>
+    </div>
+  </div>
+  <div class="gallery-cell">
+    <%= image_tag("quarto-5.jpg", size: '300x200') %>
+    <div id="div-quarto-5" class="gallery-cell-div">
+      <button onmouseover=mudarCor("div-quarto-5","black","white") onmouseout=resetarCor("div-quarto-5","#fcbe03","black")>
+        Suíte Presidencial
+      </button>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 30px; padding-bottom: 40px;">
+
+  <h1>Se interessou por um de nossos cômodos? Se cadastre agora mesmo e faça uma reserva!</h1>
+  <%= image_tag("recepcao-1.jpg", size: '540x400', style: 'display: block; margin: 0 auto;') %>
+  <li>Ao se cadastrar no sistema, você facilita a interação da nossa equipe de funcionários.</li>
+  <li>Com esse cadastro, entrar em contato para reservar um cômodo torna-se mais fácil e prático.</li>
+  <li>Observação: Lembre-se de sempre pagar na saída.</li>
+
+  <h1 style="margin-top: 20px">Não planeja alugar uma diária? Sem problemas!</h1>
+  <%= image_tag("tempo-1.jpg", size: '400x270', style: 'display: block; margin: 0 auto; margin-top: 20px; padding-bottom: 20px') %>
+  <li>Ao alugar um cômodo, oferecemos a oportunidade de optar por qualquer horário de entrada e saída,
+    sendo o mínimo de estadia, 6 horas para você aproveitar e relaxar.
+  </li>
+  <li>E o melhor de tudo: o preço da sua estadia é calculado com base no preço da diária do quarto alugado.</li>
+
+  <h1 style="margin-top: 20px">Esta aplicação ainda está sob desenvolvimento!</h1>
+  <%= image_tag("desenvolvedor-1.jpg", size: '280x270', style: 'display: block; margin: 0 auto; margin-top: 20px; padding-bottom: 20px') %>
+  <li>Desenvolvida, em 2023, por uma equipe de seis discentes da Universidade Federal do Agreste de Pernambuco,
+    Hotel Sim trata-se de um projeto de avaliação para a disciplina de Engenharia de Software, ministrada
+    pelo corrente professor Rodrigo Cardoso Amaral de Andrade.
+  </li>
+  <li>Você pode acessar o Github da aplicação para acompanhar seu desenvolvimento através deste
+    <a href="https://github.com/hotelaria-ufape/hotel-sim">link</a> ou a qualquer momento clicando no
+    texto no final da página.
+  </li>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
+<script>
+    // JavaScript para alterar a cor da div ao passar o mouse sobre ela
+    function mudarCor(id, corFundo, corTexto) {
+        var elemento = document.getElementById(id);
+        if (elemento) {
+            elemento.style.backgroundColor = corFundo;
+            elemento.style.color = corTexto;
+            elemento.style.fontSize = '18px';
+        } else {
+            console.error('Elemento com o ID ' + id + ' não encontrado.');
+        }
+    }
+
+    function resetarCor(id, corFundo, corTexto) {
+        var elemento = document.getElementById(id);
+        if (elemento) {
+            elemento.style.backgroundColor = corFundo;
+            elemento.style.color = corTexto;
+            elemento.style.fontSize = '16px';
+        } else {
+            console.error('Elemento com o ID ' + id + ' não encontrado.');
+        }
+    }
+</script>

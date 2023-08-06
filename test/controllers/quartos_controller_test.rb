@@ -17,7 +17,7 @@ class QuartosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create quarto" do
     assert_difference("Quarto.count") do
-      post quartos_url, params: { quarto: { descricao: @quarto.descricao, disponibilidade: @quarto.disponibilidade, numero: @quarto.numero, preco_diaria: @quarto.preco_diaria, tipo: @quarto.tipo } }
+      post quartos_url, params: { quarto: { descricao: @quarto.descricao, disponibilidade: @quarto.disponibilidade, numero: @quarto.numero, preco_diaria: @quarto.preco_diaria, tipo: @quarto.tipo, quantidade_de_hospedes: @quarto.quantidade_de_hospedes } }
     end
 
     assert_redirected_to quarto_url(Quarto.last)
@@ -34,7 +34,7 @@ class QuartosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update quarto" do
-    patch quarto_url(@quarto), params: { quarto: { descricao: @quarto.descricao, disponibilidade: @quarto.disponibilidade, numero: @quarto.numero, preco_diaria: @quarto.preco_diaria, tipo: @quarto.tipo } }
+    patch quarto_url(@quarto), params: { quarto: { descricao: @quarto.descricao, disponibilidade: @quarto.disponibilidade, numero: @quarto.numero, preco_diaria: @quarto.preco_diaria, tipo: @quarto.tipo, quantidade_de_hospedes: @quarto.quantidade_de_hospedes } }
     assert_redirected_to quarto_url(@quarto)
   end
 

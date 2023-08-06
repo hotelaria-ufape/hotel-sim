@@ -19,6 +19,7 @@ class QuartosTest < ApplicationSystemTestCase
     fill_in "Numero", with: @quarto.numero
     fill_in "Preco diaria", with: @quarto.preco_diaria
     fill_in "Tipo", with: @quarto.tipo
+    fill_in "Quantidade de hospedes", with: @quato.quantidade_de_hospedes
     click_on "Create Quarto"
 
     assert_text "Quarto was successfully created"
@@ -34,6 +35,7 @@ class QuartosTest < ApplicationSystemTestCase
     fill_in "Numero", with: @quarto.numero
     fill_in "Preco diaria", with: @quarto.preco_diaria
     fill_in "Tipo", with: @quarto.tipo
+    fill_in "Quantidade de hospedes", with: @quato.quantidade_de_hospedes
     click_on "Update Quarto"
 
     assert_text "Quarto was successfully updated"
