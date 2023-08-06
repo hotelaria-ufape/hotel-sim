@@ -82,7 +82,7 @@ Given('Estou na pagina de cadastrar reserva apos cadastrar o cliente {string} o 
 end
 
 Then('Vejo que existe um choque de horario entre essas reservas') do
-  expect(page).to have_content('Este quarto já está reservado para Cliente B pelo período de 10/01/2058 das 04:20 até 11/01/2058 às 04:20.')
+  expect(page).to have_content('Este quarto já está reservado para Cliente B pelo período de 10/01/2098 das 04:20 até 11/01/2098 às 04:20.')
   expect(page).to have_current_path('/reservas')
 end
 

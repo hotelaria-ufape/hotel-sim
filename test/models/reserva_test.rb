@@ -8,7 +8,7 @@ class ReservaTest < ActiveSupport::TestCase
 
   test 'Marcando reserva validos' do
     reserva = Reserva.new cliente: clientes(:one), quarto: quartos(:two), data_de_entrada: '2077-05-15 01:20:30',
-                          data_de_saida: '2077-05-17 10:20:30', custo: 93.78
+                          data_de_saida: '2077-05-17 10:20:30', custo: 712.50
     assert reserva.save, "Não foi possível salvar o cliente: #{reserva.errors.full_messages.join(', ')}"
   end
 
