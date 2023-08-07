@@ -1,9 +1,11 @@
-Given('Estou na pagina de cadastrar cliente') do
-  visit 'clientes/new'
-  expect(page).to have_current_path('/clientes/new')
+# Generalizando o Acesso ao Cadastro das Páginas de "cliente","quartos" e "reservas"
+Given('estou na pagina de cadastrar {string}') do |entidade|
+  visit entidade+'/new'
+  expect(page).to have_current_path('/'+entidade+'/new')
 end
 
-When('Eu preencho os dados cpf {string} nome {string} email {string} e telefone: {int} e clico em cadastrar') do |cpf, nome, email, telefone|
+# Generalizando a Ação de Cadastro de um Cliente
+When('preencho os dados cpf {string} nome {string} email {string} e telefone: {int} e clico em cadastrar') do |cpf, nome, email, telefone|
   fill_in 'cliente[cpf]', :with => cpf
   fill_in 'cliente[nome]', :with => nome
   fill_in 'cliente[email]', :with => email
@@ -11,53 +13,61 @@ When('Eu preencho os dados cpf {string} nome {string} email {string} e telefone:
   click_button 'Cadastrar Cliente'
 end
 
-Then('Vejo que o {string} foi cadastrado') do |nome|
-  expect(page).to have_content(nome)
-  expect(page).to have_content('Cliente criado com sucesso.')
-  expect(page).to have_current_path('/clientes/'+Cliente.last.id.to_s)
-end
-
-Given('O cliente de cpf {string} nome {string} email {string} e telefone: {int} existe') do |cpf, nome, email, telefone|
-  visit 'clientes/new'
-  fill_in 'cliente[cpf]', :with => cpf
-  fill_in 'cliente[nome]', :with => nome
-  fill_in 'cliente[email]', :with => email
-  fill_in 'cliente[telefone]', :with => telefone
-  click_button 'Cadastrar Cliente'
+# Generalizando o Resultado Positivo de Cadastro de um Cliente
+Then('vejo que o cliente {string} foi cadastrado') do |nome|
+  # Aguardando o Resultado no Backend
+  expect(page).to have_current_path('/clientes/'+Cliente.find_by_nome(nome).id.to_s)
+  # Aguardando o Resultado no Frontend
   expect(page).to have_content('Cliente criado com sucesso.')
 end
 
-Then('Vejo que seu cpf e invalido') do
+# Generalizando o Resultado Negativo de Cadastro de um Cliente
+Then('vejo que o cliente {string} nao foi cadastrado') do |nome|
+  # Aguardando o Resultado no Backend
+  expect(Cliente.find_by_nome(nome)).to be_nil
+end
+
+Then('vejo que seu cpf e invalido') do
+  # Aguardando o Resultado no Frontend
   expect(page).to have_content('Cpf informado não é valido.')
 end
 
-Then('Vejo que seu email e invalido') do
+Then('vejo que seu email e invalido') do
+  # Aguardando o Resultado no Frontend
   expect(page).to have_content('Email informado não é valido.')
 end
 
-Given('Estou na pagina de clientes') do
-  visit 'clientes'
-  expect(page).to have_current_path('/clientes')
+# Generalizando o Acesso as Listas das Páginas de "cliente","quartos" e "reservas"
+Given('estou na pagina de {string}') do |entidades|
+  visit entidades
+  expect(page).to have_current_path('/'+entidades)
 end
 
-When('Eu clico para remover esse cliente') do
-  visit '/clientes/' + Cliente.last.id.to_s
+# Generalizando a Ação de Remoção de um Cliente
+When('clico para remover o cliente {string}') do |nome|
+  visit '/clientes/' + Cliente.find_by_nome(nome).id.to_s
   click_button "Remover cliente"
 end
 
-Then('Eu vejo que o {string} foi corretamente removido') do |nome|
-  expect(page).to have_no_content(nome)
+# Generalizando o Resultado da Remoção de um Cliente
+Then('vejo que o cliente {string} foi corretamente removido') do |nome|
+  # Aguardando o Resultado no Backend
+  expect(Cliente.find_by_nome(nome)).to be_nil
+  # Aguardando o Resultado no Frontend
   expect(page).to have_content("Cliente destruído com sucesso")
-  expect(page).to have_current_path('/clientes')
 end
 
-When('Eu clico para editar seu telefone para {string}') do |telefone|
-  visit '/clientes/'+Cliente.last.id.to_s+'/edit'
-  fill_in 'cliente[telefone]', :with => telefone
+# Generalizando a Ação de Edição de um Cliente
+When('clico para editar o {string} do cliente {string} para {string}') do |atributo,nome,novo_atributo|
+  visit '/clientes/'+Cliente.find_by_nome(nome).id.to_s+'/edit'
+  fill_in 'cliente['+atributo+']', :with => novo_atributo
   click_button 'Atualizar Cliente'
 end
 
-Then('Eu vejo que o {string} teve seu telefone corretamente alterado para {string}') do |nome, telefone|
-  expect(page).to have_content(nome)
-  expect(page).to have_content(telefone)
+# Generalizando o Resultado da Edição de um Cliente
+Then('vejo que o cliente {string} teve seu {string} corretamente alterado para {string}') do |nome,atributo,novo_atributo|
+  # Aguardando o Resultado no Backend
+  expect(Cliente.find_by_nome(nome).send(atributo)).to have_content(novo_atributo)
+  # Aguardando o Resultado no Frontend
+  expect(page).to have_content("Cliente atualizado com sucesso")
 end
