@@ -13,12 +13,18 @@ When('preencho os dados cpf {string} nome {string} email {string} e telefone: {i
   click_button 'Cadastrar Cliente'
 end
 
-# Generalizando o Resultado de Cadastro de um Cliente
+# Generalizando o Resultado Positivo de Cadastro de um Cliente
 Then('vejo que o cliente {string} foi cadastrado') do |nome|
   # Aguardando o Resultado no Backend
   expect(page).to have_current_path('/clientes/'+Cliente.find_by_nome(nome).id.to_s)
   # Aguardando o Resultado no Frontend
   expect(page).to have_content('Cliente criado com sucesso.')
+end
+
+# Generalizando o Resultado Negativo de Cadastro de um Cliente
+Then('vejo que o cliente {string} nao foi cadastrado') do |nome|
+  # Aguardando o Resultado no Backend
+  expect(Cliente.find_by_nome(nome)).to be_nil
 end
 
 Then('vejo que seu cpf e invalido') do

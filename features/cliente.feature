@@ -11,7 +11,8 @@ Feature:
   Scenario: validar o cpf do cliente
     Given estou na pagina de cadastrar 'clientes'
     When preencho os dados cpf '123.456.789-10' nome 'Cliente A' email 'clienteA@gmail.com' e telefone: 87912345678 e clico em cadastrar
-    Then vejo que seu cpf e invalido
+    Then vejo que o cliente 'Cliente A' nao foi cadastrado
+    And vejo que seu cpf e invalido
 
   Scenario: validar o email do cliente
     Given estou na pagina de cadastrar 'clientes'
@@ -19,7 +20,8 @@ Feature:
     And vejo que o cliente 'Cliente A' foi cadastrado
     And estou na pagina de cadastrar 'clientes'
     When preencho os dados cpf '053.209.150-71' nome 'Cliente B' email 'clienteA@gmail.com' e telefone: 87912345678 e clico em cadastrar
-    Then vejo que seu email e invalido
+    Then vejo que o cliente 'Cliente B' nao foi cadastrado
+    And vejo que seu email e invalido
 
   Scenario: remover um cliente
     Given estou na pagina de cadastrar 'clientes'

@@ -10,7 +10,7 @@ When('preencho os dados do quarto numero {int} tipo {string} disponibilidade {st
 end
 
 # Generalizando o Resultado de Adição de um Quarto
-Then('vejo que o cadastro do quarto {int} foi realizado') do |numero|
+Then('vejo que o quarto {int} foi cadastrado') do |numero|
   # Aguardando o Resultado no Backend
   expect(page).to have_current_path('/quartos/' + Quarto.find_by_numero(numero).id.to_s)
   # Aguardando o Resultado no Frontend
