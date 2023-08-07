@@ -1,4 +1,4 @@
-Given('Estou na pagina de cadastrar reserva apos cadastrar o cliente {string} e o quarto {int}') do |nomeDoCliente,numeroDoQuarto|
+Given('estou na pagina de cadastrar reserva apos cadastrar o cliente {string} e o quarto {int}') do |nomeDoCliente,numeroDoQuarto|
   visit 'quartos/new'
   fill_in 'quarto[numero]', :with => numeroDoQuarto
   select "Quarto Padrão", from: 'quarto[tipo]'
@@ -21,7 +21,7 @@ Given('Estou na pagina de cadastrar reserva apos cadastrar o cliente {string} e 
   expect(page).to have_current_path('/reservas/new')
 end
 
-When('Eu preencho os dados cliente {string} quarto {string} data_de_entrada {string} data_de_saida {string} custo {string}') do |cliente, quarto, data_de_entrada, data_de_saida, custo|
+When('preencho os dados cliente {string} quarto {string} data_de_entrada {string} data_de_saida {string} custo {string}') do |cliente, quarto, data_de_entrada, data_de_saida, custo|
   visit 'reservas/new'
   select cliente, from: 'reserva[cliente_id]'
   select quarto, from: 'reserva[quarto_id]'
@@ -31,26 +31,26 @@ When('Eu preencho os dados cliente {string} quarto {string} data_de_entrada {str
   click_button 'Agendar Reserva'
 end
 
-Then('Vejo que a reserva foi marcada') do
+Then('vejo que a reserva foi marcada') do
   expect(page).to have_content('Reserva criada com sucesso.')
   expect(page).to have_current_path('/reservas/'+Reserva.last.id.to_s)
 end
 
-Then('Vejo que existe um periodo minimo de locacao') do
+Then('vejo que existe um periodo minimo de locacao') do
   expect(page).to have_content('Data de saida deve ser marcada pelo menos para 6 horas após a data de entrada.')
   expect(page).to have_current_path('/reservas')
 end
 
-When('Clico para cancelar essa reserva') do
+When('clico para cancelar essa reserva') do
   click_button "Remover reserva"
 end
 
-Then('Vejo que essa reserva foi corretamente removida') do
+Then('vejo que essa reserva foi corretamente removida') do
   expect(page).to have_content("Reserva destruída com sucesso.")
   expect(page).to have_current_path('/reservas')
 end
 
-Given('Estou na pagina de cadastrar reserva apos cadastrar o cliente {string} o cliente {string} e o quarto {int}') do |nomeDoCliente1,nomeDoCliente2,numeroDoQuarto|
+Given('estou na pagina de cadastrar reserva apos cadastrar o cliente {string} o cliente {string} e o quarto {int}') do |nomeDoCliente1,nomeDoCliente2,numeroDoQuarto|
   visit 'quartos/new'
   fill_in 'quarto[numero]', :with => numeroDoQuarto
   select "Quarto Padrão", from: 'quarto[tipo]'
@@ -81,28 +81,24 @@ Given('Estou na pagina de cadastrar reserva apos cadastrar o cliente {string} o 
   expect(page).to have_current_path('/reservas/new')
 end
 
-Then('Vejo que existe um choque de horario entre essas reservas') do
+Then('vejo que existe um choque de horario entre essas reservas') do
   expect(page).to have_content('Este quarto já está reservado para Cliente B pelo período de 10/01/2098 das 04:20 até 11/01/2098 às 04:20.')
   expect(page).to have_current_path('/reservas')
 end
 
-When('Estou na pagina de reservas') do
-  visit 'reservas'
-end
-
-When('Seleciono a data de entrada {string}') do |data_de_entrada|
+When('seleciono a data de entrada {string}') do |data_de_entrada|
   fill_in 'start_date', :with => DateTime.parse(data_de_entrada)
 end
 
-When('Seleciono a data de saida {string}') do |data_de_saida|
+When('seleciono a data de saida {string}') do |data_de_saida|
   fill_in 'end_date', :with => DateTime.parse(data_de_saida)
 end
 
-When('Clico em filtrar') do
+When('clico em filtrar') do
   click_button 'Filtrar'
 end
 
-Then('Vejo apenas a reserva do {string} marcada nesse periodo') do |nomeDoCliente|
+Then('vejo apenas a reserva do {string} marcada nesse periodo') do |nomeDoCliente|
   expect(page).to have_content(Cliente.find_by_nome(nomeDoCliente).reservas.last.data_de_entrada.strftime('%d/%m/%Y às %H:%M'))
   expect(page).to have_no_content(Cliente.find_by_nome("Cliente B").reservas.last.data_de_entrada.strftime('%d/%m/%Y às %H:%M'))
 end
