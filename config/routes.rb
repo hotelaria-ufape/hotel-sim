@@ -9,7 +9,12 @@ Rails.application.routes.draw do
       get 'historico_hospedagem', to: 'quartos#historico_hospedagem'
     end
   end
-  resources :clientes
+  resources :clientes do
+    member do
+      get 'historico', to: 'clientes#historico'
+    end
+  end
+
 
   root "pages#home"
 end

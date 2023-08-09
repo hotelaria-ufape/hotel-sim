@@ -6,6 +6,11 @@ class ClientesController < ApplicationController
     @clientes = Cliente.search(params[:search])
   end
 
+  def historico
+    @cliente = Cliente.find(params[:id])
+    @reservas = @cliente.reservas
+  end
+
   # GET /clientes/1 or /clientes/1.json
   def show
   end
