@@ -1,14 +1,54 @@
 <p style="color: green"><%= notice %></p>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var attributeSelect = document.querySelector('#attribute');
+        var dateFields = document.querySelector('.date-fields');
+        var costFields = document.querySelector('.cost-fields');
+
+        attributeSelect.addEventListener('change', function() {
+            if (attributeSelect.value === 'date') {
+                dateFields.style.display = 'block';
+                costFields.style.display = 'none';
+            } else if (attributeSelect.value === 'cost') {
+                costFields.style.display = 'block';
+                dateFields.style.display = 'none';
+            }
+        });
+
+        // Atualizar a exibição inicial
+        if (attributeSelect.value === 'date') {
+            dateFields.style.display = 'block';
+            costFields.style.display = 'none';
+        } else if (attributeSelect.value === 'cost') {
+            costFields.style.display = 'block';
+            dateFields.style.display = 'none';
+        }
+    });
+</script>
+
 <div>
   <%= form_tag reservas_path, method: :get do %>
 
     Filtragem por
-    <label for="start_date">data de início:</label>
-    <%= datetime_local_field_tag "start_date", params[:start_date] %>
-    e
-    <label for="end_date">data de término:</label>
-    <%= datetime_local_field_tag "end_date", params[:end_date] %>
+    <label for="attribute">Buscar por:</label>
+    <%= select_tag "attribute", options_for_select([["Data", "date"], ["Custo", "cost"]], params[:attribute]), id: "attribute" %>
+
+    <div class="date-fields">
+      <label for="start_date">data de início:</label>
+      <%= datetime_local_field_tag "start_date", params[:start_date] %>
+      e
+      <label for="end_date">data de término:</label>
+      <%= datetime_local_field_tag "end_date", params[:end_date] %>
+    </div>
+
+    <div class="cost-fields" style="display: none;">
+      <label for="min_cost">Custo mínimo:</label>
+      <%= number_field_tag "min_cost", params[:min_cost], step: 0.01, min: 0 %>
+
+      <label for="max_cost">Custo máximo:</label>
+      <%= number_field_tag "max_cost", params[:max_cost], step: 0.01, min: 0 %>
+    </div>
 
     <%= submit_tag "Filtrar" %>
   <% end %>
