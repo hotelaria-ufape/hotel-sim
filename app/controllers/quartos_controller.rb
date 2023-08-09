@@ -28,8 +28,8 @@ class QuartosController < ApplicationController
 
   def historico_hospedagem
     @quarto = Quarto.find(params[:id])
-    @reservas_passadas = @quarto.reservas.where('data_de_saida < ?', Date.today)
-    @reservas_futuras = @quarto.reservas.where('data_de_entrada > ?', Date.today)
+    @reservas_passadas = @quarto.reservas.where('data_de_saida < ?', Time.zone.today)
+    @reservas_futuras = @quarto.reservas.where('data_de_entrada > ?', Time.zone.today)
   end
 
   # GET /quartos/1 or /quartos/1.json
