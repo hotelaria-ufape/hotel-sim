@@ -3,7 +3,13 @@ class ClientesController < ApplicationController
 
   # GET /clientes or /clientes.json
   def index
-    @clientes = Cliente.search(params[:search])
+    if params[:attribute].present? && params[:search].present?
+      attribute = params[:attribute]
+      search_query = params[:search]
+      @clientes = Cliente.search(attribute, search_query)
+    else
+      @clientes = Cliente.all
+    end
   end
 
   def historico

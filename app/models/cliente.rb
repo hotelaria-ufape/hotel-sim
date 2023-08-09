@@ -22,9 +22,20 @@ class Cliente < ApplicationRecord
     self.cpf = CPF.new(cpf).formatted if cpf.present?
   end
 
-  def self.search(search)
+  def self.search(attribute, search)
     if search
-      where('nome LIKE ?', "%#{search}%")
+      case attribute
+      when "nome"
+        where('UPPER(nome) LIKE ?', "%#{search.upcase}%")
+      when "cpf"
+        formatted_search = search.gsub(/\D/, '')
+        formatted_search_with_dash = "#{formatted_search[0..2]}.#{formatted_search[3..5]}.#{formatted_search[6..8]}-#{formatted_search[9..10]}"
+        where('cpf LIKE ? OR REPLACE(cpf, ".", "") LIKE ?', "%#{formatted_search_with_dash}%", "%#{formatted_search}%")
+      when "email"
+        where('UPPER(email) LIKE ?', "%#{search.upcase}%")
+      else
+        all
+      end
     else
       all
     end
