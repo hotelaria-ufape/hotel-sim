@@ -11,6 +11,12 @@ class QuartosController < ApplicationController
     @quartos = @quartos.where('preco_diaria BETWEEN ? AND ?', params[:min_price], params[:max_price]) if params[:max_price].present? and params[:min_price].present?
   end
 
+  def historico_hospedagem
+    @quarto = Quarto.find(params[:id])
+    @reservas_passadas = @quarto.reservas.where('data_de_saida < ?', Date.today)
+    @reservas_futuras = @quarto.reservas.where('data_de_entrada > ?', Date.today)
+  end
+
   # GET /quartos/1 or /quartos/1.json
   def show
   end
