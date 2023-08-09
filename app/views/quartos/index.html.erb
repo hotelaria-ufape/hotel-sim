@@ -6,22 +6,74 @@
   <%= link_to 'Exibir todos os quartos', quartos_path %>
 </div>
 
-<div id='search-price'>
-  <%= form_with(url: quartos_path, method: 'get', local: true) do %>
-    <%= hidden_field_tag(:disponibilidade, params[:disponibilidade]) %>
-    <%= number_field_tag(:min_price, params[:min_price], placeholder: 'Preço Mínimo') %>
-    <%= number_field_tag(:max_price, params[:max_price], placeholder: 'Preço Máximo') %>
-    <%= submit_tag("Procurar por preço") %>
+<div id='search-attributes'>
+  <%= form_with(url: quartos_path, method: 'get', local: true) do |form| %>
+    <h3>Procurar quartos</h3>
+    <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Descrição', 'descricao'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
+    <div id="search-fields"></div>
+    <%= form.submit("Procurar") %>
   <% end %>
+  <%= link_to "Redefinir Filtragem", quartos_path %>
 </div>
 
 <div id="quartos" class='list'>
   <tr class='tr-show'>
     <% @quartos.each do |quarto| %>
-      <p class='show-grid'> [ Quarto: <%= quarto.numero %>  -
-        Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br> Preço: R$<%= quarto.preco_diaria %>0
+      <p class='show-grid'> [ Quarto: <%= quarto.numero %> -
+        Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br> Preço: R$<%= quarto.preco_diaria %>
         <br> <%= link_to "Exibir quarto", quarto, id: "d-#{quarto.numero}" %>
         <br> <%= link_to "Visualizar Histórico", historico_hospedagem_quarto_path(quarto) %></p>
     <% end %>
   </tr>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const attributeSelect = document.getElementById('attribute-select');
+        const searchFields = document.getElementById('search-fields');
+        const selectOptions = `
+      <label for="search">Busca por Disponibilidade:</label>
+      <%= select_tag(:search, options_for_select([['Disponível', true], ['Indisponível', false]])) %>
+    `;
+
+        const renderSearchFields = (selectedOption) => {
+            searchFields.innerHTML = '';
+            switch (selectedOption) {
+                case 'numero':
+                    searchFields.innerHTML = `<label for="search">Busca por Número:</label>
+                      <input type="text" name="search" id="search-field" placeholder="Digite o número do quarto...">`;
+                    break;
+                case 'tipo':
+                    searchFields.innerHTML = `<label for="search">Busca por Tipo:</label>
+                                                  <input type="text" name="search" id="search-field" placeholder="Digite o tipo do quarto...">`;
+                    break;
+                case 'disponibilidade':
+                    searchFields.innerHTML = `<label for="search">Busca por Disponibilidade:</label>
+                                                  <%= select_tag(:search, options_for_select([['Disponível', true], ['Indisponível', false]])) %>`;
+                    break;
+                case 'preco_diaria':
+                    searchFields.innerHTML = `<label for="search">Preço Diária:</label>
+                                                  <input type="number" name="search" id="search-field" placeholder="Preço diária">`;
+                    break;
+                case 'descricao':
+                    searchFields.innerHTML = `<label for="search">Busca por Descrição:</label>
+                                                  <input type="text" name="search" id="search-field" placeholder="Digite a descrição do quarto...">`;
+                    break;
+                case 'quantidade_de_hospedes':
+                    searchFields.innerHTML = `<label for="search">Busca por Quantidade de Hóspedes:</label>
+                                                  <input type="number" name="search" id="search-field" placeholder="Digite a quantidade de hóspedes...">`;
+                    break;
+            }
+        }
+
+        attributeSelect.addEventListener('change', function () {
+            const selectedOption = this.value;
+            renderSearchFields(selectedOption);
+        });
+
+        const initialSelectedOption = attributeSelect.value;
+        renderSearchFields(initialSelectedOption);
+    });
+</script>
+

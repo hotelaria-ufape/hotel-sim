@@ -3,12 +3,27 @@ class QuartosController < ApplicationController
 
   # GET /quartos or /quartos.json
   def index
-    if params[:disponibilidade].present?
-      @quartos = Quarto.where(disponibilidade: params[:disponibilidade])
-    else
-      @quartos = Quarto.all
+    @quartos = Quarto.all
+
+    if params[:attribute].present? && params[:search].present?
+      attribute = params[:attribute]
+      search_query = params[:search]
+
+      case attribute
+      when "numero"
+        @quartos = @quartos.where('numero LIKE ?', "%#{search_query}%")
+      when "tipo"
+        @quartos = @quartos.where('tipo LIKE ?', "%#{search_query}%")
+      when "disponibilidade"
+        @quartos = @quartos.where(disponibilidade: search_query)
+      when "preco_diaria"
+        @quartos = @quartos.where('preco_diaria LIKE ?', "%#{search_query}%")
+      when "descricao"
+        @quartos = @quartos.where('descricao LIKE ?', "%#{search_query}%")
+      when "quantidade_de_hospedes"
+        @quartos = @quartos.where('quantidade_de_hospedes = ?', search_query)
+      end
     end
-    @quartos = @quartos.where('preco_diaria BETWEEN ? AND ?', params[:min_price], params[:max_price]) if params[:max_price].present? and params[:min_price].present?
   end
 
   def historico_hospedagem
