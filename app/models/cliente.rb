@@ -21,13 +21,4 @@ class Cliente < ApplicationRecord
   def formatar_cpf
     self.cpf = CPF.new(cpf).formatted if cpf.present?
   end
-
-  def self.search(search)
-    if search
-      where('nome LIKE ?', "%#{search}%")
-    else
-      all
-    end
-  end
-
 end

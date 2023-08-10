@@ -3,11 +3,18 @@ class ClientesController < ApplicationController
 
   # GET /clientes or /clientes.json
   def index
-    @clientes = Cliente.search(params[:search])
+    @clientes = buscar_clientes(params[:attribute], params[:search])
+  end
+
+  def historico
+    @cliente = Cliente.find(params[:id])
+    @reservas = @cliente.reservas
   end
 
   # GET /clientes/1 or /clientes/1.json
   def show
+    @cliente = Cliente.find(params[:id])
+    @reservas = @cliente.reservas #
   end
 
   # GET /clientes/new
@@ -63,13 +70,29 @@ class ClientesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cliente
-      @cliente = Cliente.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cliente
+    @cliente = Cliente.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def cliente_params
-      params.require(:cliente).permit(:cpf, :nome, :email, :telefone)
+  # Only allow a list of trusted parameters through.
+  def cliente_params
+    params.require(:cliente).permit(:cpf, :nome, :email, :telefone)
+  end
+
+  def buscar_clientes(attribute, search)
+    case attribute
+    when "nome"
+      Cliente.where('UPPER(nome) LIKE ?', "%#{search.upcase}%")
+    when "cpf"
+      formatted_search = search.gsub(/\D/, '')
+      formatted_search_with_dash = "#{formatted_search[0..2]}.#{formatted_search[3..5]}.#{formatted_search[6..8]}-#{formatted_search[9..10]}"
+      Cliente.where('cpf LIKE ? OR REPLACE(cpf, ".", "") LIKE ?', "%#{formatted_search_with_dash}%", "%#{formatted_search}%")
+    when "email"
+      Cliente.where('UPPER(email) LIKE ?', "%#{search.upcase}%")
+    else
+      Cliente.all
     end
+  end
+
 end
