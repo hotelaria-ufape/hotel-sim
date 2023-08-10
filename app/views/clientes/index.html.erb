@@ -11,12 +11,15 @@
 </div>
 
 <div class='list'>
-  <tr class='tr-show'>
-    <% @clientes.each do |cliente| %>
-      <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %> <br>
-        <%= link_to "Visualizar reservas", historico_cliente_path(cliente) %></p>
-    <% end %>
-  </tr>
+  <% if @clientes.any? %>
+    <tr class='tr-show'>
+      <% @clientes.each do |cliente| %>
+        <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %> <br>
+      <% end %>
+    </tr>
+  <% else %>
+    <p>Nenhum cliente encontrado.</p>
+  <% end %>
 </div>
 
 <script>

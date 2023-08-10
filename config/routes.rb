@@ -4,17 +4,8 @@ Rails.application.routes.draw do
       get 'get_custo'
     end
   end
-  resources :quartos do
-    member do
-      get 'historico_hospedagem', to: 'quartos#historico_hospedagem'
-    end
-  end
-  resources :clientes do
-    member do
-      get 'historico', to: 'clientes#historico'
-    end
-  end
-
+  resources :quartos
+  resources :clientes
 
   root "pages#home"
 end

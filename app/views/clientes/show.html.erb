@@ -1,6 +1,31 @@
 <p style="color: green"><%= notice %></p>
 
+<br>
+
 <%= render @cliente %>
+
+<br>
+
+<h1>Histórico de reservas de <%= @cliente.nome %></h1>
+
+<br>
+
+<% if @reservas.any? %>
+  <ul>
+    <% @reservas.each do |reserva| %>
+      <li>
+        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %> ]
+        <%= link_to "Exibir Reserva", reserva %> |
+        <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %>
+        <%= link_to "Mostrar Todas as Reservas", reservas_path(cliente_id: @cliente.id) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhuma reserva encontrada para este cliente.</p>
+<% end %>
+
+<br>
 
 <div class='link-show'>
   <%= link_to "Editar cliente", edit_cliente_path(@cliente) %>
