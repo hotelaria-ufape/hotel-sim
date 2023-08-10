@@ -5,25 +5,38 @@
         var attributeSelect = document.querySelector('#attribute');
         var dateFields = document.querySelector('.date-fields');
         var costFields = document.querySelector('.cost-fields');
+        var clientFields = document.querySelector('.client-fields');
 
         attributeSelect.addEventListener('change', function() {
             if (attributeSelect.value === 'date') {
                 dateFields.style.display = 'block';
                 costFields.style.display = 'none';
+                clientFields.style.display = 'none';
             } else if (attributeSelect.value === 'cost') {
                 costFields.style.display = 'block';
                 dateFields.style.display = 'none';
+                clientFields.style.display = 'none';
+            } else if (attributeSelect.value === 'client') {
+                clientFields.style.display = 'block';
+                dateFields.style.display = 'none';
+                costFields.style.display = 'none';
             }
         });
 
-        // Atualizar a exibição inicial
         if (attributeSelect.value === 'date') {
             dateFields.style.display = 'block';
             costFields.style.display = 'none';
+            clientFields.style.display = 'none';
         } else if (attributeSelect.value === 'cost') {
             costFields.style.display = 'block';
             dateFields.style.display = 'none';
+            clientFields.style.display = 'none';
+        } else if (attributeSelect.value === 'client') {
+            clientFields.style.display = 'block';
+            dateFields.style.display = 'none';
+            costFields.style.display = 'none';
         }
+
     });
 </script>
 
@@ -32,7 +45,7 @@
 
     Filtragem por
     <label for="attribute">Buscar por:</label>
-    <%= select_tag "attribute", options_for_select([["Data", "date"], ["Custo", "cost"]], params[:attribute]), id: "attribute" %>
+    <%= select_tag "attribute", options_for_select([["Data", "date"], ["Custo", "cost"], ["Cliente", "client"]], params[:attribute]), id: "attribute" %>
 
     <div class="date-fields">
       <label for="start_date">data de início:</label>
@@ -48,6 +61,11 @@
 
       <label for="max_cost">Custo máximo:</label>
       <%= number_field_tag "max_cost", params[:max_cost], step: 0.01, min: 0 %>
+    </div>
+
+    <div class="client-fields" style="display: none;">
+      <label for="cliente_id">Filtrar por Cliente:</label>
+      <%= select_tag(:cliente_id, options_for_select(Cliente.all.map { |cliente| [cliente.nome, cliente.id] }), include_blank: true) %>
     </div>
 
     <%= submit_tag "Filtrar" %>

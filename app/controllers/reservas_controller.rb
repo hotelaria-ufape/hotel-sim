@@ -3,6 +3,7 @@ class ReservasController < ApplicationController
 
   # GET /reservas or /reservas.json
   def index
+
     @reservas = Reserva.all
 
     if params[:attribute] == "date" && params[:start_date].present? && params[:end_date].present?
@@ -13,6 +14,8 @@ class ReservasController < ApplicationController
       min_cost = params[:min_cost].to_f
       max_cost = params[:max_cost].to_f
       @reservas = @reservas.where(custo: min_cost..max_cost)
+    elsif params[:cliente_id].present?
+      @reservas = @reservas.where(cliente_id: params[:cliente_id])
     end
   end
 
