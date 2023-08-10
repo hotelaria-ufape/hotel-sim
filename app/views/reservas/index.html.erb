@@ -74,6 +74,7 @@
 </div>
 
 <div class='list'>
+  <% if @reservas.any? %>
   <tr class='tr-show'>
     <% @reservas.each do |reserva| %>
       <p class='show-grid'>
@@ -81,5 +82,8 @@
         <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %>
       </p>
     <% end %>
+  <% else %>
+        Nenhuma reserva encontrada.
+  <% end %>
   </tr>
 </div>

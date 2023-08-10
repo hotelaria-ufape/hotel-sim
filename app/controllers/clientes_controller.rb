@@ -3,7 +3,7 @@ class ClientesController < ApplicationController
 
   # GET /clientes or /clientes.json
   def index
-    @clientes = ClienteSearchService.search(params[:attribute], params[:search])
+    @clientes = Cliente.search(params[:attribute], params[:search])
   end
 
   def historico
@@ -79,4 +79,20 @@ class ClientesController < ApplicationController
     def cliente_params
       params.require(:cliente).permit(:cpf, :nome, :email, :telefone)
     end
+
+    def self.search(attribute, search)
+      case attribute
+      when "nome"
+        Cliente.where('UPPER(nome) LIKE ?', "%#{search.upcase}%")
+      when "cpf"
+        formatted_search = search.gsub(/\D/, '')
+        formatted_search_with_dash = "#{formatted_search[0..2]}.#{formatted_search[3..5]}.#{formatted_search[6..8]}-#{formatted_search[9..10]}"
+        Cliente.where('cpf LIKE ? OR REPLACE(cpf, ".", "") LIKE ?', "%#{formatted_search_with_dash}%", "%#{formatted_search}%")
+      when "email"
+        Cliente.where('UPPER(email) LIKE ?', "%#{search.upcase}%")
+      else
+        Cliente.all
+      end
+    end
+
 end
