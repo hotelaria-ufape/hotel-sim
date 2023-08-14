@@ -17,12 +17,14 @@
   <div>
     <div>
       <%= form.label :cliente_id, 'Cliente', style: "display: block" %>
-      <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true, include_blank: false }) %>
+      <%= form.collection_select(:cliente_id, Cliente.all, :id, :nome, { prompt: 'Selecione o cliente' }, { required: true, include_blank: false, selected: @reserva.cliente_id }) %>
+      <%= link_to "Listar clientes", "#", id: "select-client-button" %>
     </div>
 
     <div>
       <%= form.label :quarto_id, 'Quarto', style: "display: block" %>
-      <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select', include_blank: false }) %>
+      <%= form.collection_select(:quarto_id, Quarto.where(disponibilidade: true), :id, :numero, { prompt: 'Selecione o quarto' }, { required: true, class: 'quarto-select', include_blank: false, selected: @reserva.quarto_id }) %>
+      <%= link_to "Listar Quartos", "#", id: "select-room-button" %>
     </div>
 
     <div>

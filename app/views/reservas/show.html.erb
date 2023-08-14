@@ -3,6 +3,8 @@
 <%= render @reserva %>
 
 <div>
-  <%= link_to "Editar reserva", edit_reserva_path(@reserva) %>
+  <%= link_to "Exibir detalhes do Cliente", edit_reserva_path(@reserva.cliente) %> <br>
+  <%= link_to "Exibir detalhes do Quarto", edit_reserva_path(@reserva.quarto) %> <br>
+  <%= link_to "Editar reserva", edit_reserva_path(@reserva) %> <br>
   <%= button_to "Remover reserva", @reserva, method: :delete %>
 </div>

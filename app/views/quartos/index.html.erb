@@ -16,8 +16,10 @@
       <% @quartos.each do |quarto| %>
         <p class='show-grid'> [ Quarto <%= quarto.numero %> -
           Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br>
-          <%= quarto.tipo %> | Preço da Diária: R$<%= quarto.preco_diaria %>
-          <br> <%= link_to "Exibir quarto", quarto %>
+          <%= quarto.tipo %> | Preço da Diária: R$<%= quarto.preco_diaria %> <br>
+          <%= link_to "Exibir quarto", quarto %> <br>
+          <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
+        </p>
       <% end %>
   <% else %>
     Nenhum quarto encontrado.</p>

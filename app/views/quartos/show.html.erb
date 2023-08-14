@@ -45,6 +45,7 @@
 <br>
 
 <div class='link-show'>
-  <%= link_to "Editar quarto", edit_quarto_path(@quarto) %>
+  <%= link_to "Editar quarto", edit_quarto_path(@quarto) %> <br>
+  <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: @quarto) %> <br>
   <%= button_to "Remover quarto", @quarto, method: :delete %>
 </div>
