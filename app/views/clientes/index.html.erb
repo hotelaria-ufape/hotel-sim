@@ -14,7 +14,8 @@
   <% if @clientes.any? %>
     <tr class='tr-show'>
       <% @clientes.each do |cliente| %>
-        <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %> <br>
+        <p class='show-grid'> [ <%= cliente.nome %> ]
+          <br> <%= link_to "Exibir cliente", cliente, id: "d-#{cliente.nome}" %> <br>
       <% end %>
     </tr>
   <% else %>

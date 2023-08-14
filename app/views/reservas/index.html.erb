@@ -1,45 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var attributeSelect = document.querySelector('#attribute');
-        var dateFields = document.querySelector('.date-fields');
-        var costFields = document.querySelector('.cost-fields');
-        var clientFields = document.querySelector('.client-fields');
-
-        attributeSelect.addEventListener('change', function() {
-            if (attributeSelect.value === 'date') {
-                dateFields.style.display = 'block';
-                costFields.style.display = 'none';
-                clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'cost') {
-                costFields.style.display = 'block';
-                dateFields.style.display = 'none';
-                clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'client') {
-                clientFields.style.display = 'block';
-                dateFields.style.display = 'none';
-                costFields.style.display = 'none';
-            }
-        });
-
-        if (attributeSelect.value === 'date') {
-            dateFields.style.display = 'block';
-            costFields.style.display = 'none';
-            clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'cost') {
-            costFields.style.display = 'block';
-            dateFields.style.display = 'none';
-            clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'client') {
-            clientFields.style.display = 'block';
-            dateFields.style.display = 'none';
-            costFields.style.display = 'none';
-        }
-
-    });
-</script>
-
 <div>
   <%= form_tag reservas_path, method: :get do %>
 
@@ -75,15 +35,56 @@
 
 <div class='list'>
   <% if @reservas.any? %>
-  <tr class='tr-show'>
-    <% @reservas.each do |reserva| %>
-      <p class='show-grid'>
-        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %> - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
-        <%= link_to "Exibir Reserva", reserva, id:"d-#{reserva.data_de_entrada}" %>
-      </p>
-    <% end %>
+    <tr class='tr-show'>
+      <% @reservas.each do |reserva| %>
+        <p class='show-grid'>
+          [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %>
+          - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
+          <%= link_to "Exibir Reserva", reserva, id: "d-#{reserva.data_de_entrada}" %>
+        </p>
+      <% end %>
   <% else %>
-        Nenhuma reserva encontrada.
+    Nenhuma reserva encontrada.
   <% end %>
   </tr>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var attributeSelect = document.querySelector('#attribute');
+        var dateFields = document.querySelector('.date-fields');
+        var costFields = document.querySelector('.cost-fields');
+        var clientFields = document.querySelector('.client-fields');
+
+        attributeSelect.addEventListener('change', function () {
+            if (attributeSelect.value === 'date') {
+                dateFields.style.display = 'block';
+                costFields.style.display = 'none';
+                clientFields.style.display = 'none';
+            } else if (attributeSelect.value === 'cost') {
+                costFields.style.display = 'block';
+                dateFields.style.display = 'none';
+                clientFields.style.display = 'none';
+            } else if (attributeSelect.value === 'client') {
+                clientFields.style.display = 'block';
+                dateFields.style.display = 'none';
+                costFields.style.display = 'none';
+            }
+        });
+
+        if (attributeSelect.value === 'date') {
+            dateFields.style.display = 'block';
+            costFields.style.display = 'none';
+            clientFields.style.display = 'none';
+        } else if (attributeSelect.value === 'cost') {
+            costFields.style.display = 'block';
+            dateFields.style.display = 'none';
+            clientFields.style.display = 'none';
+        } else if (attributeSelect.value === 'client') {
+            clientFields.style.display = 'block';
+            dateFields.style.display = 'none';
+            costFields.style.display = 'none';
+        }
+
+    });
+</script>

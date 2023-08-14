@@ -2,7 +2,8 @@
   <div class='errors'>
     <% if quarto.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(quarto.errors.count, "erro") %> impedem este quarto de ser criado (passe o mouse por cima para ver mais detalhes)</h2>
+        <h2><%= pluralize(quarto.errors.count, "erro") %> impedem este quarto de ser criado (passe o mouse por cima para
+          ver mais detalhes)</h2>
 
         <ul>
           <% quarto.errors.each do |error| %>

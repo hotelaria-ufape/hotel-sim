@@ -66,16 +66,17 @@ class ReservasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reserva
-      @reserva = Reserva.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def reserva_params
-      params.require(:reserva).permit(:cliente_id, :quarto_id, :data_de_entrada, :data_de_saida, :custo)
-    end
-  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reserva
+    @reserva = Reserva.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def reserva_params
+    params.require(:reserva).permit(:cliente_id, :quarto_id, :data_de_entrada, :data_de_saida, :custo)
+  end
+
   def buscar_reservas(attribute)
     @reservas = Reserva.all
 

@@ -13,7 +13,8 @@
 <h2>Hóspedes Passados:</h2>
 <ul>
   <% @reservas_passadas.each do |reserva| %>
-    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %>
+      a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
   <% end %>
 </ul>
 
@@ -22,7 +23,8 @@
 <h2>Hóspedes Futuros:</h2>
 <ul>
   <% @reservas_futuras.each do |reserva| %>
-    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %>
+      a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
   <% end %>
 </ul>
 
