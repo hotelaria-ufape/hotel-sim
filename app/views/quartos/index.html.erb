@@ -48,7 +48,7 @@
                     break;
                 case 'tipo':
                     searchFields.innerHTML = `<label for="search">Busca por Tipo:</label>
-                                                  <input type="text" name="search" id="search-field" placeholder="Digite o tipo do quarto...">`;
+                                                  <%= select_tag(:search, options_for_select([['Quarto Padrão'], ['Quarto Familiar'], ['Quarto de Luxo'], ['Suíte Master'], ['Suíte Presidencial']])) %>`;
                     break;
                 case 'disponibilidade':
                     searchFields.innerHTML = `<label for="search">Busca por Disponibilidade:</label>
