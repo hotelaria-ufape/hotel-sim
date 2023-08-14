@@ -4,26 +4,7 @@ class QuartosController < ApplicationController
   # GET /quartos or /quartos.json
   def index
     @quartos = Quarto.all
-
-    if params[:attribute].present? && params[:search].present?
-      attribute = params[:attribute]
-      search_query = params[:search]
-
-      case attribute
-      when "numero"
-        @quartos = @quartos.where('numero LIKE ?', "%#{search_query}%")
-      when "tipo"
-        @quartos = @quartos.where('tipo LIKE ?', "%#{search_query}%")
-      when "disponibilidade"
-        @quartos = @quartos.where(disponibilidade: search_query)
-      when "preco_diaria"
-        @quartos = @quartos.where('preco_diaria LIKE ?', "%#{search_query}%")
-      when "descricao"
-        @quartos = @quartos.where('descricao LIKE ?', "%#{search_query}%")
-      when "quantidade_de_hospedes"
-        @quartos = @quartos.where('quantidade_de_hospedes = ?', search_query)
-      end
-    end
+    @quartos = buscar_quartos(params[:attribute], params[:search])
   end
 
   # GET /quartos/1 or /quartos/1.json
@@ -87,13 +68,34 @@ class QuartosController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_quarto
-    @quarto = Quarto.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_quarto
+      @quarto = Quarto.find(params[:id])
+    end
 
-  # Only allow a list of trusted parameters through.
-  def quarto_params
-    params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
-  end
+    # Only allow a list of trusted parameters through.
+    def quarto_params
+      params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
+    end
+
+    def buscar_quartos(attribute, search)
+      quartos_query = Quarto.all
+
+      case attribute
+      when "numero"
+        quartos_query = quartos_query.where('numero LIKE ?', "%#{search}%")
+      when "tipo"
+        quartos_query = quartos_query.where('tipo LIKE ?', "%#{search}%")
+      when "disponibilidade"
+        quartos_query = quartos_query.where(disponibilidade: search)
+      when "preco_diaria"
+        quartos_query = quartos_query.where('preco_diaria LIKE ?', "%#{search}%")
+      when "descricao"
+        quartos_query = quartos_query.where('descricao LIKE ?', "%#{search}%")
+      when "quantidade_de_hospedes"
+        quartos_query = quartos_query.where('quantidade_de_hospedes = ?', search)
+      end
+
+      quartos_query
+    end
 end

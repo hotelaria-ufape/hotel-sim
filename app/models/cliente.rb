@@ -21,4 +21,5 @@ class Cliente < ApplicationRecord
   def formatar_cpf
     self.cpf = CPF.new(cpf).formatted if cpf.present?
   end
+
 end

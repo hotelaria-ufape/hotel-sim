@@ -16,7 +16,6 @@
       <li>
         [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %> ]
         <%= link_to "Exibir Reserva", reserva %> |
-        <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %>
         <%= link_to "Mostrar Todas as Reservas", reservas_path(cliente_id: @cliente.id) %>
       </li>
     <% end %>
@@ -30,6 +29,7 @@
 <div class='link-show'>
   <%= link_to "Editar cliente", edit_cliente_path(@cliente) %>
   <%= link_to "Retornar aos clientes", clientes_path %>
+  <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %>
   <%= button_to "Remover cliente", @cliente, method: :delete %>
 </div>
 
