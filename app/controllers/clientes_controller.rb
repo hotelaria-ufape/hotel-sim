@@ -3,7 +3,7 @@ class ClientesController < ApplicationController
 
   # GET /clientes or /clientes.json
   def index
-    @clientes = Cliente.search(params[:attribute], params[:search])
+    @clientes = buscar_clientes(params[:attribute], params[:search])
   end
 
   def historico
@@ -80,7 +80,7 @@ class ClientesController < ApplicationController
       params.require(:cliente).permit(:cpf, :nome, :email, :telefone)
     end
 
-    def self.search(attribute, search)
+    def buscar_clientes(attribute, search)
       case attribute
       when "nome"
         Cliente.where('UPPER(nome) LIKE ?', "%#{search.upcase}%")
@@ -94,5 +94,4 @@ class ClientesController < ApplicationController
         Cliente.all
       end
     end
-
 end
