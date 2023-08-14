@@ -12,7 +12,7 @@ class ReservasController < ApplicationController
 
   # GET /reservas/new
   def new
-    @reserva = Reserva.new
+    @reserva = Reserva.new(cliente_id: params[:cliente_id], quarto_id: params[:quarto_id])
   end
 
   def get_custo
