@@ -14,38 +14,38 @@
     <% end %>
   </div>
 
-  <div class='form-div'>
-    <div class='labels'>
+  <div>
+    <div>
       <%= form.label :numero, style: "display: block" %>
       <%= form.number_field :numero %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :tipo, style: "display: block" %>
       <%= form.select :tipo, options_for_select(["Quarto Padrão", "Quarto Familiar", "Quarto de Luxo", "Suíte Master", "Suíte Presidencial"]) %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :disponibilidade, style: "display: block" %>
       <%= form.select :disponibilidade, options_for_select([["Disponível", true], ["Indisponível", false]]) %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :preco_diaria, style: "display: block" %>
       <%= form.text_field :preco_diaria %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :descricao, style: "display: block" %>
       <%= form.text_area :descricao %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :quantidade_de_hospedes, style: "display: block" %>
       <%= form.number_field :quantidade_de_hospedes %>
     </div>
 
-    <div class='submit'>
+    <div>
       <% if quarto.persisted? %>
         <%= form.submit "Atualizar Quarto" %>
       <% else %>

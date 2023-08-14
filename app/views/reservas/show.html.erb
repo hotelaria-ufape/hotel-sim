@@ -2,7 +2,7 @@
 
 <%= render @reserva %>
 
-<div class='link-show'>
+<div>
   <%= link_to "Editar reserva", edit_reserva_path(@reserva) %>
   <%= button_to "Remover reserva", @reserva, method: :delete %>
 </div>
