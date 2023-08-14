@@ -68,34 +68,33 @@ class QuartosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_quarto
-      @quarto = Quarto.find(params[:id])
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_quarto
+    @quarto = Quarto.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def quarto_params
+    params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
+  end
+
+  def buscar_quartos(attribute, search)
+    case attribute
+    when "numero"
+      Quarto.where('numero LIKE ?', "%#{search}%")
+    when "tipo"
+      Quarto.where('tipo LIKE ?', "%#{search}%")
+    when "disponibilidade"
+      Quarto.where(disponibilidade: search)
+    when "preco_diaria"
+      Quarto.where('preco_diaria LIKE ?', "%#{search}%")
+    when "descricao"
+      Quarto.where('descricao LIKE ?', "%#{search}%")
+    when "quantidade_de_hospedes"
+      Quarto.where('quantidade_de_hospedes = ?', search)
+    else
+      Quarto.all
     end
-
-    # Only allow a list of trusted parameters through.
-    def quarto_params
-      params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
-    end
-
-    def buscar_quartos(attribute, search)
-      quartos_query = Quarto.all
-
-      case attribute
-      when "numero"
-        quartos_query = quartos_query.where('numero LIKE ?', "%#{search}%")
-      when "tipo"
-        quartos_query = quartos_query.where('tipo LIKE ?', "%#{search}%")
-      when "disponibilidade"
-        quartos_query = quartos_query.where(disponibilidade: search)
-      when "preco_diaria"
-        quartos_query = quartos_query.where('preco_diaria LIKE ?', "%#{search}%")
-      when "descricao"
-        quartos_query = quartos_query.where('descricao LIKE ?', "%#{search}%")
-      when "quantidade_de_hospedes"
-        quartos_query = quartos_query.where('quantidade_de_hospedes = ?', search)
-      end
-
-      quartos_query
-    end
+  end
 end

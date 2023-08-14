@@ -3,9 +3,7 @@ class ReservasController < ApplicationController
 
   # GET /reservas or /reservas.json
   def index
-
     @reservas = buscar_reservas(params[:attribute])
-
   end
 
   # GET /reservas/1 or /reservas/1.json
@@ -19,8 +17,7 @@ class ReservasController < ApplicationController
 
   def get_custo
     quarto = Quarto.find(params[:quarto_id])
-    custo = quarto.preco_diaria # Ou qualquer lógica que você tenha para calcular o custo
-
+    custo = quarto.preco_diaria
     render json: { custo: custo }
   end
 
@@ -66,38 +63,37 @@ class ReservasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reserva
-      @reserva = Reserva.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def reserva_params
-      params.require(:reserva).permit(:cliente_id, :quarto_id, :data_de_entrada, :data_de_saida, :custo)
-    end
-  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reserva
+    @reserva = Reserva.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def reserva_params
+    params.require(:reserva).permit(:cliente_id, :quarto_id, :data_de_entrada, :data_de_saida, :custo)
+  end
+
   def buscar_reservas(attribute)
-    @reservas = Reserva.all
-
     case attribute
-    when "date"
+    when "data"
       if params[:start_date].present? && params[:end_date].present?
         start_date = DateTime.parse(params[:start_date])
         end_date = DateTime.parse(params[:end_date])
-        @reservas = @reservas.where("(data_de_entrada BETWEEN ? AND ?) OR (data_de_saida BETWEEN ? AND ?)", start_date, end_date, start_date, end_date)
+        return Reserva.where("(data_de_entrada BETWEEN ? AND ?) OR (data_de_saida BETWEEN ? AND ?)", start_date, end_date, start_date, end_date)
       end
-    when "cost"
+    when "custo"
       if params[:min_cost].present? && params[:max_cost].present?
         min_cost = params[:min_cost].to_f
         max_cost = params[:max_cost].to_f
-        @reservas = @reservas.where(custo: min_cost..max_cost)
+        return Reserva.where(custo: min_cost..max_cost)
       end
-    when "client"
+    when "cliente"
       if params[:cliente_id].present?
-        @reservas = @reservas.where(cliente_id: params[:cliente_id])
+        return Reserva.where(cliente_id: params[:cliente_id])
       end
+    else
+      return Reserva.all
     end
-
-    @reservas
   end
 end

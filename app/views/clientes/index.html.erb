@@ -1,9 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <div id='search-client'>
-  <%= form_with(url: clientes_path, method: 'get', local: true) do |form| %>
-    <h3>Procurar cliente</h3>
-    <%= select_tag(:attribute, options_for_select([['Nome', 'nome'], ['CPF', 'cpf'], ['Email', 'email']])) %>
+  <%= form_with(url: clientes_path, method: 'get') do |form| %>
+    <h3>Procurar clientes</h3>
+    Filtrar por <%= select_tag(:attribute, options_for_select([['Nome', 'nome'], ['CPF', 'cpf'], ['Email', 'email']])) %>
     <%= text_field_tag(:search) %>
     <%= form.submit("Procurar") %>
   <% end %>
@@ -11,10 +11,11 @@
 </div>
 
 <div class='list'>
-  <% if @clientes.any? %>
+  <% if @clientes.present? %>
     <tr class='tr-show'>
       <% @clientes.each do |cliente| %>
-        <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %> <br>
+        <p class='show-grid'> [ <%= cliente.nome %> ]
+          <br> <%= link_to "Exibir cliente", cliente %> <br>
       <% end %>
     </tr>
   <% else %>

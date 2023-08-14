@@ -2,7 +2,8 @@
   <div class='errors'>
     <% if cliente.errors.any? %>
       <div style="color: red">
-        <h2><%= pluralize(cliente.errors.count, "erro") %> impedem este cliente de ser criado (passe o mouse por cima para ver mais detalhes)</h2>
+        <h2><%= pluralize(cliente.errors.count, "erro") %> impedem este cliente de ser criado (passe o mouse por cima
+          para ver mais detalhes)</h2>
 
         <ul>
           <% cliente.errors.each do |error| %>
@@ -13,28 +14,28 @@
     <% end %>
   </div>
 
-  <div class='form-div'>
-    <div class='labels'>
+  <div>
+    <div>
       <%= form.label :cpf, style: "display: block" %>
       <%= form.text_field :cpf %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :nome, style: "display: block" %>
       <%= form.text_field :nome %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :email, style: "display: block" %>
       <%= form.text_field :email %>
     </div>
 
-    <div class='labels'>
+    <div>
       <%= form.label :telefone, style: "display: block" %>
       <%= form.text_field :telefone %>
     </div>
 
-    <div class='submit'>
+    <div>
       <% if cliente.persisted? %>
         <%= form.submit "Atualizar Cliente" %>
       <% else %>

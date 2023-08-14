@@ -14,9 +14,10 @@
   <ul>
     <% @reservas.each do |reserva| %>
       <li>
-        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %> ]
-        <%= link_to "Exibir Reserva", reserva %> |
-        <%= link_to "Mostrar Todas as Reservas", reservas_path(cliente_id: @cliente.id) %>
+        [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y das %H:%M") %> à <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ]
+        [ Quarto: <%= reserva.quarto.numero %> | <%= reserva.quarto.tipo %> | Custo da estadia: R$<%= reserva.custo %> ]
+        <%= link_to "Exibir Detalhes", reserva %> |
+        <%= link_to "Editar Reserva", edit_reserva_path(reserva) %>
       </li>
     <% end %>
   </ul>
@@ -26,13 +27,8 @@
 
 <br>
 
-<div class='link-show'>
+<div>
   <%= link_to "Editar cliente", edit_cliente_path(@cliente) %>
-  <%= link_to "Retornar aos clientes", clientes_path %>
   <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %>
   <%= button_to "Remover cliente", @cliente, method: :delete %>
-</div>
-
-<div id='links'>
-  <%= link_to "Home", root_path %>
 </div>
