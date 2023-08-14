@@ -28,7 +28,7 @@
 <br>
 
 <div>
-  <%= link_to "Editar cliente", edit_cliente_path(@cliente) %>
-  <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %>
+  <%= link_to "Editar cliente", edit_cliente_path(@cliente) %> <br>
+  <%= link_to "Agendar Reserva", new_reserva_path(cliente_id: @cliente) %> <br>
   <%= button_to "Remover cliente", @cliente, method: :delete %>
 </div>
