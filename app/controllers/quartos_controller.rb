@@ -3,16 +3,15 @@ class QuartosController < ApplicationController
 
   # GET /quartos or /quartos.json
   def index
-    if params[:disponibilidade].present?
-      @quartos = Quarto.where(disponibilidade: params[:disponibilidade])
-    else
-      @quartos = Quarto.all
-    end
-    @quartos = @quartos.where('preco_diaria BETWEEN ? AND ?', params[:min_price], params[:max_price]) if params[:max_price].present? and params[:min_price].present?
+    @quartos = Quarto.all
+    @quartos = buscar_quartos(params[:attribute], params[:search])
   end
 
   # GET /quartos/1 or /quartos/1.json
   def show
+    @quarto = Quarto.find(params[:id])
+    @reservas_passadas = @quarto.reservas.where('data_de_saida < ?', Time.zone.today)
+    @reservas_futuras = @quarto.reservas.where('data_de_entrada > ?', Time.zone.today)
   end
 
   # GET /quartos/new
@@ -77,5 +76,26 @@ class QuartosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def quarto_params
       params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
+    end
+
+    def buscar_quartos(attribute, search)
+      quartos_query = Quarto.all
+
+      case attribute
+      when "numero"
+        quartos_query = quartos_query.where('numero LIKE ?', "%#{search}%")
+      when "tipo"
+        quartos_query = quartos_query.where('tipo LIKE ?', "%#{search}%")
+      when "disponibilidade"
+        quartos_query = quartos_query.where(disponibilidade: search)
+      when "preco_diaria"
+        quartos_query = quartos_query.where('preco_diaria LIKE ?', "%#{search}%")
+      when "descricao"
+        quartos_query = quartos_query.where('descricao LIKE ?', "%#{search}%")
+      when "quantidade_de_hospedes"
+        quartos_query = quartos_query.where('quantidade_de_hospedes = ?', search)
+      end
+
+      quartos_query
     end
 end

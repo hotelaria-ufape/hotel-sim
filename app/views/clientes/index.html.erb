@@ -1,17 +1,41 @@
 <p style="color: green"><%= notice %></p>
 
 <div id='search-client'>
-  <%= form_with(url: clientes_path, method: 'get', local: true) do %>
-  <h3>Procurar cliente</h3>
+  <%= form_with(url: clientes_path, method: 'get', local: true) do |form| %>
+    <h3>Procurar cliente</h3>
+    <%= select_tag(:attribute, options_for_select([['Nome', 'nome'], ['CPF', 'cpf'], ['Email', 'email']])) %>
     <%= text_field_tag(:search) %>
-    <%= submit_tag("Procurar") %>
+    <%= form.submit("Procurar") %>
   <% end %>
+  <%= link_to "Redefinir Filtragem", clientes_path %>
 </div>
 
 <div class='list'>
-  <tr class='tr-show'>
-    <% @clientes.each do |cliente| %>
-      <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %></p>
-    <% end %>
-  </tr>
+  <% if @clientes.any? %>
+    <tr class='tr-show'>
+      <% @clientes.each do |cliente| %>
+        <p class='show-grid'> [ <%= cliente.nome %> ] <br> <%= link_to "Exibir cliente", cliente, id:"d-#{cliente.nome}" %> <br>
+      <% end %>
+    </tr>
+  <% else %>
+    <p>Nenhum cliente encontrado.</p>
+  <% end %>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const attributeSelect = document.getElementById('attribute');
+        const searchFields = document.getElementById('search-fields');
+
+        attributeSelect.addEventListener('change', function () {
+            const selectedOption = this.value;
+            if (selectedOption === 'nome' || selectedOption === 'cpf' || selectedOption === 'email') {
+                searchFields.innerHTML = `<label for="search">Busca por ${selectedOption}:</label>
+                                  <input type="text" name="search" id="search-field" placeholder="Digite a busca...">`;
+            } else {
+                searchFields.innerHTML = '';
+            }
+        });
+    });
+</script>
+

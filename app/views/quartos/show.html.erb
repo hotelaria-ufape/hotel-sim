@@ -1,6 +1,32 @@
 <p style="color: green"><%= notice %></p>
 
+<br>
+
 <%= render @quarto %>
+
+<br>
+
+<h1>Histórico de Hospedagem no <%= @quarto.numero %></h1>
+
+<br>
+
+<h2>Hóspedes Passados:</h2>
+<ul>
+  <% @reservas_passadas.each do |reserva| %>
+    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+  <% end %>
+</ul>
+
+<br>
+
+<h2>Hóspedes Futuros:</h2>
+<ul>
+  <% @reservas_futuras.each do |reserva| %>
+    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %> a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+  <% end %>
+</ul>
+
+<br>
 
 <div class='link-show'>
   <%= link_to "Editar quarto", edit_quarto_path(@quarto) %>
