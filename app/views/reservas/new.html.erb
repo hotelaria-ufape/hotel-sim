@@ -4,7 +4,119 @@
 
 <br>
 
+<div class="overlay" id="overlay"></div>
+<div id="client-dialog"  class="popup-container" style="display: none;">
+  <h2>Selecione um Cliente</h2>
+  <ul>
+    <% Cliente.all.each do |cliente| %>
+      <p class="client-option" data-client-id="<%= cliente.id %>">
+        Nome: <%= cliente.nome %> <br>
+        CPF: <%= cliente.cpf %> <br>
+        Email: <%= cliente.email %> <br>
+        Telefone: <%= cliente.telefone %> <br>
+        <button class="select-client-button">Selecionar</button>
+      </p>
+    <% end %>
+  </ul>
+  <button id="close-client-dialog">Fechar</button>
+</div>
+
+<div id="room-dialog" class="popup-container" style="display: none;">
+  <h2>Selecione um Quarto</h2>
+  <ul>
+    <% Quarto.all.each do |quarto| %>
+      <li class="room-option" data-room-id="<%= quarto.id %>">
+        Número: <%= quarto.numero %> <br>
+        Preço da Diária: <%= quarto.preco_diaria %> <br>
+        Tipo: <%= quarto.tipo %> <br>
+        Quantidade de Hóspedes: <%= quarto.quantidade_de_hospedes %> <br>
+        <% if !quarto.descricao.to_s.empty? %>
+            Descrição: <%= quarto.descricao %> <br>
+        <% end %>
+        <button class="select-room-button">Selecionar</button>
+      </li>
+    <% end %>
+  </ul>
+  <button id="close-room-dialog">Fechar</button>
+  <span id="selected-room-number"></span>
+</div>
+
+
 <div>
   <%= link_to "Retornar às reservas", reservas_path %>
   <%= link_to "Home", root_path %>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectClientButton = document.getElementById('select-client-button');
+        var closeClientDialogButton = document.getElementById('close-client-dialog');
+        var overlay = document.getElementById('overlay');
+        var clientDialog = document.getElementById('client-dialog');
+        var clientOptions = document.querySelectorAll('.client-option');
+        var clienteSelect = document.getElementById('reserva_cliente_id');
+
+        selectClientButton.addEventListener('click', function() {
+            clientDialog.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closeClientDialogButton.addEventListener('click', function() {
+            clientDialog.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        clientOptions.forEach(function(option) {
+            var selectClientButton = option.querySelector('.select-client-button');
+            var clientId = option.getAttribute('data-client-id');
+
+            selectClientButton.addEventListener('click', function() {
+                clienteSelect.value = clientId;
+                clientDialog.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        });
+
+        // Fechar o pop-up clicando fora dele
+        overlay.addEventListener('click', function() {
+            clientDialog.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectRoomButton = document.getElementById('select-room-button');
+        var closeRoomDialogButton = document.getElementById('close-room-dialog');
+        var overlay = document.getElementById('overlay');
+        var roomDialog = document.getElementById('room-dialog');
+        var roomOptions = document.querySelectorAll('.room-option');
+        var quartoSelect = document.getElementById('reserva_quarto_id');
+
+        selectRoomButton.addEventListener('click', function() {
+            roomDialog.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closeRoomDialogButton.addEventListener('click', function() {
+            roomDialog.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        roomOptions.forEach(function(option) {
+            var selectRoomButton = option.querySelector('.select-room-button');
+            var roomId = option.getAttribute('data-room-id');
+
+            selectRoomButton.addEventListener('click', function() {
+                quartoSelect.value = roomId;
+                roomDialog.style.display = 'none';
+                overlay.style.display = 'none';
+            });
+        });
+
+        // Fechar o pop-up clicando fora dele
+        overlay.addEventListener('click', function() {
+            roomDialog.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    });
+</script>
