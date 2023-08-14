@@ -80,23 +80,21 @@ class QuartosController < ApplicationController
   end
 
   def buscar_quartos(attribute, search)
-    quartos_query = Quarto.all
-
     case attribute
     when "numero"
-      quartos_query = quartos_query.where('numero LIKE ?', "%#{search}%")
+      Quarto.where('numero LIKE ?', "%#{search}%")
     when "tipo"
-      quartos_query = quartos_query.where('tipo LIKE ?', "%#{search}%")
+      Quarto.where('tipo LIKE ?', "%#{search}%")
     when "disponibilidade"
-      quartos_query = quartos_query.where(disponibilidade: search)
+      Quarto.where(disponibilidade: search)
     when "preco_diaria"
-      quartos_query = quartos_query.where('preco_diaria LIKE ?', "%#{search}%")
+      Quarto.where('preco_diaria LIKE ?', "%#{search}%")
     when "descricao"
-      quartos_query = quartos_query.where('descricao LIKE ?', "%#{search}%")
+      Quarto.where('descricao LIKE ?', "%#{search}%")
     when "quantidade_de_hospedes"
-      quartos_query = quartos_query.where('quantidade_de_hospedes = ?', search)
+      Quarto.where('quantidade_de_hospedes = ?', search)
+    else
+      Quarto.all
     end
-
-    quartos_query
   end
 end

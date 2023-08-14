@@ -1,29 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<div class='index-btn'>
-  <%= link_to 'Exibir quartos disponíveis', quartos_path(disponibilidade: true) %>
-  <%= link_to 'Exibir quartos indisponíveis', quartos_path(disponibilidade: false) %>
-  <%= link_to 'Exibir todos os quartos', quartos_path %>
-</div>
-
 <div id='search-attributes'>
-  <%= form_with(url: quartos_path, method: 'get', local: true) do |form| %>
+  <%= form_with(url: quartos_path, method: 'get') do |form| %>
     <h3>Procurar quartos</h3>
-    <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Descrição', 'descricao'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
-    <div id="search-fields"></div>
+    Filtrar por <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Descrição', 'descricao'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
+    <span id="search-fields"></span>
     <%= form.submit("Procurar") %>
   <% end %>
   <%= link_to "Redefinir Filtragem", quartos_path %>
 </div>
 
 <div id="quartos" class='list'>
-  <% if @quartos.any? %>
+  <% if @quartos.present? %>
     <tr class='tr-show'>
       <% @quartos.each do |quarto| %>
-        <p class='show-grid'> [ Quarto: <%= quarto.numero %> -
-          Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br> Preço:
-          R$<%= quarto.preco_diaria %>
-          <br> <%= link_to "Exibir quarto", quarto, id: "d-#{quarto.numero}" %>
+        <p class='show-grid'> [ Quarto <%= quarto.numero %> -
+          Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br>
+          <%= quarto.tipo %> | Preço da Diária: R$<%= quarto.preco_diaria %>
+          <br> <%= link_to "Exibir quarto", quarto %>
       <% end %>
   <% else %>
     Nenhum quarto encontrado.</p>

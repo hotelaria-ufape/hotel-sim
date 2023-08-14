@@ -2,31 +2,22 @@
 
 <div>
   <%= form_tag reservas_path, method: :get do %>
+    <h3>Procurar reservas</h3>
+    Filtrar por: <%= select_tag(:attribute, options_for_select([['Data', 'data'], ['Custo', 'custo'], ['Cliente', 'cliente']])) %>
 
-    Filtragem por
-    <label for="attribute">Buscar por:</label>
-    <%= select_tag "attribute", options_for_select([["Data", "date"], ["Custo", "cost"], ["Cliente", "client"]], params[:attribute]), id: "attribute" %>
+    <span class="data-fields">
+      Data de início: <%= datetime_local_field_tag "start_date", params[:start_date] %>
+      e Data de término: <%= datetime_local_field_tag "end_date", params[:end_date] %>
+    </span>
 
-    <div class="date-fields">
-      <label for="start_date">data de início:</label>
-      <%= datetime_local_field_tag "start_date", params[:start_date] %>
-      e
-      <label for="end_date">data de término:</label>
-      <%= datetime_local_field_tag "end_date", params[:end_date] %>
-    </div>
+    <span class="custo-fields" style="display: none;">
+      Custo mínimo: <%= number_field_tag "min_custo", params[:min_cost], step: 0.01, min: 0 %>
+      Custo máximo: <%= number_field_tag "max_custo", params[:max_cost], step: 0.01, min: 0 %>
+    </span>
 
-    <div class="cost-fields" style="display: none;">
-      <label for="min_cost">Custo mínimo:</label>
-      <%= number_field_tag "min_cost", params[:min_cost], step: 0.01, min: 0 %>
-
-      <label for="max_cost">Custo máximo:</label>
-      <%= number_field_tag "max_cost", params[:max_cost], step: 0.01, min: 0 %>
-    </div>
-
-    <div class="client-fields" style="display: none;">
-      <label for="cliente_id">Filtrar por Cliente:</label>
-      <%= select_tag(:cliente_id, options_for_select(Cliente.all.map { |cliente| [cliente.nome, cliente.id] }), include_blank: true) %>
-    </div>
+    <span class="cliente-fields" style="display: none;">
+      Filtrar por Cliente: <%= select_tag(:cliente_id, options_for_select(Cliente.all.map { |cliente| [cliente.nome, cliente.id] }), include_blank: false) %>
+    </span>
 
     <%= submit_tag "Filtrar" %>
   <% end %>
@@ -34,13 +25,16 @@
 </div>
 
 <div class='list'>
-  <% if @reservas.any? %>
+  <% if @reservas.present? %>
     <tr class='tr-show'>
       <% @reservas.each do |reserva| %>
         <p class='show-grid'>
+          Reserva <%= reserva.id.to_s %> <br>
           [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %>
           - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
-          <%= link_to "Exibir Reserva", reserva, id: "d-#{reserva.data_de_entrada}" %>
+          [ Cliente: <%= reserva.cliente.nome %>
+          | Quarto: <%= reserva.quarto.numero.to_s %> ] <br>
+          <%= link_to "Exibir Reserva", reserva %>
         </p>
       <% end %>
   <% else %>
@@ -52,36 +46,36 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var attributeSelect = document.querySelector('#attribute');
-        var dateFields = document.querySelector('.date-fields');
-        var costFields = document.querySelector('.cost-fields');
-        var clientFields = document.querySelector('.client-fields');
+        var dateFields = document.querySelector('.data-fields');
+        var costFields = document.querySelector('.custo-fields');
+        var clientFields = document.querySelector('.cliente-fields');
 
         attributeSelect.addEventListener('change', function () {
-            if (attributeSelect.value === 'date') {
-                dateFields.style.display = 'block';
+            if (attributeSelect.value === 'data') {
+                dateFields.style.display = 'inline';
                 costFields.style.display = 'none';
                 clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'cost') {
-                costFields.style.display = 'block';
+            } else if (attributeSelect.value === 'custo') {
+                costFields.style.display = 'inline';
                 dateFields.style.display = 'none';
                 clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'client') {
-                clientFields.style.display = 'block';
+            } else if (attributeSelect.value === 'cliente') {
+                clientFields.style.display = 'inline';
                 dateFields.style.display = 'none';
                 costFields.style.display = 'none';
             }
         });
 
-        if (attributeSelect.value === 'date') {
-            dateFields.style.display = 'block';
+        if (attributeSelect.value === 'data') {
+            dateFields.style.display = 'inline';
             costFields.style.display = 'none';
             clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'cost') {
-            costFields.style.display = 'block';
+        } else if (attributeSelect.value === 'custo') {
+            costFields.style.display = 'inline';
             dateFields.style.display = 'none';
             clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'client') {
-            clientFields.style.display = 'block';
+        } else if (attributeSelect.value === 'cliente') {
+            clientFields.style.display = 'inline';
             dateFields.style.display = 'none';
             costFields.style.display = 'none';
         }

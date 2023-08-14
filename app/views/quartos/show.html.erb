@@ -6,15 +6,22 @@
 
 <br>
 
-<h1>Histórico de Hospedagem no <%= @quarto.numero %></h1>
+<h1>Histórico de Hospedagem no Quarto <%= @quarto.numero %></h1>
 
 <br>
 
 <h2>Hóspedes Passados:</h2>
 <ul>
-  <% @reservas_passadas.each do |reserva| %>
-    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %>
-      a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+  <% if @reservas_passadas.present? %>
+    <% @reservas_passadas.each do |reserva| %>
+      <li>[<%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y das %H:%M") %>
+        à <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %>]
+        <%= link_to "Exibir Detalhes", reserva.cliente %>
+      </li>
+    <% end %>
+
+  <% else %>
+    Nenhuma reserva marcada para este quarto à priori.
   <% end %>
 </ul>
 
@@ -22,9 +29,16 @@
 
 <h2>Hóspedes Futuros:</h2>
 <ul>
-  <% @reservas_futuras.each do |reserva| %>
-    <li><%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y") %>
-      a <%= reserva.data_de_saida.strftime("%d/%m/%Y") %></li>
+  <% if @reservas_futuras.present? %>
+    <% @reservas_futuras.each do |reserva| %>
+      <li>[<%= reserva.cliente.nome %> - <%= reserva.data_de_entrada.strftime("%d/%m/%Y das %H:%M") %>
+        à <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %>]
+        <%= link_to "Exibir Detalhes", reserva.cliente %>
+      </li>
+    <% end %>
+
+  <% else %>
+    Nenhuma reserva marcada para este quarto à posteriori.
   <% end %>
 </ul>
 
@@ -32,10 +46,5 @@
 
 <div class='link-show'>
   <%= link_to "Editar quarto", edit_quarto_path(@quarto) %>
-  <%= link_to "Retornar aos quartos", quartos_path %>
   <%= button_to "Remover quarto", @quarto, method: :delete %>
-</div>
-
-<div id='links'>
-  <%= link_to "Home", root_path %>
 </div>
