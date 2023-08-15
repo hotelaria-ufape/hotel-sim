@@ -15,4 +15,9 @@ class ClienteTest < ActiveSupport::TestCase
     cliente = Cliente.new cpf:'123.456.789-10', nome:'Quarto Cliente', email:'quartocliente@gmail.com', telefone:87912345678
     assert_not cliente.save
   end
+
+  test 'Criando cliente sem email' do
+    cliente = Cliente.new cpf:'856.734.020-90', nome:'Quinto Cliente', telefone:87912345678
+    assert_not cliente.save
+  end
 end

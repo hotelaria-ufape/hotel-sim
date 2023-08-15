@@ -29,10 +29,51 @@ Feature:
     When clico para editar o 'preco da diaria' do quarto 8 para '50.0'
     Then vejo que o quarto 8 teve seu 'preco da diaria' corretamente alterado para '50.0'
 
-  @javascript
-  Scenario: ver somente quartos disponiveis
-    Given estou na pagina de 'quartos'
-    When seleciono o filtro de busca 'Disponibilidade' de quarto
+
+  Scenario: buscar quartos por disponibilidade
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Disponibilidade" de quarto
     And seleciono a disponibilidade 'Disponível' na busca
-    And clico em procurar
-    Then vejo todos os quartos que nao possuem a disponibilidade 'Indisponível'
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Status: Disponível'
+
+  Scenario: buscar quartos por numero
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Número" de quarto
+    And preencho o campo de busca com o numero do quarto
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quarto 1'
+
+  Scenario: buscar quartos por tipo
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Tipo" de quarto
+    And seleciono o tipo 'Quarto de Luxo' na busca
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quarto de Luxo'
+
+  Scenario: buscar quartos por preco de diaria
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Preço Diária" de quarto
+    And preencho o campo de busca com o preco da diaria
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Preço da Diária: R$100.0'
+
+  Scenario: buscar quartos por descricao
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Descrição" de quarto
+    And preencho o campo de busca com a descricao do quarto
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Descrição: Quarto de Luxo'
+
+  Scenario: buscar quartos por quantodade de hospedes
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Quantidade de Hóspedes" de quarto
+    And preencho o campo de busca com a quantidade de hospedes
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quantidade de Hóspedes: 2'
