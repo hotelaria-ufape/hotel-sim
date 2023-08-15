@@ -114,3 +114,7 @@ end
 When('preencho o campo de busca com o numero do quarto') do
   fill_in 'search', :with => @quarto.numero
 end
+
+When('seleciono o tipo {string} na busca') do |tipo|
+  select tipo, from: 'search'
+end

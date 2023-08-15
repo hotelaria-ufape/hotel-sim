@@ -45,3 +45,11 @@ Feature:
     And preencho o campo de busca com o numero do quarto
     And clico no botao procurar
     Then vejo todos os quartos que possuem 'Quarto 1'
+
+  Scenario: buscar quartos por tipo
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Tipo" de quarto
+    And seleciono o tipo 'Quarto de Luxo' na busca
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quarto de Luxo'
