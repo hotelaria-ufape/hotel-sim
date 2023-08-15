@@ -36,6 +36,44 @@ Then('vejo que a reserva foi marcada') do
   expect(page).to have_current_path('/reservas/'+Reserva.last.id.to_s)
 end
 
+When('clico para editar o {string} da reserva do {string} para {string}') do |atributo, nomeDoCliente, novoAtributo|
+  reservaDoCliente = Reserva.find_by_cliente_id(Cliente.find_by_nome(nomeDoCliente).id).id
+  visit '/reservas/'+reservaDoCliente.to_s+'/edit'
+  if atributo == "data de entrada"
+    diferencaEmMinutos = ((Reserva.find(reservaDoCliente).data_de_saida.to_datetime - DateTime.parse(novoAtributo)) * 24 * 60).to_f
+    fill_in 'reserva[data_de_entrada]', :with => DateTime.parse(novoAtributo)
+  elsif atributo == "data de saida"
+    diferencaEmMinutos = ((DateTime.parse(novoAtributo) - Reserva.find(reservaDoCliente).data_de_entrada.to_datetime) * 24 * 60).to_f
+    fill_in 'reserva[data_de_saida]', :with => DateTime.parse(novoAtributo)
+  else
+    diferencaEmMinutos = ((Reserva.find(reservaDoCliente).data_de_saida.to_datetime - Reserva.find(reservaDoCliente).data_de_entrada.to_datetime) * 24 * 60).to_f
+    fill_in 'reserva['+atributo+']', :with => novoAtributo
+  end
+  valorDoQuarto = Quarto.find(Reserva.find(reservaDoCliente).quarto_id).preco_diaria
+  if atributo == "quarto"
+    idDoQuarto = novoAtributo.gsub("quarto", "")
+    valorDoQuarto = Quarto.find(idDoQuarto).preco_diaria
+  end
+  custoTotal = (valorDoQuarto / 1440) * diferencaEmMinutos
+  novoCusto = format('%.2f', custoTotal)
+  fill_in 'reserva[custo]', :with => novoCusto
+  click_button 'Atualizar Reserva'
+  expect(page).to have_content("Reserva atualizada com sucesso")
+end
+
+Then('vejo que a reserva do {string} teve seu {string} corretamente alterado para {string}') do |nomeDoCliente, atributo, novoAtributo|
+  # Aguardando o Resultado no Backend
+  if atributo == "data de entrada"
+    expect(Reserva.find_by_cliente_id(Cliente.find_by_nome(nomeDoCliente).id).send("data_de_entrada")).to have_content(novoAtributo)
+  elsif atributo == "data de saida"
+    expect(Reserva.find_by_cliente_id(Cliente.find_by_nome(nomeDoCliente).id).send("data_de_saida")).to have_content(novoAtributo)
+  else
+    expect(Reserva.find_by_cliente_id(Cliente.find_by_nome(nomeDoCliente).id).send(atributo)).to have_content(novoAtributo)
+  end
+  # Aguardando o Resultado no Frontend
+  expect(page).to have_content("Reserva atualizada com sucesso")
+end
+
 Then('vejo que existe um periodo minimo de locacao') do
   expect(page).to have_content('Data de saida deve ser marcada pelo menos para 6 horas após a data de entrada.')
   expect(page).to have_current_path('/reservas')
@@ -86,11 +124,15 @@ Then('vejo que existe um choque de horario entre essas reservas') do
   expect(page).to have_current_path('/reservas')
 end
 
-When('seleciono a data de entrada {string}') do |data_de_entrada|
+When('seleciono o filtro de busca {string} de reserva') do |filtro|
+  select filtro, from: 'attribute'
+end
+
+When('seleciono a data de entrada {string} na busca') do |data_de_entrada|
   fill_in 'start_date', :with => DateTime.parse(data_de_entrada)
 end
 
-When('seleciono a data de saida {string}') do |data_de_saida|
+When('seleciono a data de saida {string} na busca') do |data_de_saida|
   fill_in 'end_date', :with => DateTime.parse(data_de_saida)
 end
 
@@ -102,4 +144,3 @@ Then('vejo apenas a reserva do {string} marcada nesse periodo') do |nomeDoClient
   expect(page).to have_content(Cliente.find_by_nome(nomeDoCliente).reservas.last.data_de_entrada.strftime('%d/%m/%Y às %H:%M'))
   expect(page).to have_no_content(Cliente.find_by_nome("Cliente B").reservas.last.data_de_entrada.strftime('%d/%m/%Y às %H:%M'))
 end
-
