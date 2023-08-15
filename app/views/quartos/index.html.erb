@@ -18,6 +18,7 @@
           Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br>
           <%= quarto.tipo %> | Quantidade de hospedes: <%= quarto.quantidade_de_hospedes %> <br>
           Preço da Diária: R$<%= quarto.preco_diaria %> <br>
+          Descrição: <%= quarto.descricao %> <br>
           <%= link_to "Exibir quarto", quarto %> <br>
           <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
         </p>

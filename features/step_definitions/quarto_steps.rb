@@ -122,3 +122,7 @@ end
 When('preencho o campo de busca com o preco da diaria') do
   fill_in 'search', :with => @quarto.preco_diaria
 end
+
+When('preencho o campo de busca com a descricao do quarto') do
+  fill_in 'search', :with => @quarto.descricao
+end

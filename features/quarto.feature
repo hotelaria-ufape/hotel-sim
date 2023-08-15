@@ -61,3 +61,11 @@ Feature:
     And preencho o campo de busca com o preco da diaria
     And clico no botao procurar
     Then vejo todos os quartos que possuem 'Preço da Diária: R$100.0'
+
+  Scenario: buscar quartos por descricao
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Descrição" de quarto
+    And preencho o campo de busca com a descricao do quarto
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Descrição: Quarto de Luxo'
