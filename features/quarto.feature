@@ -69,3 +69,11 @@ Feature:
     And preencho o campo de busca com a descricao do quarto
     And clico no botao procurar
     Then vejo todos os quartos que possuem 'Descrição: Quarto de Luxo'
+
+  Scenario: buscar quartos por quantodade de hospedes
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Quantidade de Hóspedes" de quarto
+    And preencho o campo de busca com a quantidade de hospedes
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quantidade de Hóspedes: 2'

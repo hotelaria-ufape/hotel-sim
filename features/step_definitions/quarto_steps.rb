@@ -126,3 +126,7 @@ end
 When('preencho o campo de busca com a descricao do quarto') do
   fill_in 'search', :with => @quarto.descricao
 end
+
+When('preencho o campo de busca com a quantidade de hospedes') do
+  fill_in 'search', :with => @quarto.quantidade_de_hospedes
+end
