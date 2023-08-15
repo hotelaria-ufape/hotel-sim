@@ -15,9 +15,10 @@
     <tr class='tr-show'>
       <% @clientes.each do |cliente| %>
         <p class='show-grid'>
-          [ <%= cliente.nome %> ] <br>
-          [ <%= cliente.cpf %> ] <br>
-          [ <%= cliente.email %> ] <br>
+          [ Cliente <%= cliente.id %> ] <br>
+          Nome:  <%= cliente.nome %>  <br>
+          CPF:  <%= cliente.cpf %>  <br>
+          Email:  <%= cliente.email %>  <br>
           <%= link_to "Exibir cliente", cliente %> <br>
           <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
         </p>

@@ -72,35 +72,20 @@ Then('vejo que o cliente {string} teve seu {string} corretamente alterado para {
   expect(page).to have_content("Cliente atualizado com sucesso")
 end
 
-Given('existe ao menos um cliente') do
-  @cliente = Cliente.create!(cpf: "027.514.584-08", nome: "Cliente A", email: "anyemail@email.com", telefone: 12345678910)
+When('seleciono o filtro de busca {string} de cliente') do |filtro|
+  select filtro, from: "attribute"
 end
 
-Given('eu estou na pagina de clientes') do
-  visit '/clientes'
+When('preencho o campo de busca de cliente com {string}') do |dado|
+  fill_in 'search', :with => dado
 end
 
-When('eu escolho a opção para buscar cliente por email') do
-  select("Email", from: "attribute")
-end
-
-When('eu preencho o campo com {string}') do |email|
-  fill_in 'search', :with => email
-end
-
-When('eu clico no botão procurar') do
+When('clico no botao procurar') do
   click_button 'Procurar'
 end
 
-Then('eu devo ver um cliente com {string}') do |email|
-  expect(page).to have_content(email)
+Then('devo ver todos os clientes com {string} no campo {string}') do |dado, campo|
+  # Aguardando o Resultado no Frontend
+  expect(page).to have_no_content('Nenhum cliente encontrado.')
+  expect(page).to have_content(dado)
 end
-
-When('eu escolho a opção para buscar cliente por cpf') do
-  select("CPF", from: "attribute")
-end
-
-When('eu escolho a opção para buscar cliente por nome') do
-  select("Nome", from: "attribute")
-end
-
