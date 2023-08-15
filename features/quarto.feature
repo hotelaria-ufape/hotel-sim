@@ -29,7 +29,10 @@ Feature:
     When clico para editar o 'preco da diaria' do quarto 8 para '50.0'
     Then vejo que o quarto 8 teve seu 'preco da diaria' corretamente alterado para '50.0'
 
+  @javascript
   Scenario: ver somente quartos disponiveis
     Given estou na pagina de 'quartos'
-    When clico para exibir os quartos disponiveis
+    When seleciono o filtro de busca 'Disponibilidade' de quarto
+    And seleciono a disponibilidade 'Disponível' na busca
+    And clico em procurar
     Then vejo todos os quartos que nao possuem a disponibilidade 'Indisponível'

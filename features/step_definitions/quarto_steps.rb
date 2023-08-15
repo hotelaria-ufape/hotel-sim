@@ -71,8 +71,16 @@ Then('vejo que o quarto {int} teve seu {string} corretamente alterado para {stri
 end
 
 # Especificando a Ação de Exibição de Quartos Disponíveis
-When('clico para exibir os quartos disponiveis') do
-  click_link 'Exibir quartos disponíveis'
+When('seleciono o filtro de busca {string} de quarto') do |filtro|
+  select filtro, from: 'attribute-select'
+end
+
+When('seleciono a disponibilidade {string} na busca') do |estadoDoQuarto|
+  select estadoDoQuarto, from: 'search'
+end
+
+When('clico em procurar') do
+  click_button 'Procurar'
 end
 
 # Especificando o Resultado de Exibição de Quartos Disponíveis
