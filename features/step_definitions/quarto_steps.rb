@@ -111,4 +111,6 @@ Then('vejo todos os quartos que possuem {string}') do |mensagem|
   expect(page).to have_content(mensagem)
 end
 
-
+When('preencho o campo de busca com o numero do quarto') do
+  fill_in 'search', :with => @quarto.numero
+end

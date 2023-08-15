@@ -38,3 +38,10 @@ Feature:
     And clico no botao procurar
     Then vejo todos os quartos que possuem 'Status: Disponível'
 
+  Scenario: buscar quartos por numero
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Número" de quarto
+    And preencho o campo de busca com o numero do quarto
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Quarto 1'
