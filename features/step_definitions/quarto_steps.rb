@@ -70,63 +70,23 @@ Then('vejo que o quarto {int} teve seu {string} corretamente alterado para {stri
   expect(page).to have_content("Quarto atualizado com sucesso")
 end
 
-# Especificando a Ação de Exibição de Quartos Disponíveis
 When('seleciono o filtro de busca {string} de quarto') do |filtro|
-  select filtro, from: 'attribute-select'
+  select filtro, from: "attribute-select"
 end
 
-When('clico em procurar') do
-  click_button 'Procurar'
+When('preencho o campo de busca de quarto com {string}') do |dado|
+  case dado
+  when "Quarto Padrão" | "Quarto Familiar" | "Quarto de Luxo" | "Suíte Master" | "Suíte Presidencial"
+    select dado, from: "search"
+  when "Disponível" | "Indisponível"
+    select dado, from: "search"
+  else
+    fill_in 'search-field', :with => dado
+  end
 end
 
-# Especificando o Resultado de Exibição de Quartos Disponíveis
-Then('vejo todos os quartos que nao possuem a disponibilidade {string}') do |disponibilidade|
-  # Aguardando o Resultado no Backend
-  expect(page).to have_current_path('/quartos?disponibilidade=true')
+Then('devo ver todos os quartos com {string} no campo {string}') do |dado, campo|
   # Aguardando o Resultado no Frontend
-  expect(page).to have_no_content(disponibilidade)
-end
-
-Given('existe ao menos um quarto') do
-  @quarto = Quarto.create!(numero: 1, tipo: "Quarto de Luxo", disponibilidade: true, preco_diaria: 100, descricao: "Quarto de Luxo", quantidade_de_hospedes: 2)
-end
-
-Given('estou na pagina de quartos') do
-  visit '/quartos'
-end
-
-When('seleciono o filtro de busca disponibilidade de quarto') do
-  select("Disponibilidade", from: "attribute-select")
-end
-
-When('seleciono a disponibilidade {string} na busca') do |atributo|
-  select("Disponível", from: "search")
-end
-
-When('clico no botao procurar') do
-  click_button 'Procurar'
-end
-
-Then('vejo todos os quartos que possuem {string}') do |mensagem|
-  expect(page).to have_content(mensagem)
-end
-
-When('preencho o campo de busca com o numero do quarto') do
-  fill_in 'search', :with => @quarto.numero
-end
-
-When('seleciono o tipo {string} na busca') do |tipo|
-  select tipo, from: 'search'
-end
-
-When('preencho o campo de busca com o preco da diaria') do
-  fill_in 'search', :with => @quarto.preco_diaria
-end
-
-When('preencho o campo de busca com a descricao do quarto') do
-  fill_in 'search', :with => @quarto.descricao
-end
-
-When('preencho o campo de busca com a quantidade de hospedes') do
-  fill_in 'search', :with => @quarto.quantidade_de_hospedes
+  expect(page).to have_no_content('Nenhum quarto encontrado.')
+  expect(page).to have_content(dado)
 end

@@ -73,14 +73,14 @@ Then('vejo que o cliente {string} teve seu {string} corretamente alterado para {
 end
 
 When('seleciono o filtro de busca {string} de cliente') do |filtro|
-  select(filtro, from: "attribute")
+  select filtro, from: "attribute"
 end
 
-When('preencho o campo de busca com {string}') do |dado|
+When('preencho o campo de busca de cliente com {string}') do |dado|
   fill_in 'search', :with => dado
 end
 
-When('clico no botão procurar') do
+When('clico no botao procurar') do
   click_button 'Procurar'
 end
 

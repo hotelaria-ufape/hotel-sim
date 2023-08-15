@@ -89,8 +89,6 @@ class QuartosController < ApplicationController
       Quarto.where(disponibilidade: search)
     when "preco_diaria"
       Quarto.where('preco_diaria LIKE ?', "%#{search}%")
-    when "descricao"
-      Quarto.where('descricao LIKE ?', "%#{search}%")
     when "quantidade_de_hospedes"
       Quarto.where('quantidade_de_hospedes = ?', search)
     else

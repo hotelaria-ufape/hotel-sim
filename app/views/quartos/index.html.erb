@@ -3,7 +3,8 @@
 <div id='search-attributes'>
   <%= form_with(url: quartos_path, method: 'get') do |form| %>
     <h3>Procurar quartos</h3>
-    Filtrar por <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Descrição', 'descricao'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
+    Filtrar
+    por <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
     <span id="search-fields"></span>
     <%= form.submit("Procurar") %>
   <% end %>
@@ -25,7 +26,7 @@
           <% else %>
             <%= quarto.descricao %> <br>
           <% end %>
-        <%= link_to "Exibir quarto", quarto %> <br>
+          <%= link_to "Exibir quarto", quarto %> <br>
           <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
         </p>
       <% end %>
@@ -63,10 +64,6 @@
                     searchFields.innerHTML = `<label for="search">Preço Diária:</label>
                                                   <input type="number" name="search" id="search-field" placeholder="Preço diária">`;
                     break;
-                case 'descricao':
-                    searchFields.innerHTML = `<label for="search">Busca por Descrição:</label>
-                                                  <input type="text" name="search" id="search-field" placeholder="Digite a descrição do quarto...">`;
-                    break;
                 case 'quantidade_de_hospedes':
                     searchFields.innerHTML = `<label for="search">Busca por Quantidade de Hóspedes:</label>
                                                   <input type="number" name="search" id="search-field" placeholder="Digite a quantidade de hóspedes...">`;
@@ -83,4 +80,3 @@
         renderSearchFields(initialSelectedOption);
     });
 </script>
-
