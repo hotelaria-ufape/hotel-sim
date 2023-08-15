@@ -53,3 +53,10 @@ Feature:
     And eu clico no botão procurar
     Then eu devo ver um cliente com "027.514.584-08"
 
+  Scenario: buscar cliente por nome
+    Given existe ao menos um cliente
+    And eu estou na pagina de clientes
+    When eu escolho a opção para buscar cliente por nome
+    And eu preencho o campo com "Cliente A"
+    And eu clico no botão procurar
+    Then eu devo ver um cliente com "Cliente A"

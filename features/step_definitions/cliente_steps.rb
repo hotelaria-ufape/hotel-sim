@@ -100,5 +100,7 @@ When('eu escolho a opção para buscar cliente por cpf') do
   select("CPF", from: "attribute")
 end
 
-
+When('eu escolho a opção para buscar cliente por nome') do
+  select("Nome", from: "attribute")
+end
 
