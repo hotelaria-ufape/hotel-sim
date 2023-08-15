@@ -75,10 +75,6 @@ When('seleciono o filtro de busca {string} de quarto') do |filtro|
   select filtro, from: 'attribute-select'
 end
 
-When('seleciono a disponibilidade {string} na busca') do |estadoDoQuarto|
-  select estadoDoQuarto, from: 'search'
-end
-
 When('clico em procurar') do
   click_button 'Procurar'
 end
@@ -90,3 +86,29 @@ Then('vejo todos os quartos que nao possuem a disponibilidade {string}') do |dis
   # Aguardando o Resultado no Frontend
   expect(page).to have_no_content(disponibilidade)
 end
+
+Given('existe ao menos um quarto') do
+  @quarto = Quarto.create!(numero: 1, tipo: "Quarto de Luxo", disponibilidade: true, preco_diaria: 100, descricao: "Quarto de Luxo", quantidade_de_hospedes: 2)
+end
+
+Given('estou na pagina de quartos') do
+  visit '/quartos'
+end
+
+When('seleciono o filtro de busca disponibilidade de quarto') do
+  select("Disponibilidade", from: "attribute-select")
+end
+
+When('seleciono a disponibilidade {string} na busca') do |atributo|
+  select("Disponível", from: "search")
+end
+
+When('clico no botao procurar') do
+  click_button 'Procurar'
+end
+
+Then('vejo todos os quartos que possuem {string}') do |mensagem|
+  expect(page).to have_content(mensagem)
+end
+
+
