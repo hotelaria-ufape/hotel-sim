@@ -118,3 +118,7 @@ end
 When('seleciono o tipo {string} na busca') do |tipo|
   select tipo, from: 'search'
 end
+
+When('preencho o campo de busca com o preco da diaria') do
+  fill_in 'search', :with => @quarto.preco_diaria
+end

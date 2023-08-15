@@ -53,3 +53,11 @@ Feature:
     And seleciono o tipo 'Quarto de Luxo' na busca
     And clico no botao procurar
     Then vejo todos os quartos que possuem 'Quarto de Luxo'
+
+  Scenario: buscar quartos por preco de diaria
+    Given existe ao menos um quarto
+    And estou na pagina de quartos
+    When seleciono o filtro de busca "Preço Diária" de quarto
+    And preencho o campo de busca com o preco da diaria
+    And clico no botao procurar
+    Then vejo todos os quartos que possuem 'Preço da Diária: R$100.0'
