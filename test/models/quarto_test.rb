@@ -17,6 +17,13 @@ class QuartoTest < ActiveSupport::TestCase
                         preco_diaria:150.00, descricao:'Quarto de entrada do nosso hotel.', quantidade_de_hospedes:2
     assert_not quarto.save
   end
+
+  test 'Criando quarto com preco invalido' do
+    quarto = Quarto.new numero:'3', tipo:'Quarto Padrão', disponibilidade: true,
+                        preco_diaria:'zzzzzzzz', descricao:'Quarto de entrada do nosso hotel.', quantidade_de_hospedes:2
+    assert_not quarto.save
+  end
+
   # test "the truth" do
   #   assert true
   # end
