@@ -38,25 +38,31 @@ Feature:
     Then vejo que o cliente 'Cliente A' teve seu 'telefone' corretamente alterado para '88812345678'
 
   Scenario: buscar cliente por email
-    Given existe ao menos um cliente
-    And eu estou na pagina de clientes
-    When eu escolho a opção para buscar cliente por email
-    And eu preencho o campo com "anyemail@email.com"
-    And eu clico no botão procurar
-    Then eu devo ver um cliente com "anyemail@email.com"
+    Given estou na pagina de cadastrar 'clientes'
+    And preencho os dados cpf '027.514.584-08' nome 'Cliente A' email 'anyemail@gmail.com' e telefone: 87912345678 e clico em cadastrar
+    And vejo que o cliente 'Cliente A' foi cadastrado
+    And estou na pagina de 'clientes'
+    When seleciono o filtro de busca 'Email' de cliente
+    And preencho o campo de busca com 'anyemail@gmail.com'
+    And clico no botão procurar
+    Then devo ver todos os clientes com 'anyemail@gmail.com' no campo 'Email'
 
   Scenario: buscar cliente por cpf
-    Given existe ao menos um cliente
-    And eu estou na pagina de clientes
-    When eu escolho a opção para buscar cliente por cpf
-    And eu preencho o campo com "027.514.584-08"
-    And eu clico no botão procurar
-    Then eu devo ver um cliente com "027.514.584-08"
+    Given estou na pagina de cadastrar 'clientes'
+    And preencho os dados cpf '027.514.584-08' nome 'Cliente A' email 'anyemail@gmail.com' e telefone: 87912345678 e clico em cadastrar
+    And vejo que o cliente 'Cliente A' foi cadastrado
+    And estou na pagina de 'clientes'
+    When seleciono o filtro de busca 'CPF' de cliente
+    And preencho o campo de busca com '027.514.584-08'
+    And clico no botão procurar
+    Then devo ver todos os clientes com '027.514.584-08' no campo 'CPF'
 
   Scenario: buscar cliente por nome
-    Given existe ao menos um cliente
-    And eu estou na pagina de clientes
-    When eu escolho a opção para buscar cliente por nome
-    And eu preencho o campo com "Cliente A"
-    And eu clico no botão procurar
-    Then eu devo ver um cliente com "Cliente A"
+    Given estou na pagina de cadastrar 'clientes'
+    And preencho os dados cpf '027.514.584-08' nome 'Cliente A' email 'anyemail@gmail.com' e telefone: 87912345678 e clico em cadastrar
+    And vejo que o cliente 'Cliente A' foi cadastrado
+    And estou na pagina de 'clientes'
+    When seleciono o filtro de busca 'Nome' de cliente
+    And preencho o campo de busca com 'A'
+    And clico no botão procurar
+    Then devo ver todos os clientes com 'A' no campo 'Nome'
