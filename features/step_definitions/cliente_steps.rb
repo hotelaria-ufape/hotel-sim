@@ -96,5 +96,9 @@ Then('eu devo ver um cliente com {string}') do |email|
   expect(page).to have_content(email)
 end
 
+When('eu escolho a opção para buscar cliente por cpf') do
+  select("CPF", from: "attribute")
+end
+
 
 

@@ -45,4 +45,11 @@ Feature:
     And eu clico no botão procurar
     Then eu devo ver um cliente com "anyemail@email.com"
 
-  
+  Scenario: buscar cliente por cpf
+    Given existe ao menos um cliente
+    And eu estou na pagina de clientes
+    When eu escolho a opção para buscar cliente por cpf
+    And eu preencho o campo com "027.514.584-08"
+    And eu clico no botão procurar
+    Then eu devo ver um cliente com "027.514.584-08"
+
