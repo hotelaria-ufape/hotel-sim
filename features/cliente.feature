@@ -36,3 +36,13 @@ Feature:
     And vejo que o cliente 'Cliente A' foi cadastrado
     When clico para editar o 'telefone' do cliente 'Cliente A' para '88812345678'
     Then vejo que o cliente 'Cliente A' teve seu 'telefone' corretamente alterado para '88812345678'
+
+  Scenario: buscar cliente por email
+    Given existe ao menos um cliente
+    And eu estou na pagina de clientes
+    When eu escolho a opção para buscar cliente por email
+    And eu preencho o campo com "anyemail@email.com"
+    And eu clico no botão procurar
+    Then eu devo ver um cliente com "anyemail@email.com"
+
+  

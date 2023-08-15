@@ -71,3 +71,30 @@ Then('vejo que o cliente {string} teve seu {string} corretamente alterado para {
   # Aguardando o Resultado no Frontend
   expect(page).to have_content("Cliente atualizado com sucesso")
 end
+
+Given('existe ao menos um cliente') do
+  @cliente = Cliente.create!(cpf: "027.514.584-08", nome: "Cliente A", email: "anyemail@email.com", telefone: 12345678910)
+end
+
+Given('eu estou na pagina de clientes') do
+  visit '/clientes'
+end
+
+When('eu escolho a opção para buscar cliente por email') do
+  select("Email", from: "attribute")
+end
+
+When('eu preencho o campo com {string}') do |email|
+  fill_in 'search', :with => email
+end
+
+When('eu clico no botão procurar') do
+  click_button 'Procurar'
+end
+
+Then('eu devo ver um cliente com {string}') do |email|
+  expect(page).to have_content(email)
+end
+
+
+
