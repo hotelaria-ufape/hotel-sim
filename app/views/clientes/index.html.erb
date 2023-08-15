@@ -14,7 +14,10 @@
   <% if @clientes.present? %>
     <tr class='tr-show'>
       <% @clientes.each do |cliente| %>
-        <p class='show-grid'> [ <%= cliente.nome %> ] <br>
+        <p class='show-grid'>
+          [ <%= cliente.nome %> ] <br>
+          [ <%= cliente.cpf %> ] <br>
+          [ <%= cliente.email %> ] <br>
           <%= link_to "Exibir cliente", cliente %> <br>
           <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
         </p>
