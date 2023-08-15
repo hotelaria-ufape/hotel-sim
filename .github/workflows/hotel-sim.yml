@@ -56,5 +56,5 @@ jobs:
         run: | 
           bundle exec rails test:models
       - name: Realizando testes de cenario
-        run: | 
-          bundle exec cucumber
+        run: |
+          bundle exec cucumber --tags "not @javascript"

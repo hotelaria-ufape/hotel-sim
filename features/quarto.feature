@@ -31,7 +31,7 @@ Feature:
 
   @javascript
   Scenario: ver somente quartos disponiveis
-    Given acesso a pagina de quartos
+    Given estou na pagina de 'quartos'
     When seleciono o filtro de busca 'Disponibilidade' de quarto
     And seleciono a disponibilidade 'Disponível' na busca
     And clico em procurar

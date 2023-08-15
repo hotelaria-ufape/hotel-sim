@@ -83,10 +83,6 @@ When('clico em procurar') do
   click_button 'Procurar'
 end
 
-Given("acesso a pagina de quartos") do
-  click_link 'Acessar Quartos'
-end
-
 # Especificando o Resultado de Exibição de Quartos Disponíveis
 Then('vejo todos os quartos que nao possuem a disponibilidade {string}') do |disponibilidade|
   # Aguardando o Resultado no Backend
