@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :administradors
   resources :reservas do
     collection do
       get 'get_custo'
