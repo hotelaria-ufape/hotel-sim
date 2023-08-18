@@ -1,4 +1,5 @@
 class ClientesController < ApplicationController
+  before_action :authenticate_administrador!
   before_action :set_cliente, only: %i[ show edit update destroy ]
 
   # GET /clientes or /clientes.json

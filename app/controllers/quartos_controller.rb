@@ -1,4 +1,5 @@
 class QuartosController < ApplicationController
+  before_action :authenticate_administrador!, except: [:index]
   before_action :set_quarto, only: %i[ show edit update destroy ]
 
   # GET /quartos or /quartos.json
