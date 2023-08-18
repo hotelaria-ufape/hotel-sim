@@ -8,7 +8,7 @@
   <div class="gallery-cell">
     <%= image_tag("quarto-1.jpg", size: '300x200') %>
     <div id="div-quarto-1" class="gallery-cell-div">
-      <button onmouseover=mudarCor("div-quarto-1","black","white") onmouseout=resetarCor("div-quarto-1","#fcbe03","black")>
+      <button id='quarto-padrao' onmouseover=mudarCor("div-quarto-1","black","white") onmouseout=resetarCor("div-quarto-1","#fcbe03","black")>
         Quartos para Solteiros e Casais
       </button>
     </div>
@@ -16,7 +16,7 @@
   <div class="gallery-cell">
     <%= image_tag("quarto-2.jpg", size: '300x200') %>
     <div id="div-quarto-2" class="gallery-cell-div">
-      <button onmouseover=mudarCor("div-quarto-2","black","white") onmouseout=resetarCor("div-quarto-2","#fcbe03","black")>
+      <button id='quarto-familiar' onmouseover=mudarCor("div-quarto-2","black","white") onmouseout=resetarCor("div-quarto-2","#fcbe03","black")>
         Quartos para a Família
       </button>
     </div>
@@ -24,7 +24,7 @@
   <div class="gallery-cell">
     <%= image_tag("quarto-3.jpg", size: '300x200') %>
     <div id="div-quarto-3" class="gallery-cell-div">
-      <button onmouseover=mudarCor("div-quarto-3","black","white") onmouseout=resetarCor("div-quarto-3","#fcbe03","black")>
+      <button id='quarto-luxo' onmouseover=mudarCor("div-quarto-3","black","white") onmouseout=resetarCor("div-quarto-3","#fcbe03","black")>
         Quartos de Luxo
       </button>
     </div>
@@ -32,7 +32,7 @@
   <div class="gallery-cell">
     <%= image_tag("quarto-4.jpg", size: '300x200') %>
     <div id="div-quarto-4" class="gallery-cell-div">
-      <button onmouseover=mudarCor("div-quarto-4","black","white") onmouseout=resetarCor("div-quarto-4","#fcbe03","black")>
+      <button id='quarto-master' onmouseover=mudarCor("div-quarto-4","black","white") onmouseout=resetarCor("div-quarto-4","#fcbe03","black")>
         Suítes Master
       </button>
     </div>
@@ -40,7 +40,7 @@
   <div class="gallery-cell">
     <%= image_tag("quarto-5.jpg", size: '300x200') %>
     <div id="div-quarto-5" class="gallery-cell-div">
-      <button onmouseover=mudarCor("div-quarto-5","black","white") onmouseout=resetarCor("div-quarto-5","#fcbe03","black")>
+      <button id='quarto-presidencial' onmouseover=mudarCor("div-quarto-5","black","white") onmouseout=resetarCor("div-quarto-5","#fcbe03","black")>
         Suíte Presidencial
       </button>
     </div>
@@ -98,4 +98,42 @@
             console.error('Elemento com o ID ' + id + ' não encontrado.');
         }
     }
+
+    // JavaScript para redirecionar para a página de quartos
+    // de acordo com o botão clicado
+    document.addEventListener("DOMContentLoaded", function() {
+      var redirectButton = document.getElementById("quarto-padrao");
+      redirectButton.addEventListener("click", function() {
+        window.location.href = "/quartos" + '?attribute=tipo&search=Quarto+Padrão&commit=Procurar';
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var redirectButton = document.getElementById("quarto-familiar");
+      redirectButton.addEventListener("click", function() {
+        window.location.href = "/quartos" + '?attribute=tipo&search=Quarto+Familiar&commit=Procurar';
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var redirectButton = document.getElementById("quarto-luxo");
+      redirectButton.addEventListener("click", function() {
+        window.location.href = "/quartos" + '?attribute=tipo&search=Quarto+de+Luxo&commit=Procurar';
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var redirectButton = document.getElementById("quarto-master");
+      redirectButton.addEventListener("click", function() {
+        window.location.href = "/quartos" + '?attribute=tipo&search=Suíte+Master&commit=Procurar';
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var redirectButton = document.getElementById("quarto-presidencial");
+      redirectButton.addEventListener("click", function() {
+        window.location.href = "/quartos" + '?attribute=tipo&search=Suíte+Presidencial&commit=Procurar';
+      });
+    });
+
 </script>
