@@ -3,8 +3,14 @@
 <div id='search-attributes'>
   <%= form_with(url: quartos_path, method: 'get') do |form| %>
     <h3>Procurar quartos</h3>
-    Filtrar
-    por <%= select_tag(:attribute, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'attribute-select') %>
+    Filtrar por
+    <%= select_tag(:atributo, options_for_select([
+                                                   ['Número', 'numero'],
+                                                   ['Tipo', 'tipo'],
+                                                   ['Disponibilidade', 'disponibilidade'],
+                                                   ['Preço Diária', 'preco_diaria'],
+                                                   ['Quantidade de Hóspedes', 'quantidade_de_hospedes']
+                                                 ]), id: 'attribute-select') %>
     <span id="search-fields"></span>
     <%= form.submit("Procurar") %>
   <% end %>
@@ -13,63 +19,80 @@
 
 <div id="quartos" class='list'>
   <% if @quartos.present? %>
-    <tr class='tr-show'>
+    <table>
+      <thead>
+      <tr>
+        <th>Número</th>
+        <th>Status</th>
+        <th>Preço da Diária</th>
+        <th>Tipo</th>
+        <th>Quantidade de Hóspedes</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
       <% @quartos.each do |quarto| %>
-        <p class='show-grid'> [ Quarto <%= quarto.numero %> -
-          Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br>
-          Preço da Diária: R$<%= sprintf('%.2f', quarto.preco_diaria) %> <br>
-          Tipo: <%= quarto.tipo %> <br>
-          Suporta <%= quarto.quantidade_de_hospedes.to_i %> hóspede(s) <br>
-          Descrição:
-          <% if quarto.descricao == "" %>
-            nenhuma descrição fornecida. <br>
-          <% else %>
-            <%= quarto.descricao %> <br>
-          <% end %>
-          <%= link_to "Exibir quarto", quarto %> <br>
-          <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
-        </p>
+        <tr>
+          <td><%= quarto.numero %></td>
+          <td><%= quarto.disponibilidade ? "Disponível" : "Indisponível" %></td>
+          <td>R$<%= sprintf('%.2f', quarto.preco_diaria) %></td>
+          <td><%= quarto.tipo %></td>
+          <td><%= quarto.quantidade_de_hospedes %></td>
+          <td><%= quarto.descricao.presence || "Nenhuma descrição fornecida" %></td>
+          <td>
+            <%= link_to "Exibir", quarto %>
+            <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
+          </td>
+        </tr>
       <% end %>
+      </tbody>
+    </table>
   <% else %>
-    Nenhum quarto encontrado.</p>
+    <p>Nenhum quarto encontrado.</p>
   <% end %>
-  </tr>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const attributeSelect = document.getElementById('attribute-select');
         const searchFields = document.getElementById('search-fields');
-        const selectOptions = `
-      <label for="search">Busca por Disponibilidade:</label>
-      <%= select_tag(:search, options_for_select([['Disponível', true], ['Indisponível', false]])) %>
-    `;
 
         const renderSearchFields = (selectedOption) => {
-            searchFields.innerHTML = '';
+            const searchFieldLabels = {
+                numero: 'Número',
+                tipo: 'Tipo',
+                disponibilidade: 'Disponibilidade',
+                preco_diaria: 'Preço Diária',
+                quantidade_de_hospedes: 'Quantidade de Hóspedes'
+            };
+
+            searchFields.innerHTML = `
+        <label for="search">Busca por ${searchFieldLabels[selectedOption]}:</label>
+        ${getSearchField(selectedOption)}
+      `;
+        };
+
+        const getSearchField = (selectedOption) => {
             switch (selectedOption) {
                 case 'numero':
-                    searchFields.innerHTML = `<label for="search">Busca por Número:</label>
-                      <input type="text" name="search" id="search-field" placeholder="Digite o número do quarto...">`;
-                    break;
+                    return `<input type="text" name="search" id="search-field" placeholder="Digite o número do quarto...">`;
                 case 'tipo':
-                    searchFields.innerHTML = `<label for="search">Busca por Tipo:</label>
-                                                  <%= select_tag(:search, options_for_select([['Quarto Padrão'], ['Quarto Familiar'], ['Quarto de Luxo'], ['Suíte Master'], ['Suíte Presidencial']])) %>`;
-                    break;
+                    return `<%= select_tag(:search, options_for_select([
+            ['Quarto Padrão'], ['Quarto Familiar'], ['Quarto de Luxo'], ['Suíte Master'], ['Suíte Presidencial']
+          ])) %>`;
                 case 'disponibilidade':
-                    searchFields.innerHTML = `<label for="search">Busca por Disponibilidade:</label>
-                                                  <%= select_tag(:search, options_for_select([['Disponível', true], ['Indisponível', false]])) %>`;
-                    break;
+                    return `<%= select_tag(:search, options_for_select([
+            ['Disponível', true], ['Indisponível', false]
+          ])) %>`;
                 case 'preco_diaria':
-                    searchFields.innerHTML = `<label for="search">Preço Diária:</label>
-                                                  <input type="number" name="search" id="search-field" placeholder="Preço diária">`;
-                    break;
+                    return `<input type="number" name="search" id="search-field" placeholder="Preço diária">`;
                 case 'quantidade_de_hospedes':
-                    searchFields.innerHTML = `<label for="search">Busca por Quantidade de Hóspedes:</label>
-                                                  <input type="number" name="search" id="search-field" placeholder="Digite a quantidade de hóspedes...">`;
-                    break;
+                    return `<input type="number" name="search" id="search-field" placeholder="Digite a quantidade de hóspedes...">`;
+                default:
+                    return '';
             }
-        }
+        };
 
         attributeSelect.addEventListener('change', function () {
             const selectedOption = this.value;
