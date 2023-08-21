@@ -125,15 +125,15 @@ Then('vejo que existe um choque de horario entre essas reservas') do
 end
 
 When('seleciono o filtro de busca {string} de reserva') do |filtro|
-  select filtro, from: 'attribute'
+  select filtro, from: 'atributo'
 end
 
 When('seleciono a data de entrada {string} na busca') do |data_de_entrada|
-  fill_in 'start_date', :with => DateTime.parse(data_de_entrada)
+  fill_in 'data_inicial', :with => DateTime.parse(data_de_entrada)
 end
 
 When('seleciono a data de saida {string} na busca') do |data_de_saida|
-  fill_in 'end_date', :with => DateTime.parse(data_de_saida)
+  fill_in 'data_final', :with => DateTime.parse(data_de_saida)
 end
 
 When('clico em filtrar') do

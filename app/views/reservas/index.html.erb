@@ -3,28 +3,20 @@
 <div>
   <%= form_tag reservas_path, method: :get do %>
     <h3>Procurar reservas</h3>
-    Filtrar por:
-    <%= select_tag(:atributo, options_for_select([
-                                                   ['Data', 'data'],
-                                                   ['Custo', 'custo'],
-                                                   ['Cliente', 'cliente']
-                                                 ])) %>
+    Filtrar por: <%= select_tag(:atributo, options_for_select([['Data', 'data'], ['Custo', 'custo'], ['Cliente', 'cliente']])) %>
 
     <span class="data-fields">
-      Data de início: <%= datetime_local_field_tag "start_date", params[:start_date] %>
-      e Data de término: <%= datetime_local_field_tag "end_date", params[:end_date] %>
+      Data de início: <%= datetime_local_field_tag "data_inicial", params[:data_inicial] %>
+      e Data de término: <%= datetime_local_field_tag "data_final", params[:data_final] %>
     </span>
 
     <span class="custo-fields" style="display: none;">
-      Custo mínimo: <%= number_field_tag "min_custo", params[:min_cost], step: 0.01, min: 0 %>
-      Custo máximo: <%= number_field_tag "max_custo", params[:max_cost], step: 0.01, min: 0 %>
+      Custo mínimo: <%= number_field_tag "custo_minimo", params[:custo_minimo], step: 0.01, min: 0 %>
+      Custo máximo: <%= number_field_tag "custo_maximo", params[:custo_maximo], step: 0.01, min: 0 %>
     </span>
 
     <span class="cliente-fields" style="display: none;">
-      Filtrar por Cliente:
-      <%= select_tag(:cliente_id, options_for_select(
-        Cliente.all.map { |cliente| [cliente.nome, cliente.id] }
-      ), include_blank: false) %>
+      Filtrar por Cliente: <%= select_tag(:cliente_id, options_for_select(Cliente.all.map { |cliente| [cliente.nome, cliente.id] }), include_blank: false) %>
     </span>
 
     <%= submit_tag "Filtrar" %>
@@ -34,68 +26,45 @@
 
 <div class='list'>
   <% if @reservas.present? %>
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Data de Entrada</th>
-        <th>Data de Saída</th>
-        <th>Cliente</th>
-        <th>Quarto</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
+    <tr class='tr-show'>
       <% @reservas.each do |reserva| %>
-        <tr>
-          <td><%= reserva.id %></td>
-          <td><%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %></td>
-          <td><%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %></td>
-          <td><%= reserva.cliente.nome %></td>
-          <td><%= reserva.quarto.numero.to_s %></td>
-          <td>
-            <%= link_to "Exibir", reserva %>
-          </td>
-        </tr>
+        <p class='show-grid'>
+          Reserva <%= reserva.id.to_s %> <br>
+          [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %>
+          - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
+          [ Cliente: <%= reserva.cliente.nome %>
+          | Quarto: <%= reserva.quarto.numero.to_s %> ] <br>
+          [ Custo de Locação: R$<%= sprintf('%.2f', reserva.custo) %> ] <br>
+          <%= link_to "Exibir Reserva", reserva %>
+        </p>
       <% end %>
-      </tbody>
-    </table>
   <% else %>
-    <p>Nenhuma reserva encontrada.</p>
+    Nenhuma reserva encontrada.
   <% end %>
+  </tr>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const selecionarAtributo = document.querySelector('#attribute');
-        const camposData = document.querySelector('.data-fields');
-        const camposCusto = document.querySelector('.custo-fields');
-        const camposCliente = document.querySelector('.cliente-fields');
+        var atributoSelect = document.querySelector('#atributo');
+        var dataFields = document.querySelector('.data-fields');
+        var custoFields = document.querySelector('.custo-fields');
+        var clienteFields = document.querySelector('.cliente-fields');
 
-        function mostrarCamposDeFiltro(seletor) {
-            camposData.style.display = 'none';
-            camposCusto.style.display = 'none';
-            camposCliente.style.display = 'none';
-            seletor.style.display = 'inline';
-        }
-
-        selecionarAtributo.addEventListener('change', function () {
-            if (selecionarAtributo.value === 'data') {
-                mostrarCamposDeFiltro(camposData);
-            } else if (selecionarAtributo.value === 'custo') {
-                mostrarCamposDeFiltro(camposCusto);
-            } else if (selecionarAtributo.value === 'cliente') {
-                mostrarCamposDeFiltro(camposCliente);
+        atributoSelect.addEventListener('change', function () {
+            if (atributoSelect.value === 'data') {
+                dataFields.style.display = 'inline';
+                custoFields.style.display = 'none';
+                clienteFields.style.display = 'none';
+            } else if (atributoSelect.value === 'custo') {
+                dataFields.style.display = 'none';
+                custoFields.style.display = 'inline';
+                clienteFields.style.display = 'none';
+            } else if (atributoSelect.value === 'cliente') {
+                dataFields.style.display = 'none';
+                custoFields.style.display = 'none';
+                clienteFields.style.display = 'inline';
             }
         });
-
-        if (selecionarAtributo.value === 'data') {
-            mostrarCamposDeFiltro(camposData);
-        } else if (selecionarAtributo.value === 'custo') {
-            mostrarCamposDeFiltro(camposCusto);
-        } else if (selecionarAtributo.value === 'cliente') {
-            mostrarCamposDeFiltro(camposCliente);
-        }
-
     });
 </script>

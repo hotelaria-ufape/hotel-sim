@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    'pages/home'
+    render 'pages/home'
   end
 
 end
