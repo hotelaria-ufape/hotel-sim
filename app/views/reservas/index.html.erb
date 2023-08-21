@@ -34,35 +34,21 @@
 
 <div class='list'>
   <% if @reservas.present? %>
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Data de Entrada</th>
-        <th>Data de Saída</th>
-        <th>Cliente</th>
-        <th>Quarto</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
+    <tr class='tr-show'>
       <% @reservas.each do |reserva| %>
-        <tr>
-          <td><%= reserva.id %></td>
-          <td><%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %></td>
-          <td><%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %></td>
-          <td><%= reserva.cliente.nome %></td>
-          <td><%= reserva.quarto.numero.to_s %></td>
-          <td>
-            <%= link_to "Exibir", reserva %>
-          </td>
-        </tr>
+        <p class='show-grid'>
+          Reserva <%= reserva.id.to_s %> <br>
+          [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %>
+          - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
+          [ Cliente: <%= reserva.cliente.nome %>
+          | Quarto: <%= reserva.quarto.numero.to_s %> ] <br>
+          <%= link_to "Exibir Reserva", reserva %>
+        </p>
       <% end %>
-      </tbody>
-    </table>
   <% else %>
-    <p>Nenhuma reserva encontrada.</p>
+    Nenhuma reserva encontrada.
   <% end %>
+  </tr>
 </div>
 
 <script>

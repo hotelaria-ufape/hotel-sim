@@ -17,31 +17,18 @@
 
 <div class='list'>
   <% if @clientes.present? %>
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Email</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
+    <tr class='tr-show'>
       <% @clientes.each do |cliente| %>
-        <tr>
-          <td><%= cliente.id %></td>
-          <td><%= cliente.nome %></td>
-          <td><%= cliente.cpf %></td>
-          <td><%= cliente.email %></td>
-          <td>
-            <%= link_to "Exibir", cliente %>
-            <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
-          </td>
-        </tr>
+        <p class='show-grid'>
+          [ Cliente <%= cliente.id %> ] <br>
+          Nome:  <%= cliente.nome %>  <br>
+          CPF:  <%= cliente.cpf %>  <br>
+          Email:  <%= cliente.email %>  <br>
+          <%= link_to "Exibir cliente", cliente %> <br>
+          <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
+        </p>
       <% end %>
-      </tbody>
-    </table>
+    </tr>
   <% else %>
     <p>Nenhum cliente encontrado.</p>
   <% end %>

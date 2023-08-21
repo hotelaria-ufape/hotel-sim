@@ -19,38 +19,27 @@
 
 <div id="quartos" class='list'>
   <% if @quartos.present? %>
-    <table>
-      <thead>
-      <tr>
-        <th>Número</th>
-        <th>Status</th>
-        <th>Preço da Diária</th>
-        <th>Tipo</th>
-        <th>Quantidade de Hóspedes</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-      </tr>
-      </thead>
-      <tbody>
+    <tr class='tr-show'>
       <% @quartos.each do |quarto| %>
-        <tr>
-          <td><%= quarto.numero %></td>
-          <td><%= quarto.disponibilidade ? "Disponível" : "Indisponível" %></td>
-          <td>R$<%= sprintf('%.2f', quarto.preco_diaria) %></td>
-          <td><%= quarto.tipo %></td>
-          <td><%= quarto.quantidade_de_hospedes %></td>
-          <td><%= quarto.descricao.presence || "Nenhuma descrição fornecida" %></td>
-          <td>
-            <%= link_to "Exibir", quarto %>
-            <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
-          </td>
-        </tr>
+        <p class='show-grid'> [ Quarto <%= quarto.numero %> -
+          Status: <%= quarto.disponibilidade ? "Disponível" : "Indisponível" %> ] <br>
+          Preço da Diária: R$<%= sprintf('%.2f', quarto.preco_diaria) %> <br>
+          Tipo: <%= quarto.tipo %> <br>
+          Suporta <%= quarto.quantidade_de_hospedes.to_i %> hóspede(s) <br>
+          Descrição:
+          <% if quarto.descricao == "" %>
+            nenhuma descrição fornecida. <br>
+          <% else %>
+            <%= quarto.descricao %> <br>
+          <% end %>
+          <%= link_to "Exibir quarto", quarto %> <br>
+          <%= link_to "Marcar Reserva", new_reserva_path(quarto_id: quarto) %>
+        </p>
       <% end %>
-      </tbody>
-    </table>
   <% else %>
-    <p>Nenhum quarto encontrado.</p>
+    Nenhum quarto encontrado.</p>
   <% end %>
+  </tr>
 </div>
 
 <script>
