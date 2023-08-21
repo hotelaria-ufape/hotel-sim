@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_164652) do
     t.boolean "disponibilidade"
     t.decimal "preco_diaria"
     t.text "descricao"
+    t.decimal "quantidade_de_hospedes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
