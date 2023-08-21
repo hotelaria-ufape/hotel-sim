@@ -1,17 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<div id='search-attributes'>
+<div id='busca-atributos'>
   <%= form_with(url: quartos_path, method: 'get') do |form| %>
     <h3>Procurar quartos</h3>
     Filtrar por
-    <%= select_tag(:atributo, options_for_select([
-                                                   ['Número', 'numero'],
-                                                   ['Tipo', 'tipo'],
-                                                   ['Disponibilidade', 'disponibilidade'],
-                                                   ['Preço Diária', 'preco_diaria'],
-                                                   ['Quantidade de Hóspedes', 'quantidade_de_hospedes']
-                                                 ]), id: 'attribute-select') %>
-    <span id="search-fields"></span>
+    <%= select_tag(:atributo, options_for_select([['Número', 'numero'], ['Tipo', 'tipo'], ['Disponibilidade', 'disponibilidade'], ['Preço Diária', 'preco_diaria'], ['Quantidade de Hóspedes', 'quantidade_de_hospedes']]), id: 'atributo-select') %>
+    <span id="busca-fields"></span>
     <%= form.submit("Procurar") %>
   <% end %>
   <%= link_to "Redefinir Filtragem", quartos_path %>
@@ -44,51 +38,45 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const attributeSelect = document.getElementById('attribute-select');
-        const searchFields = document.getElementById('search-fields');
+        const atributoSelect = document.getElementById('atributo-select');
+        const campoDeBusca = document.getElementById('busca-fields');
+        const opcaoSelecionada = `
+      <label for="search">Busca por Disponibilidade:</label>
+      <%= select_tag(:busca, options_for_select([['Disponível', true], ['Indisponível', false]])) %>
+    `;
 
-        const renderSearchFields = (selectedOption) => {
-            const searchFieldLabels = {
-                numero: 'Número',
-                tipo: 'Tipo',
-                disponibilidade: 'Disponibilidade',
-                preco_diaria: 'Preço Diária',
-                quantidade_de_hospedes: 'Quantidade de Hóspedes'
-            };
-
-            searchFields.innerHTML = `
-        <label for="search">Busca por ${searchFieldLabels[selectedOption]}:</label>
-        ${getSearchField(selectedOption)}
-      `;
-        };
-
-        const getSearchField = (selectedOption) => {
-            switch (selectedOption) {
+        const carregarCampoDeBusca = (opcaoSelecionada) => {
+            campoDeBusca.innerHTML = '';
+            switch (opcaoSelecionada) {
                 case 'numero':
-                    return `<input type="text" name="search" id="search-field" placeholder="Digite o número do quarto...">`;
+                    campoDeBusca.innerHTML = `<label for="busca">Busca por Número:</label>
+                      <input type="text" name="busca" id="busca-field" placeholder="Digite o número do quarto...">`;
+                    break;
                 case 'tipo':
-                    return `<%= select_tag(:search, options_for_select([
-            ['Quarto Padrão'], ['Quarto Familiar'], ['Quarto de Luxo'], ['Suíte Master'], ['Suíte Presidencial']
-          ])) %>`;
+                    campoDeBusca.innerHTML = `<label for="search">Busca por Tipo:</label>
+                                                  <%= select_tag(:busca, options_for_select([['Quarto Padrão'], ['Quarto Familiar'], ['Quarto de Luxo'], ['Suíte Master'], ['Suíte Presidencial']])) %>`;
+                    break;
                 case 'disponibilidade':
-                    return `<%= select_tag(:search, options_for_select([
-            ['Disponível', true], ['Indisponível', false]
-          ])) %>`;
+                    campoDeBusca.innerHTML = `<label for="search">Busca por Disponibilidade:</label>
+                                                  <%= select_tag(:busca, options_for_select([['Disponível', true], ['Indisponível', false]])) %>`;
+                    break;
                 case 'preco_diaria':
-                    return `<input type="number" name="search" id="search-field" placeholder="Preço diária">`;
+                    campoDeBusca.innerHTML = `<label for="busca">Preço Diária:</label>
+                                                  <input type="number" name="busca" id="busca-field" placeholder="Preço diária">`;
+                    break;
                 case 'quantidade_de_hospedes':
-                    return `<input type="number" name="search" id="search-field" placeholder="Digite a quantidade de hóspedes...">`;
-                default:
-                    return '';
+                    campoDeBusca.innerHTML = `<label for="busca">Busca por Quantidade de Hóspedes:</label>
+                                                  <input type="number" name="busca" id="busca-field" placeholder="Digite a quantidade de hóspedes...">`;
+                    break;
             }
-        };
+        }
 
-        attributeSelect.addEventListener('change', function () {
-            const selectedOption = this.value;
-            renderSearchFields(selectedOption);
+        atributoSelect.addEventListener('change', function () {
+            const opcaoSelecionada = this.value;
+            carregarCampoDeBusca(opcaoSelecionada);
         });
 
-        const initialSelectedOption = attributeSelect.value;
-        renderSearchFields(initialSelectedOption);
+        const opcaoSelecionadaInicial = atributoSelect.value;
+        carregarCampoDeBusca(opcaoSelecionadaInicial);
     });
 </script>
