@@ -4,7 +4,7 @@ class ClientesController < ApplicationController
 
   # GET /clientes or /clientes.json
   def index
-    @clientes = buscar_clientes(params[:attribute], params[:search])
+    @clientes = buscar_clientes(params[:atributo], params[:busca])
   end
 
   def historico
@@ -15,7 +15,7 @@ class ClientesController < ApplicationController
   # GET /clientes/1 or /clientes/1.json
   def show
     @cliente = Cliente.find(params[:id])
-    @reservas = @cliente.reservas #
+    @reservas = @cliente.reservas
   end
 
   # GET /clientes/new
@@ -82,16 +82,16 @@ class ClientesController < ApplicationController
     params.require(:cliente).permit(:cpf, :nome, :email, :telefone)
   end
 
-  def buscar_clientes(attribute, search)
-    case attribute
+  def buscar_clientes(atributo, busca)
+    case atributo
     when "nome"
-      return Cliente.where('UPPER(nome) LIKE ?', "%#{search.upcase}%")
+      return Cliente.where('UPPER(nome) LIKE ?', "%#{busca.upcase}%")
     when "cpf"
-      formatted_search = search.gsub(/\D/, '')
-      formatted_search_with_dash = "#{formatted_search[0..2]}.#{formatted_search[3..5]}.#{formatted_search[6..8]}-#{formatted_search[9..10]}"
-      return Cliente.where('cpf LIKE ? OR REPLACE(cpf, ".", "") LIKE ?', "%#{formatted_search_with_dash}%", "%#{formatted_search}%")
+      busca_formatada = busca.gsub(/\D/, '')
+      busca_formatada_com_traco = "#{busca_formatada[0..2]}.#{busca_formatada[3..5]}.#{busca_formatada[6..8]}-#{busca_formatada[9..10]}"
+      return Cliente.where('cpf LIKE ? OR REPLACE(cpf, ".", "") LIKE ?', "%#{busca_formatada_com_traco}%", "%#{busca_formatada}%")
     when "email"
-      return Cliente.where('UPPER(email) LIKE ?', "%#{search.upcase}%")
+      return Cliente.where('UPPER(email) LIKE ?', "%#{busca.upcase}%")
     else
       return Cliente.all
     end

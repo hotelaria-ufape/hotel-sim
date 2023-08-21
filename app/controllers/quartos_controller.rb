@@ -4,7 +4,6 @@ class QuartosController < ApplicationController
 
   # GET /quartos or /quartos.json
   def index
-    @quartos = Quarto.all
     @quartos = buscar_quartos(params[:attribute], params[:search])
   end
 
@@ -80,20 +79,21 @@ class QuartosController < ApplicationController
     params.require(:quarto).permit(:numero, :tipo, :disponibilidade, :preco_diaria, :descricao, :quantidade_de_hospedes)
   end
 
-  def buscar_quartos(attribute, search)
-    case attribute
+  def buscar_quartos(atributo, buscar)
+    case atributo
     when "numero"
-      Quarto.where('numero LIKE ?', "%#{search}%")
+      Quarto.where('numero LIKE ?', "%#{buscar}%")
     when "tipo"
-      Quarto.where('tipo LIKE ?', "%#{search}%")
+      Quarto.where('tipo LIKE ?', "%#{buscar}%")
     when "disponibilidade"
-      Quarto.where(disponibilidade: search)
+      Quarto.where(disponibilidade: buscar)
     when "preco_diaria"
-      Quarto.where('preco_diaria LIKE ?', "%#{search}%")
+      Quarto.where('preco_diaria LIKE ?', "%#{buscar}%")
     when "quantidade_de_hospedes"
-      Quarto.where('quantidade_de_hospedes = ?', search)
+      Quarto.where(quantidade_de_hospedes: buscar)
     else
       Quarto.all
     end
   end
+
 end

@@ -3,7 +3,12 @@
 <div>
   <%= form_tag reservas_path, method: :get do %>
     <h3>Procurar reservas</h3>
-    Filtrar por: <%= select_tag(:attribute, options_for_select([['Data', 'data'], ['Custo', 'custo'], ['Cliente', 'cliente']])) %>
+    Filtrar por:
+    <%= select_tag(:atributo, options_for_select([
+                                                   ['Data', 'data'],
+                                                   ['Custo', 'custo'],
+                                                   ['Cliente', 'cliente']
+                                                 ])) %>
 
     <span class="data-fields">
       Data de início: <%= datetime_local_field_tag "start_date", params[:start_date] %>
@@ -16,7 +21,10 @@
     </span>
 
     <span class="cliente-fields" style="display: none;">
-      Filtrar por Cliente: <%= select_tag(:cliente_id, options_for_select(Cliente.all.map { |cliente| [cliente.nome, cliente.id] }), include_blank: false) %>
+      Filtrar por Cliente:
+      <%= select_tag(:cliente_id, options_for_select(
+        Cliente.all.map { |cliente| [cliente.nome, cliente.id] }
+      ), include_blank: false) %>
     </span>
 
     <%= submit_tag "Filtrar" %>
@@ -26,58 +34,67 @@
 
 <div class='list'>
   <% if @reservas.present? %>
-    <tr class='tr-show'>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Data de Entrada</th>
+        <th>Data de Saída</th>
+        <th>Cliente</th>
+        <th>Quarto</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
       <% @reservas.each do |reserva| %>
-        <p class='show-grid'>
-          Reserva <%= reserva.id.to_s %> <br>
-          [ <%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %>
-          - <%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %> ] <br>
-          [ Cliente: <%= reserva.cliente.nome %>
-          | Quarto: <%= reserva.quarto.numero.to_s %> ] <br>
-          <%= link_to "Exibir Reserva", reserva %>
-        </p>
+        <tr>
+          <td><%= reserva.id %></td>
+          <td><%= reserva.data_de_entrada.strftime("%d/%m/%Y às %H:%M") %></td>
+          <td><%= reserva.data_de_saida.strftime("%d/%m/%Y às %H:%M") %></td>
+          <td><%= reserva.cliente.nome %></td>
+          <td><%= reserva.quarto.numero.to_s %></td>
+          <td>
+            <%= link_to "Exibir", reserva %>
+          </td>
+        </tr>
       <% end %>
+      </tbody>
+    </table>
   <% else %>
-    Nenhuma reserva encontrada.
+    <p>Nenhuma reserva encontrada.</p>
   <% end %>
-  </tr>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var attributeSelect = document.querySelector('#attribute');
-        var dateFields = document.querySelector('.data-fields');
-        var costFields = document.querySelector('.custo-fields');
-        var clientFields = document.querySelector('.cliente-fields');
+        const selecionarAtributo = document.querySelector('#attribute');
+        const camposData = document.querySelector('.data-fields');
+        const camposCusto = document.querySelector('.custo-fields');
+        const camposCliente = document.querySelector('.cliente-fields');
 
-        attributeSelect.addEventListener('change', function () {
-            if (attributeSelect.value === 'data') {
-                dateFields.style.display = 'inline';
-                costFields.style.display = 'none';
-                clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'custo') {
-                costFields.style.display = 'inline';
-                dateFields.style.display = 'none';
-                clientFields.style.display = 'none';
-            } else if (attributeSelect.value === 'cliente') {
-                clientFields.style.display = 'inline';
-                dateFields.style.display = 'none';
-                costFields.style.display = 'none';
+        function mostrarCamposDeFiltro(seletor) {
+            camposData.style.display = 'none';
+            camposCusto.style.display = 'none';
+            camposCliente.style.display = 'none';
+            seletor.style.display = 'inline';
+        }
+
+        selecionarAtributo.addEventListener('change', function () {
+            if (selecionarAtributo.value === 'data') {
+                mostrarCamposDeFiltro(camposData);
+            } else if (selecionarAtributo.value === 'custo') {
+                mostrarCamposDeFiltro(camposCusto);
+            } else if (selecionarAtributo.value === 'cliente') {
+                mostrarCamposDeFiltro(camposCliente);
             }
         });
 
-        if (attributeSelect.value === 'data') {
-            dateFields.style.display = 'inline';
-            costFields.style.display = 'none';
-            clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'custo') {
-            costFields.style.display = 'inline';
-            dateFields.style.display = 'none';
-            clientFields.style.display = 'none';
-        } else if (attributeSelect.value === 'cliente') {
-            clientFields.style.display = 'inline';
-            dateFields.style.display = 'none';
-            costFields.style.display = 'none';
+        if (selecionarAtributo.value === 'data') {
+            mostrarCamposDeFiltro(camposData);
+        } else if (selecionarAtributo.value === 'custo') {
+            mostrarCamposDeFiltro(camposCusto);
+        } else if (selecionarAtributo.value === 'cliente') {
+            mostrarCamposDeFiltro(camposCliente);
         }
 
     });

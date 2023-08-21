@@ -1,10 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<div id='search-client'>
+<div id='search-cliente'>
   <%= form_with(url: clientes_path, method: 'get') do |form| %>
     <h3>Procurar clientes</h3>
-    Filtrar por <%= select_tag(:attribute, options_for_select([['Nome', 'nome'], ['CPF', 'cpf'], ['Email', 'email']])) %>
-    <%= text_field_tag(:search) %>
+    Filtrar por
+    <%= select_tag(:atributo, options_for_select([
+                                                   ['Nome', 'nome'],
+                                                   ['CPF', 'cpf'],
+                                                   ['Email', 'email']
+                                                 ])) %>
+    <%= text_field_tag(:busca) %>
     <%= form.submit("Procurar") %>
   <% end %>
   <%= link_to "Redefinir Filtragem", clientes_path %>
@@ -12,18 +17,31 @@
 
 <div class='list'>
   <% if @clientes.present? %>
-    <tr class='tr-show'>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
       <% @clientes.each do |cliente| %>
-        <p class='show-grid'>
-          [ Cliente <%= cliente.id %> ] <br>
-          Nome:  <%= cliente.nome %>  <br>
-          CPF:  <%= cliente.cpf %>  <br>
-          Email:  <%= cliente.email %>  <br>
-          <%= link_to "Exibir cliente", cliente %> <br>
-          <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
-        </p>
+        <tr>
+          <td><%= cliente.id %></td>
+          <td><%= cliente.nome %></td>
+          <td><%= cliente.cpf %></td>
+          <td><%= cliente.email %></td>
+          <td>
+            <%= link_to "Exibir", cliente %>
+            <%= link_to "Marcar Reserva", new_reserva_path(cliente_id: cliente) %>
+          </td>
+        </tr>
       <% end %>
-    </tr>
+      </tbody>
+    </table>
   <% else %>
     <p>Nenhum cliente encontrado.</p>
   <% end %>
@@ -31,18 +49,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const attributeSelect = document.getElementById('attribute');
-        const searchFields = document.getElementById('search-fields');
+        const selecionarAtributo = document.getElementById('attribute');
+        const campoDeBusca = document.getElementById('search-fields');
 
-        attributeSelect.addEventListener('change', function () {
-            const selectedOption = this.value;
-            if (selectedOption === 'nome' || selectedOption === 'cpf' || selectedOption === 'email') {
-                searchFields.innerHTML = `<label for="search">Busca por ${selectedOption}:</label>
+        selecionarAtributo.addEventListener('change', function () {
+            const opcaoSelecionada = this.value;
+            if (opcaoSelecionada === 'nome' || opcaoSelecionada === 'cpf' || opcaoSelecionada === 'email') {
+                campoDeBusca.innerHTML = `<label for="search">Busca por ${opcaoSelecionada}:</label>
                                   <input type="text" name="search" id="search-field" placeholder="Digite a busca...">`;
             } else {
-                searchFields.innerHTML = '';
+                campoDeBusca.innerHTML = '';
             }
         });
     });
 </script>
-
