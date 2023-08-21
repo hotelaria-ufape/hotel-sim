@@ -24,52 +24,75 @@
       <li id="link-to-root"
           onmouseover=sombrear("link-to-root")
           onmouseout=resetarSombrear("link-to-root")>
-        <%= link_to root_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Página Principal
-        <% end %>
+          <%= link_to root_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Página Principal
+          <% end %>
       </li>
       <li id="link-to-clientes"
           onmouseover=sombrear("link-to-clientes")
           onmouseout=resetarSombrear("link-to-clientes")>
-        <%= link_to clientes_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Ver todos os Clientes
-        <% end %>
+          <%= link_to clientes_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Ver todos os Clientes
+          <% end %>
       </li>
       <li id="link-to-quartos"
           onmouseover=sombrear("link-to-quartos")
           onmouseout=resetarSombrear("link-to-quartos")>
-        <%= link_to quartos_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Acessar Quartos
-        <% end %>
+          <%= link_to quartos_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Acessar Quartos
+          <% end %>
       </li>
       <li id="link-to-reservas"
           onmouseover=sombrear("link-to-reservas")
           onmouseout=resetarSombrear("link-to-reservas")>
-        <%= link_to reservas_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Gerenciar Reservas
-        <% end %>
+          <%= link_to reservas_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Gerenciar Reservas
+          <% end %>
       </li>
       <li id="link-to-create-clientes"
           onmouseover=sombrear("link-to-create-clientes")
           onmouseout=resetarSombrear("link-to-create-clientes")>
-        <%= link_to new_cliente_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Cadastrar um Cliente
-        <% end %>
+          <%= link_to new_cliente_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Cadastrar um Cliente
+          <% end %>
       </li>
       <li id="link-to-create-quartos"
           onmouseover=sombrear("link-to-create-quartos")
           onmouseout=resetarSombrear("link-to-create-quartos")>
-        <%= link_to new_quarto_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Cadastrar um Quarto
-        <% end %>
+          <%= link_to new_quarto_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Cadastrar um Quarto
+          <% end %>
       </li>
       <li id="link-to-create-reservas"
           onmouseover=sombrear("link-to-create-reservas")
           onmouseout=resetarSombrear("link-to-create-reservas")>
-        <%= link_to new_reserva_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
-          Marcar Reserva
+          <%= link_to new_reserva_path, style: "font-size: 16px; color: inherit; text-decoration: none;" do %>
+            Marcar Reserva
+          <% end %>
+      </li>
+      <li id="link-to-entrar-sair-perfil"
+          onmouseover=sombrear("link-to-entrar-sair-perfil")
+          onmouseout=resetarSombrear("link-to-entrar-sair-perfil")>
+        <% if administrador_signed_in? %>
+          <%= button_to "Sair do Perfil", destroy_administrador_session_path, method: :delete, style: "font-size: 16px; background-color: inherit; color: inherit; text-decoration: none;", data: { confirm: "Você deseja sair?" } %>
+        <% else %>
+          <%= link_to "Entrar em um Perfil", new_administrador_session_path, method: :delete, style: "font-size: 16px; color: inherit; text-decoration: none;", data: { confirm: "Você deseja sair?" } %>
         <% end %>
       </li>
+      <% if !administrador_signed_in? %>
+      <li id="link-to-criar-perfil"
+          onmouseover=sombrear("link-to-entrar-sair-perfil")
+          onmouseout=resetarSombrear("link-to-entrar-sair-perfil")>
+        <%= link_to "Criar um Perfil", new_administrador_registration_path, method: :delete, style: "font-size: 16px; color: inherit; text-decoration: none;", data: { confirm: "Você deseja sair?" } %>
+      </li>
+      <% end %>
+      <% if administrador_signed_in? %>
+      <li id="link-to-editar-meu-perfil"
+          onmouseover=sombrear("link-to-editar-meu-perfil")
+          onmouseout=resetarSombrear("link-to-editar-meu-perfil")>
+          <%= link_to "Editar dados do meu Perfil", edit_administrador_registration_path, style: "font-size: 16px; color: inherit; text-decoration: none;" %>
+      </li>
+      <% end %>
     </ul>
   </nav>
 </header>
